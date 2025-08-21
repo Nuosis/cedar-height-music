@@ -189,16 +189,16 @@ export async function sendContactConfirmationEmail(contactData) {
                 <h2 style="color: #2c1810; margin-top: 0;">Thank you for contacting us!</h2>
                 <p>Dear ${sanitizedName},</p>
                 <p>We have received your message and will get back to you as soon as possible, typically within 24 hours.</p>
-                <p>In the meantime, feel free to explore our website to learn more about our music lessons and programs:</p>
+                <p>We're excited to share that our new website is coming soon! In the meantime, here's what we offer:</p>
                 <ul style="color: #555;">
-                    <li>Individual and group lessons available</li>
+                    <li>Individual lessons available</li>
                     <li>All skill levels welcome</li>
                     <li>Flexible scheduling options</li>
                     <li>Professional, experienced instructors</li>
                 </ul>
                 <div style="background-color: #8B4513; color: white; padding: 15px; border-radius: 5px; margin: 20px 0; text-align: center;">
                     <p style="margin: 0; font-weight: bold;">Ready to start your musical journey?</p>
-                    <p style="margin: 5px 0 0 0; font-size: 14px;">Visit our website to learn more about enrollment!</p>
+                    <p style="margin: 5px 0 0 0; font-size: 14px;">Our full website with enrollment details is coming soon!</p>
                 </div>
                 <p>Best regards,<br>
                 <strong>The Cedar Heights Music Academy Team</strong></p>
@@ -218,15 +218,15 @@ Dear ${sanitizedName},
 
 We have received your message and will get back to you as soon as possible, typically within 24 hours.
 
-In the meantime, feel free to explore our website to learn more about our music lessons and programs:
+We're excited to share that our new website is coming soon! In the meantime, here's what we offer:
 
-• Individual and group lessons available
-• All skill levels welcome  
+• Individual lessons available
+• All skill levels welcome
 • Flexible scheduling options
 • Professional, experienced instructors
 
 Ready to start your musical journey?
-Visit our website to learn more about enrollment!
+Our full website with enrollment details is coming soon!
 
 Best regards,
 The Cedar Heights Music Academy Team
