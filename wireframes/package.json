@@ -1,0 +1,24 @@
+{
+  "name": "cedar-heights-wireframes",
+  "version": "1.0.0",
+  "description": "Low-fidelity wireframes for Cedar Heights Music Academy with automated validation",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server .. -p 3005 -o /wireframes/index.html",
+    "validate": "node validation/validate-wireframes.js",
+    "screenshot": "node validation/take-screenshots.js",
+    "test": "npm run screenshot && npm run validate"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.9.0",
+    "http-server": "^14.1.1"
+  },
+  "keywords": [
+    "wireframes",
+    "ui-ux",
+    "validation",
+    "puppeteer"
+  ],
+  "author": "Cedar Heights Music Academy",
+  "license": "MIT"
+}
