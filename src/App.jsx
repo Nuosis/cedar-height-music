@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import './App.css'
+import { sendContactEmails } from './services/emailService'
 
 function App() {
   const [showForm, setShowForm] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null) // 'success', 'error', or null
+  const [errorMessage, setErrorMessage] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,42 +24,62 @@ function App() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // Create email body
-    const emailBody = `
-New Inquiry from Cedar Heights Music Academy Website
+    // Reset previous status
+    setSubmitStatus(null)
+    setErrorMessage('')
+    setIsSubmitting(true)
 
-Parent/Student Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-
+    try {
+      // Prepare contact data for email service
+      const contactData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: 'New Music Academy Inquiry',
+        message: `
 Preferred Time Slots:
 1. ${formData.timeSlot1}
 2. ${formData.timeSlot2}
 3. ${formData.timeSlot3}
 
----
 This inquiry was submitted via the Coming Soon page.
-    `.trim()
+        `.trim()
+      }
 
-    // Create mailto link
-    const mailtoLink = `mailto:kaeden@cedarheightsmusicacademy.com?subject=New Music Academy Inquiry&body=${encodeURIComponent(emailBody)}`
-    
-    // Open email client
-    window.location.href = mailtoLink
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      timeSlot1: '',
-      timeSlot2: '',
-      timeSlot3: ''
-    })
-    setShowForm(false)
+      // Send emails using Brevo service
+      const result = await sendContactEmails(contactData)
+
+      if (result.success) {
+        setSubmitStatus('success')
+        // Reset form on success
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          timeSlot1: '',
+          timeSlot2: '',
+          timeSlot3: ''
+        })
+        
+        // Hide form after a delay to show success message
+        setTimeout(() => {
+          setShowForm(false)
+          setSubmitStatus(null)
+        }, 3000)
+      } else {
+        setSubmitStatus('error')
+        setErrorMessage(result.errors.join('. ') || 'Failed to send inquiry. Please try again.')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitStatus('error')
+      setErrorMessage('Failed to send inquiry. Please check your connection and try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -83,6 +107,19 @@ This inquiry was submitted via the Coming Soon page.
               <form className="inquiry-form" onSubmit={handleSubmit}>
                 <h3>Get Started Today</h3>
                 
+                {submitStatus === 'success' && (
+                  <div className="success-message">
+                    <p>✅ Thank you! Your inquiry has been sent successfully.</p>
+                    <p>You should receive a confirmation email shortly.</p>
+                  </div>
+                )}
+                
+                {submitStatus === 'error' && (
+                  <div className="error-message">
+                    <p>❌ {errorMessage}</p>
+                  </div>
+                )}
+                
                 <div className="form-group">
                   <input
                     type="text"
@@ -90,6 +127,7 @@ This inquiry was submitted via the Coming Soon page.
                     placeholder="Parent/Student Name"
                     value={formData.name}
                     onChange={handleInputChange}
+                    disabled={isSubmitting || submitStatus === 'success'}
                     required
                   />
                 </div>
@@ -101,6 +139,7 @@ This inquiry was submitted via the Coming Soon page.
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={handleInputChange}
+                    disabled={isSubmitting || submitStatus === 'success'}
                     required
                   />
                 </div>
@@ -112,6 +151,7 @@ This inquiry was submitted via the Coming Soon page.
                     placeholder="Phone Number"
                     value={formData.phone}
                     onChange={handleInputChange}
+                    disabled={isSubmitting || submitStatus === 'success'}
                     required
                   />
                 </div>
@@ -124,6 +164,7 @@ This inquiry was submitted via the Coming Soon page.
                     placeholder="First choice (e.g., Monday 4-5 PM)"
                     value={formData.timeSlot1}
                     onChange={handleInputChange}
+                    disabled={isSubmitting || submitStatus === 'success'}
                     required
                   />
                   <input
@@ -132,6 +173,7 @@ This inquiry was submitted via the Coming Soon page.
                     placeholder="Second choice"
                     value={formData.timeSlot2}
                     onChange={handleInputChange}
+                    disabled={isSubmitting || submitStatus === 'success'}
                     required
                   />
                   <input
@@ -140,18 +182,28 @@ This inquiry was submitted via the Coming Soon page.
                     placeholder="Third choice"
                     value={formData.timeSlot3}
                     onChange={handleInputChange}
+                    disabled={isSubmitting || submitStatus === 'success'}
                     required
                   />
                 </div>
 
                 <div className="form-buttons">
-                  <button type="submit" className="submit-button">
-                    Send Inquiry
+                  <button
+                    type="submit"
+                    className="submit-button"
+                    disabled={isSubmitting || submitStatus === 'success'}
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Inquiry'}
                   </button>
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     className="cancel-button"
-                    onClick={() => setShowForm(false)}
+                    onClick={() => {
+                      setShowForm(false)
+                      setSubmitStatus(null)
+                      setErrorMessage('')
+                    }}
+                    disabled={isSubmitting}
                   >
                     Cancel
                   </button>

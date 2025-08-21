@@ -210,6 +210,67 @@
   background: #e0e0e0;
 }
 
+.submit-button:disabled,
+.cancel-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-button:disabled:hover,
+.cancel-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.form-group input:disabled,
+.time-slots input:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.success-message {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+  animation: slideIn 0.3s ease-out;
+}
+
+.success-message p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.success-message p:first-child {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.success-message p:last-child {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.error-message {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+  animation: slideIn 0.3s ease-out;
+}
+
+.error-message p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
 .hero-image {
   position: fixed;
   bottom: 0;
