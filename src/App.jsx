@@ -11,9 +11,11 @@ function App() {
     name: '',
     email: '',
     phone: '',
-    timeSlot1: '',
-    timeSlot2: '',
-    timeSlot3: ''
+    studentName: '',
+    studentAge: '',
+    instrument: '',
+    experience: '',
+    preferredDayTime: ''
   })
 
   const handleInputChange = (e) => {
@@ -40,10 +42,19 @@ function App() {
         phone: formData.phone,
         subject: 'New Music Academy Inquiry',
         message: `
-Preferred Time Slots:
-1. ${formData.timeSlot1}
-2. ${formData.timeSlot2}
-3. ${formData.timeSlot3}
+Student Information:
+- Name: ${formData.studentName}
+- Age: ${formData.studentAge}
+- Instrument: ${formData.instrument}
+- Experience Level: ${formData.experience}
+
+Preferred Day/Time:
+${formData.preferredDayTime}
+
+Parent/Guardian Contact:
+- Name: ${formData.name}
+- Phone: ${formData.phone}
+- Email: ${formData.email}
 
 This inquiry was submitted via the Coming Soon page.
         `.trim()
@@ -59,9 +70,11 @@ This inquiry was submitted via the Coming Soon page.
           name: '',
           email: '',
           phone: '',
-          timeSlot1: '',
-          timeSlot2: '',
-          timeSlot3: ''
+          studentName: '',
+          studentAge: '',
+          instrument: '',
+          experience: '',
+          preferredDayTime: ''
         })
         
         // Hide form after a delay to show success message
@@ -156,31 +169,68 @@ This inquiry was submitted via the Coming Soon page.
                   />
                 </div>
 
-                <div className="time-slots">
-                  <label>Preferred Time Slots:</label>
+                <div className="form-group">
                   <input
                     type="text"
-                    name="timeSlot1"
-                    placeholder="First choice (e.g., Monday 4-5 PM)"
-                    value={formData.timeSlot1}
+                    name="studentName"
+                    placeholder="Student Name"
+                    value={formData.studentName}
                     onChange={handleInputChange}
                     disabled={isSubmitting || submitStatus === 'success'}
                     required
                   />
+                </div>
+
+                <div className="form-group">
                   <input
-                    type="text"
-                    name="timeSlot2"
-                    placeholder="Second choice"
-                    value={formData.timeSlot2}
+                    type="number"
+                    name="studentAge"
+                    placeholder="Student Age"
+                    min="3"
+                    max="120"
+                    value={formData.studentAge}
                     onChange={handleInputChange}
                     disabled={isSubmitting || submitStatus === 'success'}
                     required
                   />
+                </div>
+
+                <div className="form-group">
+                  <select
+                    name="instrument"
+                    value={formData.instrument}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting || submitStatus === 'success'}
+                    required
+                  >
+                    <option value="">Select instrument</option>
+                    <option value="Piano">Piano</option>
+                    <option value="Guitar">Guitar</option>
+                    <option value="Bass">Bass</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <select
+                    name="experience"
+                    value={formData.experience}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting || submitStatus === 'success'}
+                    required
+                  >
+                    <option value="">Select Experience Level</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
                   <input
                     type="text"
-                    name="timeSlot3"
-                    placeholder="Third choice"
-                    value={formData.timeSlot3}
+                    name="preferredDayTime"
+                    placeholder="Preferred Day/Time (e.g., Monday 4–5 PM)"
+                    value={formData.preferredDayTime}
                     onChange={handleInputChange}
                     disabled={isSubmitting || submitStatus === 'success'}
                     required

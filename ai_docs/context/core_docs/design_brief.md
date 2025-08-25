@@ -25,6 +25,7 @@ Maintain the same warm, supportive tone throughout all pages (Home → About →
 ### Color Palette
 - **Primary**: Warm browns (#2c1810, #8b4513, #a0522d)
 - **Accent**: Gold (#ffd700, #ffed4e)
+- **Hero Background**: Ripe wheat (rgb(252, 244, 226)) - warm, nurturing base color
 - **Strategy**: Maintain exact Figma color relationships across all pages for maximum brand recognition
 - **Application**: Colors convey warmth, quality, and approachability
 
@@ -48,6 +49,149 @@ Maintain the same warm, supportive tone throughout all pages (Home → About →
 - **Available**: `boy+guitar.png`, `girl+guitar.png`, `girl&guitar.png`
 - **Usage**: Friendly, approachable imagery supporting the nurturing community feeling
 - **Brand Elements**: `logo.JPG`, `Group 255.png`, `Mask group.png`
+
+## Complete Asset Map
+
+### Visual Assets Inventory (Repository Paths)
+
+#### Brand Identity Assets
+- **Primary Logo**: `public/logo.JPG` (280x280px, JPG format)
+- **Brand Graphics**:
+  - `public/Group 255.png` (Brand element/icon)
+  - `public/Mask group.png` (Brand element/mask)
+
+#### Seasonal Background System
+- **Base Color**: Ripe wheat (rgb(252, 244, 226)) - warm, nurturing foundation
+- **Summer Background**: `public/summer_bg_lrg.png` (Large format, hero background) - **ACTIVE**
+- **Fall Background**: `public/fall_bg_lrg.png` (Large format, hero background)
+- **Winter Background**: `public/winter_bg_lrg.png` (Large format, hero background)
+- **Implementation**: Background images overlay the ripe wheat base color for enhanced warmth
+
+#### Character Illustrations
+- **Boy with Guitar**: `public/boy+guitar.png` (Hero character, right-positioned)
+- **Girl with Guitar (Version 1)**: `public/girl+guitar.png` (Alternative character)
+- **Girl with Guitar (Version 2)**: `public/girl&guitar.png` (Alternative character)
+
+#### Design Reference Elements (Figma-based)
+- **Hero Layout Reference**: `ai_docs/context/design_elements/hero.png`
+- **Button Specifications**: `ai_docs/context/design_elements/Button.png`
+- **Navigation Design**: `ai_docs/context/design_elements/navigation.png`
+- **Secondary Section Layout**: `ai_docs/context/design_elements/secondary_section.png`
+- **About Page Hero**: `ai_docs/context/design_elements/about_hero.png`
+- **About Secondary Section**: `ai_docs/context/design_elements/about_secondary_section.png`
+- **Image Cluster Layout**: `ai_docs/context/design_elements/image_cluster.png`
+- **Scheduling Interface**: `ai_docs/context/design_elements/scheduling.png`
+
+#### Technical Assets
+- **React Default**: `src/assets/react.svg` (Framework asset, not user-facing)
+
+### Asset Usage Guidelines
+- **Seasonal Logic**: Backgrounds rotate based on date (Summer: Jun-Aug, Fall: Sep-Nov, Winter: Dec-Feb, Spring: Mar-May defaults to Fall)
+- **Character Positioning**: Hero characters positioned bottom-right with drop-shadow effects
+- **Logo Treatment**: White background padding, rounded corners, shadow for contrast
+- **Reference Authority**: Design elements serve as visual reference; actual branding uses Cedar Heights Music Academy identity
+
+## Visual Authority Documentation
+
+### Primary Design System Authority
+- **Figma Design System URL**: https://www.figma.com/design/8iXCoxrnEkJaAEVERBY4wr/Music?node-id=0-1&p=f&t=mEFgAvR3fs6muKHj-0
+- **Authority Level**: Primary visual authority for layout, typography, spacing, and component specifications
+- **Usage Constraint**: Strict adherence required for brand trust and consistency
+- **Adaptation Note**: Generic "Beat" branding in Figma adapted to Cedar Heights Music Academy identity
+
+### Reference Asset Catalog with Provenance
+
+#### Design Reference Elements (Figma-Derived)
+**Source**: Exported from Figma design system for layout and component reference
+**Location**: `ai_docs/context/design_elements/`
+**Provenance**: Design system exports adapted for Cedar Heights Music Academy
+
+- **Hero Layout Reference**: `hero.png`
+  - **Purpose**: Homepage hero section layout and composition
+  - **Usage**: Spatial relationships, character positioning, CTA placement
+  - **Adaptation**: Replace "Beat" branding with Cedar Heights Music Academy elements
+
+- **Button Specifications**: `Button.png`
+  - **Purpose**: Primary and secondary button styling reference
+  - **Usage**: Color gradients, border radius, typography, hover states
+  - **Implementation**: Maintain visual style with Cedar Heights color palette
+
+- **Navigation Design**: `navigation.png`
+  - **Purpose**: Global navigation structure and styling
+  - **Usage**: Menu layout, typography, active states, responsive behavior
+  - **Adaptation**: Update navigation labels to match Cedar Heights page structure
+
+- **Secondary Section Layout**: `secondary_section.png`
+  - **Purpose**: Content section layout patterns
+  - **Usage**: Grid systems, content hierarchy, spacing relationships
+  - **Implementation**: Apply to About, Pricing, and other content pages
+
+- **About Page References**:
+  - `about_hero.png`: About page hero section layout
+  - `about_secondary_section.png`: About page content sections
+  - **Usage**: Teacher bio layouts, studio story presentation
+  - **Adaptation**: Cedar Heights content with maintained visual structure
+
+- **Image Cluster Layout**: `image_cluster.png`
+  - **Purpose**: Multi-image arrangement patterns
+  - **Usage**: Teacher photo galleries, feature showcases
+  - **Implementation**: Maintain spacing and arrangement principles
+
+- **Scheduling Interface**: `scheduling.png`
+  - **Purpose**: Time slot selection and booking interface
+  - **Usage**: Enrollment configurator step design
+  - **Implementation**: Adapt for Cedar Heights timeslot selection flow
+
+#### Production Assets (Cedar Heights Branded)
+**Source**: Cedar Heights Music Academy brand assets
+**Location**: `public/` directory
+**Provenance**: Academy-provided brand materials and custom illustrations
+
+- **Brand Identity Assets**:
+  - `logo.JPG`: Official Cedar Heights Music Academy logo
+  - `Group 255.png`, `Mask group.png`: Supporting brand elements
+  - **Authority**: Primary brand identity source
+  - **Usage**: Exact reproduction without modification
+
+- **Seasonal Background System**:
+  - `summer_bg_lrg.png`, `fall_bg_lrg.png`, `winter_bg_lrg.png`
+  - **Source**: Custom seasonal illustrations for Cedar Heights
+  - **Usage**: Hero background rotation based on calendar date
+  - **Implementation**: Date-driven background selection logic
+
+- **Character Illustrations**:
+  - `boy+guitar.png`, `girl+guitar.png`, `girl&guitar.png`
+  - **Source**: Custom character illustrations for music academy
+  - **Usage**: Friendly, approachable hero imagery
+  - **Positioning**: Bottom-right with drop-shadow effects
+
+### Authority Hierarchy and Decision Framework
+
+#### Primary Authority (Figma Design System)
+- **Layout Structure**: Spatial relationships, grid systems, component positioning
+- **Typography System**: Font families, sizes, weights, line heights, letter spacing
+- **Color Relationships**: Color harmony, contrast ratios, gradient applications
+- **Component Specifications**: Button styles, form elements, navigation patterns
+- **Responsive Behavior**: Breakpoint definitions, mobile-first adaptations
+
+#### Secondary Authority (Cedar Heights Brand Assets)
+- **Brand Identity**: Logo usage, brand colors, brand voice and messaging
+- **Content Strategy**: Academy-specific copy, teacher information, pricing structure
+- **Seasonal Elements**: Background imagery, thematic variations
+- **Character Design**: Illustration style, character positioning, visual personality
+
+#### Conflict Resolution Protocol
+1. **Brand Identity Conflicts**: Cedar Heights brand assets take precedence over Figma generic branding
+2. **Layout Conflicts**: Figma design system takes precedence for spatial and structural decisions
+3. **Content Conflicts**: Cedar Heights content and messaging take precedence
+4. **Technical Conflicts**: Performance and accessibility requirements override visual preferences
+
+### Implementation Validation Against Authority
+- **Figma Overlay Comparison**: Use Figma design overlay to validate layout accuracy
+- **Brand Compliance Check**: Ensure Cedar Heights logo and branding are correctly implemented
+- **Asset Integrity Verification**: Confirm all assets load correctly and maintain quality
+- **Responsive Validation**: Test design system breakpoints across device sizes
+- **Authority Documentation**: Maintain clear record of design decisions and their authority source
 
 ## Information Architecture
 
@@ -202,6 +346,79 @@ Maintain the same warm, supportive tone throughout all pages (Home → About →
 - **Accessibility**: Pass WCAG 2.1 AA automated and manual testing
 - **Usability**: Low bounce rate on enrollment configurator
 - **Trust**: Increased completion rate of contact forms
+
+## Validation Criteria and Success Standards
+
+### Design Fidelity Validation
+- **Figma Adherence Threshold**: ≥95% visual accuracy to Figma design system
+- **Color Accuracy**: Exact hex values match Figma specifications (±0 tolerance)
+- **Typography Compliance**: Font families, sizes, weights, and line heights match Figma specs exactly
+- **Spacing Precision**: Layout spacing within ±2px of Figma measurements
+- **Component Consistency**: All UI components (buttons, forms, cards) match Figma component library
+
+### Performance Validation Standards
+- **Core Web Vitals (75th percentile mobile)**:
+  - LCP (Largest Contentful Paint): ≤ 2.5 seconds (Target: ≤ 2.0 seconds)
+  - CLS (Cumulative Layout Shift): ≤ 0.1 (Target: ≤ 0.05)
+  - FID (First Input Delay): ≤ 100ms (Target: ≤ 50ms)
+- **Page Load Speed**: Initial page load ≤ 3 seconds on 3G connection
+- **Image Optimization**: All images compressed to ≤ 500KB without quality loss
+- **Bundle Size**: JavaScript bundle ≤ 250KB gzipped
+
+### Accessibility Validation Criteria
+- **WCAG 2.1 AA Compliance**: 100% automated testing pass rate
+- **Color Contrast**: All text meets minimum 4.5:1 contrast ratio (7:1 for enhanced)
+- **Keyboard Navigation**: 100% of interactive elements accessible via keyboard
+- **Screen Reader Compatibility**: Full functionality with NVDA, JAWS, and VoiceOver
+- **Focus Management**: Clear focus indicators on all interactive elements
+- **Alternative Text**: Descriptive alt text for all meaningful images
+
+### Functional Validation Standards
+- **Cross-Browser Compatibility**: 100% functionality across Chrome, Firefox, Safari, Edge
+- **Responsive Design**: Perfect layout integrity across all breakpoints (320px - 1920px)
+- **Form Validation**: Real-time validation with accessible error messages
+- **Seasonal Background Logic**: Correct background rotation based on current date
+- **API Integration**: Graceful handling of API failures with appropriate fallbacks
+
+### User Experience Validation Metrics
+- **Enrollment Flow Completion**: ≥85% completion rate from start to handoff
+- **Form Abandonment**: ≤15% abandonment rate on contact forms
+- **Mobile Usability**: ≥4.5/5 average mobile usability score
+- **Page Engagement**: Average time on site ≥2 minutes
+- **Bounce Rate**: ≤40% bounce rate on landing pages
+
+### Brand Consistency Validation
+- **Logo Treatment**: Consistent sizing, padding, and shadow effects across all pages
+- **Voice and Tone**: 100% adherence to warm, nurturing, professional messaging
+- **Visual Hierarchy**: Clear information hierarchy supporting user goals
+- **Emotional Impact**: User testing confirms "warm and nurturing" first impression
+
+### Technical Validation Criteria
+- **Code Quality**: ESLint passing with 0 errors, 0 warnings
+- **Type Safety**: 100% TypeScript coverage with strict mode enabled
+- **Error Handling**: Comprehensive error boundaries and graceful degradation
+- **Security**: No exposed sensitive data, proper input sanitization
+- **SEO Readiness**: Proper meta tags, semantic HTML, structured data
+
+### Comparison and Testing Standards
+- **A/B Testing Framework**: Ability to test design variations for optimization
+- **User Testing Protocol**: Minimum 5 user sessions per major page/flow
+- **Automated Testing**: 100% critical path coverage with automated tests
+- **Visual Regression Testing**: Automated screenshot comparison for design consistency
+- **Performance Monitoring**: Continuous monitoring with alerting for threshold breaches
+
+### Success Validation Timeline
+- **Week 1 Checkpoint**: Design system components pass Figma adherence validation
+- **Week 2 Checkpoint**: Performance and accessibility targets met
+- **Pre-Launch**: All validation criteria pass with documented evidence
+- **Post-Launch**: Monthly validation reports with improvement recommendations
+
+### Validation Tools and Methods
+- **Design Comparison**: Figma overlay comparison, pixel-perfect validation tools
+- **Performance Testing**: Lighthouse CI, WebPageTest, Core Web Vitals monitoring
+- **Accessibility Testing**: axe-core, WAVE, manual screen reader testing
+- **Cross-Browser Testing**: BrowserStack, manual testing across device matrix
+- **User Testing**: Moderated sessions, unmoderated task completion studies
 
 ## Implementation Phases
 
