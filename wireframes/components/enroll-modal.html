@@ -1,0 +1,1046 @@
+
+<!-- Cedar Heights Music Academy - Enroll Modal Component
+     Implements Page Blueprints specifications exactly as written
+     Reference: ai_docs/context/core_docs/page_blueprints.md Lines 259-304 -->
+
+<!-- Page Blueprints Modal Layout - Lines 262-266 -->
+<div class="enroll-modal-overlay" id="enroll-modal" data-wireframe-section="enroll-modal" data-measurement-point="modal-overlay" style="display: none;">
+  <div class="enroll-modal-container" data-measurement-point="modal-container">
+    
+    <!-- Page Blueprints Modal Header - Lines 268-271 -->
+    <div class="enroll-modal-header" data-wireframe-section="modal-header" data-measurement-point="modal-header">
+      
+      <!-- Page Blueprints Close Button - Line 266 -->
+      <button class="modal-close" aria-label="Close enrollment modal" data-measurement-point="close-button">
+        <span class="close-icon" data-asset-container="close-icon">×</span>
+      </button>
+      
+      <!-- Page Blueprints Title - Line 269 -->
+      <h2 class="modal-title" data-typography-container="modal-title">Start Your Musical Journey</h2>
+      
+      <!-- Page Blueprints Subtitle - Line 270 -->
+      <p class="modal-subtitle" data-typography-container="modal-subtitle">Just 3 quick steps to get started</p>
+      
+      <!-- Page Blueprints Progress Indicator - Line 271 -->
+      <div class="progress-indicator" data-wireframe-section="progress-indicator" data-measurement-point="progress-indicator">
+        <div class="progress-steps">
+          <div class="progress-step active" data-step="1">
+            <span class="step-number" data-typography-container="step-number">1</span>
+            <span class="step-label" data-typography-container="step-label">Instrument</span>
+          </div>
+          <div class="progress-step" data-step="2">
+            <span class="step-number" data-typography-container="step-number">2</span>
+            <span class="step-label" data-typography-container="step-label">Time</span>
+          </div>
+          <div class="progress-step" data-step="3">
+            <span class="step-number" data-typography-container="step-number">3</span>
+            <span class="step-label" data-typography-container="step-label">Billing</span>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-measurement-point="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Blueprints Modal Content - Lines 273-296 -->
+    <div class="enroll-modal-content" data-wireframe-section="modal-content" data-measurement-point="modal-content">
+      
+      <!-- Page Blueprints Step 1: Instrument Selection - Lines 274-278 -->
+      <div class="modal-step step-1 active" data-wireframe-section="step-instrument" data-measurement-point="step-1-content">
+        <h3 class="step-title" data-typography-container="step-title">Choose Your Instrument</h3>
+        <p class="step-description" data-typography-container="step-description">30-minute lessons</p>
+        
+        <div class="instrument-grid" data-measurement-point="instrument-grid">
+          <div class="instrument-option" data-instrument="piano" tabindex="0" role="button">
+            <div class="instrument-icon" data-asset-container="piano-icon">🎹</div>
+            <span class="instrument-name" data-typography-container="instrument-name">Piano</span>
+          </div>
+          <div class="instrument-option" data-instrument="guitar" tabindex="0" role="button">
+            <div class="instrument-icon" data-asset-container="guitar-icon">🎸</div>
+            <span class="instrument-name" data-typography-container="instrument-name">Guitar</span>
+          </div>
+          <div class="instrument-option" data-instrument="violin" tabindex="0" role="button">
+            <div class="instrument-icon" data-asset-container="violin-icon">🎻</div>
+            <span class="instrument-name" data-typography-container="instrument-name">Violin</span>
+          </div>
+          <div class="instrument-option" data-instrument="bass" tabindex="0" role="button">
+            <div class="instrument-icon" data-asset-container="bass-icon">🎸</div>
+            <span class="instrument-name" data-typography-container="instrument-name">Bass</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Blueprints Step 2: Timeslot Selection - Lines 279-283 -->
+      <div class="modal-step step-2" data-wireframe-section="step-timeslot" data-measurement-point="step-2-content">
+        <h3 class="step-title" data-typography-container="step-title">Pick Your Perfect Time</h3>
+        <p class="step-description" data-typography-container="step-description">Available slots this week</p>
+        
+        <!-- Page Blueprints Data Source - Line 280: Mock week 1 → Pre-launch live GET /public/timeslots -->
+        <div class="timeslot-loading" data-wireframe-section="timeslot-loading" style="display: none;">
+          <div class="loading-spinner" data-asset-container="loading-spinner">⏳</div>
+          <p class="loading-text" data-typography-container="loading-text">Loading available times...</p>
+        </div>
+        
+        <!-- Page Blueprints Display: Available slots in easy-to-scan format - Line 281 -->
+        <div class="timeslot-grid" data-measurement-point="timeslot-grid">
+          <div class="timeslot-option" data-timeslot="monday-4pm" tabindex="0" role="button">
+            <div class="timeslot-day" data-typography-container="timeslot-day">Monday</div>
+            <div class="timeslot-time" data-typography-container="timeslot-time">4:00 PM - 4:30 PM</div>
+            <div class="timeslot-teacher" data-typography-container="timeslot-teacher">Sarah Johnson</div>
+          </div>
+          <div class="timeslot-option" data-timeslot="wednesday-530pm" tabindex="0" role="button">
+            <div class="timeslot-day" data-typography-container="timeslot-day">Wednesday</div>
+            <div class="timeslot-time" data-typography-container="timeslot-time">5:30 PM - 6:00 PM</div>
+            <div class="timeslot-teacher" data-typography-container="timeslot-teacher">Sarah Johnson</div>
+          </div>
+          <div class="timeslot-option" data-timeslot="thursday-6pm" tabindex="0" role="button">
+            <div class="timeslot-day" data-typography-container="timeslot-day">Thursday</div>
+            <div class="timeslot-time" data-typography-container="timeslot-time">6:00 PM - 6:30 PM</div>
+            <div class="timeslot-teacher" data-typography-container="timeslot-teacher">Sarah Johnson</div>
+          </div>
+          <div class="timeslot-option" data-timeslot="saturday-10am" tabindex="0" role="button">
+            <div class="timeslot-day" data-typography-container="timeslot-day">Saturday</div>
+            <div class="timeslot-time" data-typography-container="timeslot-time">10:00 AM - 10:30 AM</div>
+            <div class="timeslot-teacher" data-typography-container="timeslot-teacher">Sarah Johnson</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Blueprints Step 3: Billing Selection - Lines 284-286 -->
+      <div class="modal-step step-3" data-wireframe-section="step-billing" data-measurement-point="step-3-content">
+        <h3 class="step-title" data-typography-container="step-title">Choose Your Payment Plan</h3>
+        <p class="step-description" data-typography-container="step-description">Final pricing confirmed during enrollment</p>
+        
+        <!-- Page Blueprints Options: Monthly | Yearly | Semester with pricing preview - Line 285 -->
+        <div class="billing-options" data-measurement-point="billing-options">
+          <div class="billing-option" data-billing="monthly" tabindex="0" role="button">
+            <div class="billing-period" data-typography-container="billing-period">Monthly</div>
+            <div class="billing-price" data-typography-container="billing-price">$120/month</div>
+            <div class="billing-description" data-typography-container="billing-description">4 lessons per month</div>
+          </div>
+          <div class="billing-option recommended" data-billing="semester" tabindex="0" role="button">
+            <div class="recommended-badge" data-typography-container="recommended-badge">Recommended</div>
+            <div class="billing-period" data-typography-container="billing-period">Semester</div>
+            <div class="billing-price" data-typography-container="billing-price">$480/semester</div>
+            <div class="billing-description" data-typography-container="billing-description">16 lessons, save $240</div>
+          </div>
+          <div class="billing-option" data-billing="yearly" tabindex="0" role="button">
+            <div class="billing-period" data-typography-container="billing-period">Yearly</div>
+            <div class="billing-price" data-typography-container="billing-price">$1,200/year</div>
+            <div class="billing-description" data-typography-container="billing-description">48 lessons, save $240</div>
+          </div>
+        </div>
+        
+        <!-- Page Blueprints Enrollment Summary - Lines 284-286 -->
+        <div class="enrollment-summary" data-wireframe-section="enrollment-summary" data-measurement-point="enrollment-summary">
+          <h4 class="summary-title" data-typography-container="summary-title">Enrollment Summary</h4>
+          <div class="summary-details">
+            <div class="summary-item">
+              <span class="summary-label" data-typography-container="summary-label">Instrument:</span>
+              <span class="summary-value" id="selected-instrument" data-typography-container="summary-value">Not selected</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label" data-typography-container="summary-label">Time:</span>
+              <span class="summary-value" id="selected-timeslot" data-typography-container="summary-value">Not selected</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label" data-typography-container="summary-label">Billing:</span>
+              <span class="summary-value" id="selected-billing" data-typography-container="summary-value">Not selected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Blueprints Navigation - Lines 287-290 -->
+    <div class="enroll-modal-footer" data-wireframe-section="modal-footer" data-measurement-point="modal-footer">
+      <div class="modal-navigation" data-measurement-point="modal-navigation">
+        
+        <!-- Page Blueprints Back/Next buttons - Line 288 -->
+        <button class="nav-button back-button" data-measurement-point="back-button" style="display: none;">
+          <span data-typography-container="nav-button-text">← Back</span>
+        </button>
+        
+        <button class="nav-button next-button primary-cta" data-measurement-point="next-button" disabled>
+          <span data-typography-container="nav-button-text">Next →</span>
+        </button>
+        
+        <!-- Page Blueprints Final step: "Complete Enrollment" button - Line 290 -->
+        <button class="nav-button complete-button primary-cta" data-measurement-point="complete-button" style="display: none;">
+          <span data-typography-container="nav-button-text">Complete Enrollment</span>
+        </button>
+        
+        <!-- Page Blueprints "Save & Continue Later" option - Line 289 -->
+        <button class="save-later-button secondary-cta" data-measurement-point="save-later-button">
+          <span data-typography-container="save-later-text">Save & Continue Later</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Page Blueprints Modal Layout - Lines 262-266 */
+.enroll-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Page Blueprints Line 265: Semi-transparent dark overlay */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Page Blueprints Display: Full-screen on mobile, centered overlay (max-width 600px) on desktop - Line 263 */
+.enroll-modal-container {
+  background: white;
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px; /* Page Blueprints Line 263: max-width 600px on desktop */
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Page Blueprints Modal Header - Lines 268-271 */
+.enroll-modal-header {
+  padding: 2rem 2rem 1rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition-normal);
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+}
+
+.modal-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+  font-size: 1rem;
+  color: rgba(0, 5, 16, 0.7);
+  margin-bottom: 1.5rem;
+}
+
+/* Page Blueprints Progress Indicator - Line 271 */
+.progress-indicator {
+  margin-bottom: 0;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.progress-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 60%;
+  right: -40%;
+  height: 2px;
+  background: #e0e0e0;
+  z-index: 1;
+}
+
+.progress-step.active:not(:last-child)::after,
+.progress-step.completed:not(:last-child)::after {
+  background: var(--color-primary-green);
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.progress-step.active .step-number,
+.progress-step.completed .step-number {
+  background: var(--color-primary-green);
+  color: var(--color-dark-text);
+}
+
+.step-label {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.progress-step.active .step-label,
+.progress-step.completed .step-label {
+  color: var(--color-dark-text);
+}
+
+.progress-bar {
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-primary-green);
+  width: 33.33%; /* Step 1 of 3 */
+  transition: width var(--transition-normal);
+}
+
+/* Page Blueprints Modal Content */
+.enroll-modal-content {
+  padding: 2rem;
+  min-height: 300px;
+}
+
+.modal-step {
+  display: none;
+}
+
+.modal-step.active {
+  display: block;
+}
+
+.step-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.step-description {
+  font-size: 1rem;
+  color: rgba(0, 5, 16, 0.7);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Page Blueprints Step 1: Instrument Selection - Lines 274-278 */
+.instrument-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.instrument-option {
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius-medium);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  background: white;
+}
+
+.instrument-option:hover {
+  border-color: var(--color-primary-green);
+  box-shadow: 0 2px 8px rgba(153, 227, 158, 0.2);
+}
+
+.instrument-option.selected {
+  border-color: var(--color-primary-green);
+  background: rgba(153, 227, 158, 0.1);
+}
+
+.instrument-option:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+}
+
+.instrument-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.instrument-name {
+  font-weight: 500;
+  color: var(--color-dark-text);
+}
+
+/* Page Blueprints Step 2: Timeslot Selection - Lines 279-283 */
+.timeslot-loading {
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loading-text {
+  color: rgba(0, 5, 16, 0.7);
+}
+
+.timeslot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.timeslot-option {
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius-medium);
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  background: white;
+  text-align: left;
+}
+
+.timeslot-option:hover {
+  border-color: var(--color-primary-green);
+  box-shadow: 0 2px 8px rgba(153, 227, 158, 0.2);
+}
+
+.timeslot-option.selected {
+  border-color: var(--color-primary-green);
+  background: rgba(153, 227, 158, 0.1);
+}
+
+.timeslot-option:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+}
+
+.timeslot-day {
+  font-weight: 600;
+  color: var(--color-dark-text);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.timeslot-time {
+  font-size: 0.875rem;
+  color: var(--color-primary-green);
+  margin-bottom: 0.25rem;
+}
+
+.timeslot-teacher {
+  font-size: 0.75rem;
+  color: rgba(0, 5, 16, 0.6);
+}
+
+/* Page Blueprints Step 3: Billing Selection - Lines 284-286 */
+.billing-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.billing-option {
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius-medium);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  background: white;
+  text-align: center;
+  position: relative;
+}
+
+.billing-option:hover {
+  border-color: var(--color-primary-green);
+  box-shadow: 0 2px 8px rgba(153, 227, 158, 0.2);
+}
+
+.billing-option.selected {
+  border-color: var(--color-primary-green);
+  background: rgba(153, 227, 158, 0.1);
+}
+
+.billing-option.recommended {
+  border-color: var(--color-primary-green);
+  box-shadow: 0 2px 8px rgba(153, 227, 158, 0.15);
+}
+
+.billing-option:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+}
+
+.recommended-badge {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary-green);
+  color: var(--color-dark-text);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.billing-period {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  margin-bottom: 0.5rem;
+}
+
+.billing-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary-green);
+  margin-bottom: 0.5rem;
+}
+
+.billing-description {
+  font-size: 0.875rem;
+  color: rgba(0, 5, 16, 0.7);
+}
+
+/* Enrollment Summary */
+.enrollment-summary {
+  background: rgba(153, 227, 158, 0.05);
+  border: 1px solid rgba(153, 227, 158, 0.2);
+  border-radius: var(--border-radius-medium);
+  padding: 1.5rem;
+}
+
+.summary-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-label {
+  font-weight: 500;
+  color: var(--color-dark-text);
+}
+
+.summary-value {
+  font-weight: 600;
+  color: var(--color-primary-green);
+}
+
+/* Page Blueprints Modal Footer - Lines 287-290 */
+.enroll-modal-footer {
+  padding: 1.5rem 2rem 2rem 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-medium);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  border: none;
+  min-height: 44px;
+}
+
+.nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nav-button:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+}
+
+.back-button {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.back-button:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.save-later-button {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Page Blueprints Mobile Responsive - Line 263: Full-screen on mobile */
+@media (max-width: 767px) {
+  .enroll-modal-container {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+  
+  .enroll-modal-header {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+  
+  .enroll-modal-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .enroll-modal-footer {
+    padding: 1rem;
+  }
+  
+  .instrument-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-navigation {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .nav-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .save-later-button {
+    order: -1;
+  }
+}
+
+/* Page Blueprints Auto-save progress in localStorage - Line 299 */
+.auto-save-indicator {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  color: rgba(0, 5, 16, 0.5);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.auto-save-indicator.saving {
+  opacity: 1;
+}
+
+/* Page Blueprints Smooth transitions between steps - Line 300 */
+.modal-step {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.modal-step.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Page Blueprints Loading states for API calls - Line 303 */
+.loading-state {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading-state::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e0e0e0;
+  border-top: 2px solid var(--color-primary-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+</style>
+
+<script>
+// Page Blueprints Modal UX Features - Lines 298-304
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('enroll-modal');
+  const modalContainer = modal.querySelector('.enroll-modal-container');
+  const closeButton = modal.querySelector('.modal-close');
+  const backButton = modal.querySelector('.back-button');
+  const nextButton = modal.querySelector('.next-button');
+  const completeButton = modal.querySelector('.complete-button');
+  const saveLaterButton = modal.querySelector('.save-later-button');
+  const progressFill = modal.querySelector('.progress-fill');
+  const progressSteps = modal.querySelectorAll('.progress-step');
+  const modalSteps = modal.querySelectorAll('.modal-step');
+  
+  let currentStep = 1;
+  let enrollmentData = {
+    instrument: null,
+    timeslot: null,
+    billing: null
+  };
+  
+  // Page Blueprints Auto-save progress in localStorage - Line 299
+  function saveProgress() {
+    localStorage.setItem('enrollment-progress', JSON.stringify({
+      step: currentStep,
+      data: enrollmentData
+    }));
+    
+    // Show auto-save indicator
+    const indicator = modal.querySelector('.auto-save-indicator');
+    if (indicator) {
+      indicator.classList.add('saving');
+      setTimeout(() => indicator.classList.remove('saving'), 1000);
+    }
+  }
+  
+  // Load saved progress
+  function loadProgress() {
+    const saved = localStorage.getItem('enrollment-progress');
+    if (saved) {
+      const progress = JSON.parse(saved);
+      currentStep = progress.step;
+      enrollmentData = progress.data;
+      updateStep();
+      updateSummary();
+    }
+  }
+  
+  // Page Blueprints Smooth transitions between steps - Line 300
+  function updateStep() {
+    // Update progress indicator
+    progressSteps.forEach((step, index) => {
+      step.classList.remove('active', 'completed');
+      if (index + 1 < currentStep) {
+        step.classList.add('completed');
+      } else if (index + 1 === currentStep) {
+        step.classList.add('active');
+      }
+    });
+    // Update progress bar
+    const progressWidth = ((currentStep - 1) / 2) * 100;
+    progressFill.style.width = `${progressWidth}%`;
+    
+    // Update modal steps
+    modalSteps.forEach((step, index) => {
+      step.classList.remove('active');
+      if (index + 1 === currentStep) {
+        step.classList.add('active');
+      }
+    });
+    
+    // Update navigation buttons
+    backButton.style.display = currentStep > 1 ? 'block' : 'none';
+    nextButton.style.display = currentStep < 3 ? 'block' : 'none';
+    completeButton.style.display = currentStep === 3 ? 'block' : 'none';
+    
+    // Update button states
+    updateButtonStates();
+  }
+  
+  function updateButtonStates() {
+    const canProceed = validateCurrentStep();
+    nextButton.disabled = !canProceed;
+    completeButton.disabled = !canProceed;
+  }
+  
+  function validateCurrentStep() {
+    switch (currentStep) {
+      case 1:
+        return enrollmentData.instrument !== null;
+      case 2:
+        return enrollmentData.timeslot !== null;
+      case 3:
+        return enrollmentData.billing !== null;
+      default:
+        return false;
+    }
+  }
+  
+  function updateSummary() {
+    const instrumentEl = document.getElementById('selected-instrument');
+    const timeslotEl = document.getElementById('selected-timeslot');
+    const billingEl = document.getElementById('selected-billing');
+    
+    instrumentEl.textContent = enrollmentData.instrument || 'Not selected';
+    timeslotEl.textContent = enrollmentData.timeslot || 'Not selected';
+    billingEl.textContent = enrollmentData.billing || 'Not selected';
+  }
+  
+  // Page Blueprints Mobile-optimized touch interactions - Line 301
+  function setupTouchInteractions() {
+    const options = modal.querySelectorAll('.instrument-option, .timeslot-option, .billing-option');
+    options.forEach(option => {
+      option.addEventListener('click', handleOptionSelect);
+      option.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleOptionSelect.call(option, e);
+        }
+      });
+    });
+  }
+  
+  function handleOptionSelect(e) {
+    const option = e.currentTarget;
+    const step = option.closest('.modal-step');
+    
+    // Remove selection from siblings
+    const siblings = step.querySelectorAll('.instrument-option, .timeslot-option, .billing-option');
+    siblings.forEach(sibling => sibling.classList.remove('selected'));
+    
+    // Add selection to current option
+    option.classList.add('selected');
+    
+    // Update enrollment data
+    if (step.classList.contains('step-1')) {
+      enrollmentData.instrument = option.dataset.instrument;
+    } else if (step.classList.contains('step-2')) {
+      const day = option.querySelector('.timeslot-day').textContent;
+      const time = option.querySelector('.timeslot-time').textContent;
+      enrollmentData.timeslot = `${day} ${time}`;
+    } else if (step.classList.contains('step-3')) {
+      const period = option.querySelector('.billing-period').textContent;
+      const price = option.querySelector('.billing-price').textContent;
+      enrollmentData.billing = `${period} - ${price}`;
+    }
+    
+    updateButtonStates();
+    updateSummary();
+    saveProgress();
+  }
+  
+  // Page Blueprints Accessible keyboard navigation - Line 302
+  function setupKeyboardNavigation() {
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+    
+    // Trap focus within modal
+    const focusableElements = modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+    
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
+        }
+      }
+    });
+  }
+  
+  // Page Blueprints Loading states for API calls - Line 303
+  async function loadTimeslots() {
+    const timeslotGrid = modal.querySelector('.timeslot-grid');
+    const loadingIndicator = modal.querySelector('.timeslot-loading');
+    
+    // Show loading state
+    timeslotGrid.style.display = 'none';
+    loadingIndicator.style.display = 'block';
+    
+    try {
+      // Simulate API call - Page Blueprints Line 280: Mock week 1 → Pre-launch live GET /public/timeslots
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Hide loading state
+      loadingIndicator.style.display = 'none';
+      timeslotGrid.style.display = 'grid';
+      
+    } catch (error) {
+      console.error('Failed to load timeslots:', error);
+      loadingIndicator.innerHTML = '<p class="error-text">Failed to load available times. Please try again.</p>';
+    }
+  }
+  
+  function openModal() {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    // Focus first focusable element
+    const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (firstFocusable) {
+      firstFocusable.focus();
+    }
+    
+    // Load saved progress
+    loadProgress();
+    
+    // Load timeslots when reaching step 2
+    if (currentStep === 2) {
+      loadTimeslots();
+    }
+  }
+  
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  
+  // Event listeners
+  closeButton.addEventListener('click', closeModal);
+  
+  // Page Blueprints Close options: click outside (with confirmation if partially completed) - Line 266
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      const hasProgress = enrollmentData.instrument || enrollmentData.timeslot || enrollmentData.billing;
+      if (hasProgress) {
+        if (confirm('You have unsaved progress. Are you sure you want to close?')) {
+          closeModal();
+        }
+      } else {
+        closeModal();
+      }
+    }
+  });
+  
+  backButton.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      updateStep();
+      saveProgress();
+    }
+  });
+  
+  nextButton.addEventListener('click', () => {
+    if (currentStep < 3 && validateCurrentStep()) {
+      currentStep++;
+      updateStep();
+      saveProgress();
+      
+      // Load timeslots when entering step 2
+      if (currentStep === 2) {
+        loadTimeslots();
+      }
+    }
+  });
+  
+  // Page Blueprints Completion behavior - Lines 293-296
+  completeButton.addEventListener('click', () => {
+    if (validateCurrentStep()) {
+      // Page Blueprints Success message - Line 293
+      const successMessage = modal.querySelector('.success-message') || createSuccessMessage();
+      successMessage.style.display = 'block';
+      
+      // Page Blueprints Redirect to protected app - Lines 294-296
+      setTimeout(() => {
+        const params = new URLSearchParams({
+          instrument_id: enrollmentData.instrument,
+          teacher_id: 'sarah-johnson', // Page Blueprints Line 295: optional if implied by timeslot
+          timeslot_id: enrollmentData.timeslot,
+          billing_frequency: enrollmentData.billing,
+          source: 'public_site' // Page Blueprints Line 295
+        });
+        
+        // Page Blueprints Line 294: Redirect to https://app.cedarheightsmusic.com/enroll/start
+        window.location.href = `https://app.cedarheightsmusic.com/enroll/start?${params.toString()}`;
+      }, 2000);
+      
+      // Clear saved progress
+      localStorage.removeItem('enrollment-progress');
+    }
+  });
+  
+  function createSuccessMessage() {
+    const message = document.createElement('div');
+    message.className = 'success-message';
+    message.innerHTML = '<p>Almost there! Redirecting you to complete enrollment...</p>';
+    message.style.display = 'none';
+    modal.querySelector('.enroll-modal-content').appendChild(message);
+    return message;
+  }
+  
+  saveLaterButton.addEventListener('click', () => {
+    saveProgress();
+    alert('Your progress has been saved. You can continue later by clicking "Enroll Now" again.');
+    closeModal();
+  });
+  
+  // Initialize
+  setupTouchInteractions();
+  setupKeyboardNavigation();
+  
+  // Expose openModal function globally for use by "Enroll Now" buttons
+  window.openEnrollModal = openModal;
+});
+</script>
+    

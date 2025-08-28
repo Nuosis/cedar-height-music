@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Cedar Heights Music Academy</title>
+  <meta name="description" content="Learn about Cedar Heights Music Academy's dedicated teacher and personalized approach to music education in Cedar Heights.">
+  
+  <!-- Page Blueprints Design System -->
+  <link rel="stylesheet" href="wireframe-styles.css">
+  
+  <!-- Accessibility -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Skip Navigation -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+</head>
+<body>
+  
+  <!-- Page Blueprints Global Navigation - Lines 27-30 -->
+  <div id="navigation-placeholder">
+    <!-- Navigation component will be loaded here -->
+    <script>
+      fetch('components/navigation.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('navigation-placeholder').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <main id="main-content">
+    
+    <!-- Page Blueprints About Hero Section - Lines 156-185 -->
+    <section class="about-hero-section section" data-wireframe-section="about-hero" data-measurement-point="about-hero-height">
+      
+      <div class="page-container">      
+        <!-- Page Blueprints Main Headline - Line 163 -->
+        <h1 class="about-hero-headline" data-typography-container="about-hero-headline" data-measurement-point="about-headline-size">
+          Teaching music with heart and patience
+        </h1>
+
+        <!-- Page Blueprints Hero Layout Structure - Lines 161-165 -->
+        <div class="about-hero-content" data-measurement-point="about-hero-content">
+          
+          <!-- Page Blueprints Eyebrow Text - Line 162 -->
+          <!-- <div class="hero-eyebrow" data-typography-container="about-eyebrow">
+            Teaching music with heart and patience
+          </div> -->
+          
+          <!-- Page Blueprints Call-to-Action - Lines 178-181 -->
+          <div class="about-hero-cta" data-measurement-point="about-hero-cta">
+            <a href="/enroll" class="primary-cta" data-measurement-point="about-primary-cta">
+              Enroll Now
+              <span class="cta-arrow" data-asset-container="arrow-icon">→</span>
+            </a>
+          </div>
+        </div>
+        <!-- Page Blueprints Background Composition - Lines 165-177 -->
+        <div class="about-hero-background" data-wireframe-section="about-hero-background">
+          <!-- Page Blueprints Central Element - Line 167: Group 255.png -->
+          <div class="hero-background-shape" data-asset-container="group-255-background" data-measurement-point="background-shape-size"></div>
+        </div>
+        <!-- Page Blueprints Character Illustration - Lines 169-173 -->
+        <div class="hero-character-container" data-asset-container="girl-guitar-character" data-measurement-point="character-positioning" style="position: absolute; bottom: 100px; right: 20%; transform: translateX(0);">
+          <img src="../public/girl&guitar.png" alt="" role="presentation" class="about-hero-character" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints Studio Story Section - Lines 187-207 -->
+    <section class="studio-story-section section" data-wireframe-section="studio-story" data-measurement-point="studio-story-height">
+      <div class="page-container">
+        <div class="two-column-grid" data-measurement-point="studio-story-grid">
+          
+          <!-- Page Blueprints Left Column Content - Lines 189-195 -->
+          <div class="studio-story-content" data-wireframe-section="studio-story-text">
+            
+            <!-- Page Blueprints Eyebrow - Line 190 -->
+            <div class="eyebrow" data-typography-container="studio-story-eyebrow">About us</div>
+            
+            <!-- Page Blueprints Main Heading - Line 191 -->
+            <h2 class="section-heading" data-typography-container="studio-story-heading">
+              Master Music from the Core and Achieve Excellence
+            </h2>
+            
+            <!-- Page Blueprints Body Content - Line 192 -->
+            <div class="studio-story-text" data-typography-container="studio-story-body">
+              <p>At Cedar Heights Music Academy, we believe that every student has the potential to excel in music. Our personalized approach focuses on building strong fundamentals while nurturing each student's unique musical voice.</p>
+              <p>Located in the heart of Cedar Heights, we're proud to serve the Nanaimo community with dedicated, one-on-one instruction that adapts to each student's learning style and goals.</p>
+            </div>
+            
+            <!-- Page Blueprints Feature Highlights - Lines 193-195 -->
+            <div class="feature-highlights" data-wireframe-section="feature-highlights" data-measurement-point="feature-highlights">
+              <div class="feature-item" data-typography-container="feature-item">
+                <span class="feature-icon" data-asset-container="checkmark-icon">✓</span>
+                <span class="feature-text">Private Lessons</span>
+              </div>
+              <div class="feature-item" data-typography-container="feature-item">
+                <span class="feature-icon" data-asset-container="checkmark-icon">✓</span>
+                <span class="feature-text">All Ages Welcome</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Page Blueprints Right Column - Lines 196-205 -->
+          <div class="studio-story-images" data-wireframe-section="studio-story-images">
+            <div class="image-cluster" data-measurement-point="image-cluster-size">
+              
+              <!-- North Row: West ⅔, East ⅓ -->
+              <div class="north-row">
+                <div class="cluster-image north-west" data-asset-container="piano-teacher-image">
+                  <img src="../public/piano-teacher-student.jpg" alt="Piano teacher working with student" />
+                </div>
+                <div class="cluster-image north-east" data-asset-container="guitar-lesson-image">
+                  <img src="../public/guitar-lesson-teaching.jpg" alt="Guitar lesson instruction" />
+                </div>
+              </div>
+              
+              <!-- South Row: West ⅓, East ⅔ -->
+              <div class="south-row">
+                <div class="cluster-image south-west" data-asset-container="bass-lesson-image">
+                  <img src="../public/bass-lesson-instruction.jpg" alt="Bass lesson instruction" />
+                </div>
+                <div class="cluster-image south-east" data-asset-container="music-lesson-image">
+                  <img src="../public/music-lesson-general.jpg" alt="General music lesson" />
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints Teacher Card Section - Lines 209-211 -->
+    <section class="teacher-card-section section" data-wireframe-section="teacher-card" data-measurement-point="teacher-card-height">
+      <div class="page-container">
+        <div class="teacher-card-container" style="max-width: 600px; margin: 0 auto;">
+          
+          <!-- Page Blueprints Single Teacher Card - Line 210 -->
+          <div class="teacher-card card" data-wireframe-section="single-teacher" data-measurement-point="teacher-card-size">
+            
+            <!-- Page Blueprints Photo - Line 210: 120×120 rounded -->
+            <div class="teacher-photo" data-asset-container="teacher-photo" data-measurement-point="teacher-photo-size">
+              <img src="../public/logo.JPG" alt="Cedar Heights Music Academy Teacher" class="teacher-image" />
+            </div>
+            
+            <div class="teacher-info">
+              <!-- Page Blueprints Name - Line 210 -->
+              <h3 class="teacher-name" data-typography-container="teacher-name">Sarah Johnson</h3>
+              
+              <!-- Page Blueprints Instruments Taught - Line 210 -->
+              <div class="teacher-instruments" data-typography-container="teacher-instruments">
+                Piano, Guitar, Bass
+              </div>
+              
+              <!-- Page Blueprints Short Bio - Line 210: 3-4 lines -->
+              <p class="teacher-bio" data-typography-container="teacher-bio">
+                With over 15 years of teaching experience, Sarah brings patience and expertise to every lesson. 
+                She specializes in helping beginners build confidence while challenging advanced students to reach new heights. 
+                Sarah holds a Bachelor of Music Education and believes every student can find joy in music.
+              </p>
+              
+              <!-- Page Blueprints Optional Chips - Line 211 -->
+              <div class="teacher-availability" data-wireframe-section="teacher-availability">
+                <span class="availability-chip" data-typography-container="availability-chip">Typically evenings</span>
+                <span class="availability-chip" data-typography-container="availability-chip">Open Wed/Thu</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints Compact CTA Band - Lines 213-214 -->
+    <section class="compact-cta-section section" data-wireframe-section="compact-cta" data-measurement-point="compact-cta-height">
+      <div class="page-container">
+        <div class="compact-cta-content" style="text-align: center;">
+          
+          <!-- Page Blueprints Short Line - Line 214 -->
+          <p class="cta-prompt" data-typography-container="cta-prompt">Ready to start?</p>
+          
+          <!-- Page Blueprints Button - Line 214 -->
+          <a href="/enroll" class="primary-cta" data-measurement-point="compact-cta-button">Enroll Now</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Page Blueprints Global Footer - Lines 31-33 -->
+  <div id="footer-placeholder">
+    <!-- Footer component will be loaded here -->
+    <script>
+      fetch('components/footer.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('footer-placeholder').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <!-- Page-specific styles -->
+  <style>
+    /* About Hero Section - Page Blueprints Lines 156-185 */
+    .about-hero-section {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 100px;
+      background: var(--color-warm-off-white); /* Page Blueprints Line 168: Warm off-white/cream background */
+      overflow: hidden;
+    }
+    
+    .about-hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100%;
+      padding-top: 2rem;
+    }
+    
+    /* Page Blueprints Eyebrow Text - Line 162 */
+    .hero-eyebrow {
+      font-size: 1rem; /* Page Blueprints Line 164: Eyebrow ~16px */
+      color: var(--color-primary-green);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Page Blueprints Main Headline - Line 163 */
+    .about-hero-headline {
+      font-size: 3.5rem; /* Page Blueprints Line 164: headline ~48-56px desktop */
+      font-weight: 700;
+      z-index: 10;
+      line-height: 1.15;
+      color: var(--color-dark-text);
+      margin-bottom: 2rem;
+    }
+    
+    .about-hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    /* Page Blueprints Background Composition - Lines 165-177 */
+    .about-hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+    
+    /* Page Blueprints Central Element - Line 167: ~60% width */
+    .hero-background-shape {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 400px;
+      background-image: url('../public/Group 255.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 1;
+    }
+    
+    /* Page Blueprints Character Illustration - Lines 169-173 */
+    .hero-character-container {
+      position: absolute;
+      top: 50%;
+      right: 25%; /* Page Blueprints Line 170: right-center of background shape */
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+    
+    .about-hero-character {
+      width: 200px; /* Page Blueprints Line 173: sized to feel welcoming and personal */
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+    }
+    
+    /* Page Blueprints Decorative Elements - Lines 174-177 */
+    .hero-decorative-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .musical-accent {
+      position: absolute;
+      font-size: 2rem;
+      color: var(--color-warm-yellow);
+      opacity: 0.3; /* Page Blueprints Line 175: low opacity */
+    }
+    
+    .accent-note-1 {
+      top: 20%;
+      left: 15%;
+      transform: rotate(-15deg);
+    }
+    
+    .accent-note-2 {
+      bottom: 25%;
+      right: 20%;
+      transform: rotate(20deg);
+    }
+    
+    .accent-clef {
+      top: 15%;
+      right: 15%;
+      font-size: 3rem;
+    }
+    
+    .organic-shape {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--color-warm-yellow);
+      opacity: 0.15; /* Page Blueprints Line 177: soft, rounded background elements */
+    }
+    
+    .shape-1 {
+      width: 80px;
+      height: 80px;
+      top: 30%;
+      left: 10%;
+    }
+    
+    .shape-2 {
+      width: 60px;
+      height: 60px;
+      bottom: 20%;
+      left: 20%;
+    }
+    
+    /* Studio Story Section - Page Blueprints Lines 187-207 */
+    .studio-story-section {
+      padding: var(--section-spacing-desktop) 0;
+      background: white;
+    }
+    
+    .studio-story-content {
+      padding-right: 2rem;
+    }
+    
+    .studio-story-text p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: rgba(0, 5, 16, 0.8);
+    }
+    
+    .studio-story-text p:last-child {
+      margin-bottom: 2rem;
+    }
+    
+    /* Page Blueprints Feature Highlights - Lines 193-195 */
+    .feature-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .feature-icon {
+      color: var(--color-primary-green);
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+    
+    .feature-text {
+      font-weight: 500;
+      color: var(--color-dark-text);
+    }
+    
+    /* Page Blueprints Image Cluster - Lines 196-205 */
+    .image-cluster {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem; /* Page Blueprints Line 203: 12-16px gaps */
+      height: 400px;
+    }
+    
+    .north-row,
+    .south-row {
+      display: grid;
+      gap: 1rem;
+      height: calc(50% - 0.5rem); /* Equal height rows accounting for gap */
+    }
+    
+    /* North Row: West ⅔, East ⅓ */
+    .north-row {
+      grid-template-columns: 2fr 1fr;
+    }
+    
+    /* South Row: West ⅓, East ⅔ */
+    .south-row {
+      grid-template-columns: 1fr 2fr;
+    }
+    
+    .cluster-image {
+      overflow: hidden;
+      border-radius: var(--border-radius-medium); /* Page Blueprints Line 204: ~8-12px radius */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Page Blueprints Line 203: subtle drop shadows */
+    }
+    
+    .cluster-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* North Row Specific Styling */
+    .north-west {
+      /* Full height for west cell */
+    }
+    
+    .north-east {
+      height: 50%; /* 50% height of west cell */
+      align-self: flex-end; /* Bottom aligned */
+    }
+    
+    /* South Row Specific Styling */
+    .south-west {
+      height: 60%; /* 60% height */
+      align-self: flex-start; /* Top aligned */
+    }
+    
+    .south-east {
+      /* Full height for east cell */
+    }
+    
+    /* Teacher Card Section - Page Blueprints Lines 209-211 */
+    .teacher-card-section {
+      padding: var(--section-spacing-desktop) 0;
+      background: rgba(153, 227, 158, 0.03);
+    }
+    
+    .teacher-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 2rem;
+      text-align: left;
+    }
+    
+    /* Page Blueprints Photo - Line 210: 120×120 rounded */
+    .teacher-photo {
+      flex-shrink: 0;
+    }
+    
+    .teacher-image {
+      width: 120px; /* Page Blueprints Line 210: 120×120 */
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--color-primary-green);
+    }
+    
+    .teacher-info {
+      flex: 1;
+    }
+    
+    .teacher-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-dark-text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .teacher-instruments {
+      font-size: 1rem;
+      color: var(--color-primary-green);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    
+    .teacher-bio {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: rgba(0, 5, 16, 0.8);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Page Blueprints Optional Chips - Line 211 */
+    .teacher-availability {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .availability-chip {
+      background: rgba(153, 227, 158, 0.2);
+      color: var(--color-dark-text);
+      padding: 0.375rem 0.75rem;
+      border-radius: var(--border-radius-pill);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    /* Compact CTA Section - Page Blueprints Lines 213-214 */
+    .compact-cta-section {
+      padding: 3rem 0;
+      background: var(--color-dark-text);
+    }
+    
+    .compact-cta-content {
+      color: var(--color-warm-off-white);
+    }
+    
+    .cta-prompt {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: var(--color-warm-off-white);
+    }
+    
+    /* Responsive Adjustments - Page Blueprints responsive guidelines */
+    @media (max-width: 1199px) {
+      .about-hero-headline {
+        font-size: 3rem;
+      }
+      
+      .about-hero-character {
+        width: 160px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .about-hero-section {
+        min-height: 60vh;
+        text-align: center;
+      }
+      
+      .about-hero-headline {
+        font-size: 2.25rem;
+      }
+      
+      /* Page Blueprints Line 182: Mobile stack elements vertically */
+      .hero-character-container {
+        position: static;
+        transform: none;
+        margin-top: 2rem;
+        text-align: center;
+      }
+      
+      .about-hero-character {
+        width: 140px; /* Page Blueprints Line 182: reduce character size */
+      }
+      
+      .about-hero-cta {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      
+      .primary-cta,
+      .secondary-cta {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+      
+      .teacher-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      
+      .teacher-photo {
+        align-self: center;
+      }
+      
+      .studio-story-images {
+        display: none !important; /* Hide image cluster on mobile */
+      }
+      
+      .two-column-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+      }
+      
+      .studio-story-content {
+        padding-right: 0; /* Remove right padding on mobile */
+      }
+    }
+  </style>
+
+  <!-- Page-specific JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set active navigation state
+      const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === '/about') {
+          link.setAttribute('aria-current', 'page');
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!-- Cedar Heights Music Academy - Global Footer Component
+     Implements Page Blueprints specifications exactly as written
+     Reference: ai_docs/context/core_docs/page_blueprints.md Lines 31-33 -->
+
+<footer class="global-footer" data-wireframe-section="global-footer" data-measurement-point="footer-height">
+  <div class="page-container">
+    
+    <!-- Page Blueprints Line 32: Columns: Brand + short description; Links; Legal; Social row -->
+    <div class="footer-content">
+      
+      <!-- Brand Column - Page Blueprints Line 32: Brand + short description -->
+      <div class="footer-column footer-brand" data-measurement-point="brand-column">
+        <div class="footer-logo" data-typography-container="footer-brand">
+          <span class="footer-wordmark">Cedar Heights Music Academy</span>
+        </div>
+        <p class="footer-description" data-typography-container="footer-description">
+          Personal, one-on-one music lessons in Cedar Heights. Nurturing young musicians in a supportive environment.
+        </p>
+      </div>
+
+      <!-- Links Column - Page Blueprints Line 32: Links (About, Pricing, Enroll, Contact) -->
+      <div class="footer-column footer-links" data-measurement-point="links-column">
+        <h3 class="footer-heading" data-typography-container="footer-heading">Quick Links</h3>
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item">
+            <a href="/about" class="footer-nav-link" data-typography-container="footer-link">About</a>
+          </li>
+          <li class="footer-nav-item">
+            <a href="/pricing" class="footer-nav-link" data-typography-container="footer-link">Pricing</a>
+          </li>
+          <li class="footer-nav-item">
+            <a href="/enroll" class="footer-nav-link" data-typography-container="footer-link">Enroll</a>
+          </li>
+          <li class="footer-nav-item">
+            <a href="/contact" class="footer-nav-link" data-typography-container="footer-link">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal Column - Page Blueprints Line 32: Legal (Privacy, Terms) -->
+      <div class="footer-column footer-legal" data-measurement-point="legal-column">
+        <h3 class="footer-heading" data-typography-container="footer-heading">Legal</h3>
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item">
+            <a href="/privacy" class="footer-nav-link" data-typography-container="footer-link">Privacy Policy</a>
+          </li>
+          <li class="footer-nav-item">
+            <a href="/terms" class="footer-nav-link" data-typography-container="footer-link">Terms of Service</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Column - Page Blueprints Line 32: Social row -->
+      <div class="footer-column footer-social" data-measurement-point="social-column">
+        <h3 class="footer-heading" data-typography-container="footer-heading">Connect</h3>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook" data-asset-container="facebook-icon">
+            <span class="social-text" data-typography-container="social-link">Facebook</span>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram" data-asset-container="instagram-icon">
+            <span class="social-text" data-typography-container="social-link">Instagram</span>
+          </a>
+          <a href="#" class="social-link" aria-label="Email" data-asset-container="email-icon">
+            <span class="social-text" data-typography-container="social-link">Email</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Blueprints Line 33: Bottom bar: Copyright line -->
+    <div class="footer-bottom" data-wireframe-section="footer-copyright" data-measurement-point="copyright-bar">
+      <p class="copyright" data-typography-container="copyright-text">
+        Cedar Heights Music Academy © 2025. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+/* Global Footer Styles */
+.global-footer {
+  background: var(--color-dark-text);
+  color: var(--color-warm-off-white);
+  margin-top: var(--section-spacing-desktop);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr; /* Brand column wider per Page Blueprints */
+  gap: 3rem;
+  padding: 3rem 0 2rem 0;
+}
+
+/* Footer Brand Column - Page Blueprints Line 32 */
+.footer-brand {
+  max-width: 300px;
+}
+
+.footer-wordmark {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: var(--font-family-display);
+  color: var(--color-warm-off-white);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.footer-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(252, 244, 226, 0.8);
+  margin: 0;
+}
+
+/* Footer Navigation Columns */
+.footer-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-warm-off-white);
+  margin-bottom: 1rem;
+}
+
+.footer-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-nav-item {
+  margin-bottom: 0.5rem;
+}
+
+.footer-nav-link {
+  color: rgba(252, 244, 226, 0.7);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: var(--transition-normal);
+}
+
+.footer-nav-link:hover {
+  color: var(--color-primary-green);
+}
+
+.footer-nav-link:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Social Links - Page Blueprints Line 32: Social row */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.social-link {
+  color: rgba(252, 244, 226, 0.7);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: var(--transition-normal);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social-link:hover {
+  color: var(--color-primary-green);
+}
+
+.social-link:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Footer Bottom - Page Blueprints Line 33 */
+.footer-bottom {
+  border-top: 1px solid rgba(252, 244, 226, 0.2);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  color: rgba(252, 244, 226, 0.6);
+  margin: 0;
+}
+
+/* Responsive Footer Layout - Page Blueprints responsive guidelines */
+@media (max-width: 1199px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-brand {
+    grid-column: 1 / -1;
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 0 1.5rem 0;
+  }
+  
+  .footer-brand {
+    grid-column: 1;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .footer-links,
+  .footer-legal,
+  .footer-social {
+    text-align: center;
+  }
+  
+  .social-links {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .footer-bottom {
+    padding: 1rem 0;
+  }
+}
+
+/* Accessibility Enhancements */
+.footer-nav-link,
+.social-link {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* Focus management for keyboard navigation */
+.global-footer a:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .global-footer {
+    border-top: 2px solid var(--color-warm-off-white);
+  }
+  
+  .footer-nav-link,
+  .social-link {
+    color: var(--color-warm-off-white);
+  }
+  
+  .footer-description,
+  .copyright {
+    color: var(--color-warm-off-white);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .footer-nav-link,
+  .social-link {
+    transition: none;
+  }
+}
+</style>

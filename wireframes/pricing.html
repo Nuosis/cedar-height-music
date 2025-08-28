@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - Cedar Heights Music Academy</title>
+  <meta name="description" content="Transparent pricing for quality music education. Clear, straightforward pricing with flexible payment options at Cedar Heights Music Academy.">
+  
+  <!-- Page Blueprints Design System -->
+  <link rel="stylesheet" href="wireframe-styles.css">
+  
+  <!-- Accessibility -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Skip Navigation -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+</head>
+<body>
+  
+  <!-- Page Blueprints Global Navigation - Lines 27-30 -->
+  <div id="navigation-placeholder">
+    <!-- Navigation component will be loaded here -->
+    <script>
+      fetch('components/navigation.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('navigation-placeholder').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <main id="main-content">
+    
+    <!-- Page Blueprints Pricing Hero Section - Lines 219-245 -->
+    <section class="pricing-hero-section section" data-wireframe-section="pricing-hero" data-measurement-point="pricing-hero-height">
+      <div class="page-container">
+        <div class="pricing-hero-content" style="text-align: center; max-width: 800px; margin: 0 auto;">
+          
+          <!-- Page Blueprints Eyebrow Text - Line 224 -->
+          <div class="hero-eyebrow" data-typography-container="pricing-eyebrow">
+            Transparent pricing
+          </div>
+          
+          <!-- Page Blueprints Main Headline - Line 225 -->
+          <h1 class="pricing-hero-headline" data-typography-container="pricing-hero-headline" data-measurement-point="pricing-headline-size">
+            Quality music education that fits your family
+          </h1>
+          
+          <!-- Page Blueprints Subcopy - Line 226 -->
+          <p class="pricing-hero-subcopy" data-typography-container="pricing-hero-subcopy" data-measurement-point="pricing-subcopy-spacing">
+            Clear, straightforward pricing with flexible payment options. No hidden fees, no surprises—just honest pricing for exceptional music instruction.
+          </p>
+        </div>
+        
+        <!-- Page Blueprints Background Composition - Lines 228-230 -->
+        <div class="pricing-hero-background" data-wireframe-section="pricing-hero-background">
+          <!-- Page Blueprints Base: Warm off-white/cream background consistent with brand palette -->
+          <div class="hero-background-base" data-asset-container="pricing-background"></div>
+          
+          <!-- Page Blueprints Optional seasonal background element (subtle, non-distracting) -->
+          <div class="hero-seasonal-element" data-asset-container="seasonal-accent"></div>
+          
+          <!-- Page Blueprints Minimal decorative accents -->
+          <div class="pricing-decorative" data-wireframe-section="pricing-decorative">
+            <div class="musical-note-accent note-1" data-asset-container="music-note-accent-1">♪</div>
+            <div class="musical-note-accent note-2" data-asset-container="music-note-accent-2">♫</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints Billing Frequency Selector Section - Lines 247-251 -->
+    <section class="billing-selector-section section" data-wireframe-section="billing-selector" data-measurement-point="billing-selector-height">
+      <div class="page-container">
+        <div class="billing-selector-content" style="max-width: 900px; margin: 0 auto;">
+          
+          <!-- Page Blueprints Options: Monthly | Yearly | Semester - Line 248 -->
+          <div class="billing-frequency-selector" data-measurement-point="billing-selector-width">
+            <div class="billing-options" data-wireframe-section="billing-options">
+              
+              <!-- Monthly Option -->
+              <div class="billing-option" data-wireframe-section="billing-monthly">
+                <input type="radio" id="monthly" name="billing-frequency" value="monthly" class="billing-radio" checked>
+                <label for="monthly" class="billing-label" data-typography-container="billing-option-label">
+                  <div class="billing-period" data-typography-container="billing-period">Monthly</div>
+                  <div class="billing-price" data-typography-container="billing-price">$120/month</div>
+                  <div class="billing-description" data-typography-container="billing-description">4 lessons per month</div>
+                </label>
+              </div>
+              
+              <!-- Semester Option - Page Blueprints per PRD -->
+              <div class="billing-option popular" data-wireframe-section="billing-semester">
+                <div class="popular-badge" data-typography-container="popular-badge">Most Popular</div>
+                <input type="radio" id="semester" name="billing-frequency" value="semester" class="billing-radio">
+                <label for="semester" class="billing-label" data-typography-container="billing-option-label">
+                  <div class="billing-period" data-typography-container="billing-period">Semester</div>
+                  <div class="billing-price" data-typography-container="billing-price">$480/semester</div>
+                  <div class="billing-description" data-typography-container="billing-description">16 lessons, save $240</div>
+                </label>
+              </div>
+              
+              <!-- Yearly Option -->
+              <div class="billing-option" data-wireframe-section="billing-yearly">
+                <input type="radio" id="yearly" name="billing-frequency" value="yearly" class="billing-radio">
+                <label for="yearly" class="billing-label" data-typography-container="billing-option-label">
+                  <div class="billing-period" data-typography-container="billing-period">Yearly</div>
+                  <div class="billing-price" data-typography-container="billing-price">$1,200/year</div>
+                  <div class="billing-description" data-typography-container="billing-description">48 lessons, save $240</div>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Page Blueprints Shows indicative price mapping - Line 249 -->
+          <div class="pricing-details" data-wireframe-section="pricing-details" data-measurement-point="pricing-details-spacing">
+            <div class="pricing-breakdown" data-typography-container="pricing-breakdown">
+              <h3 class="breakdown-title" data-typography-container="breakdown-title">What's included:</h3>
+              <ul class="breakdown-list" data-typography-container="breakdown-list">
+                <li>30-minute one-on-one lessons</li>
+                <li>Personalized lesson plans</li>
+                <li>Progress tracking and feedback</li>
+                <li>Flexible rescheduling (24hr notice)</li>
+                <li>Performance opportunities</li>
+              </ul>
+            </div>
+            
+            <!-- Page Blueprints Note: "Final pricing confirmed during enrollment." - Line 250 -->
+            <div class="pricing-disclaimer" data-wireframe-section="pricing-disclaimer" data-measurement-point="disclaimer-positioning">
+              <p class="disclaimer-text" data-typography-container="pricing-disclaimer">
+                <strong>Indicative pricing shown above.</strong> Final pricing confirmed during enrollment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints CTA Block Section - Lines 252-255 -->
+    <section class="pricing-cta-section section" data-wireframe-section="pricing-cta" data-measurement-point="pricing-cta-height">
+      <div class="page-container">
+        <div class="pricing-cta-content" style="text-align: center; max-width: 600px; margin: 0 auto;">
+          
+          <h2 class="cta-heading" data-typography-container="pricing-cta-heading">Ready to start your musical journey?</h2>
+          <p class="cta-description" data-typography-container="pricing-cta-description">
+            Choose your preferred payment plan and begin with a personalized lesson that fits your schedule and goals.
+          </p>
+          
+          <!-- Page Blueprints Primary: "Enroll Now" → /enroll - Line 253 -->
+          <div class="pricing-cta-buttons" data-measurement-point="pricing-cta-buttons">
+            <a href="/enroll" class="primary-cta" data-measurement-point="pricing-primary-cta">
+              Enroll Now
+              <span class="cta-arrow" data-asset-container="arrow-icon">→</span>
+            </a>
+            
+            <!-- Page Blueprints Secondary: "Contact" → /contact - Line 254 -->
+            <a href="/contact" class="secondary-cta" data-measurement-point="pricing-secondary-cta">
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Page Blueprints Global Footer - Lines 31-33 -->
+  <div id="footer-placeholder">
+    <!-- Footer component will be loaded here -->
+    <script>
+      fetch('components/footer.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('footer-placeholder').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <!-- Page-specific styles -->
+  <style>
+    /* Pricing Hero Section - Page Blueprints Lines 219-245 */
+    .pricing-hero-section {
+      position: relative;
+      padding: calc(var(--section-spacing-desktop) * 1.5) 0 var(--section-spacing-desktop) 0;
+      background: var(--color-warm-off-white); /* Page Blueprints Line 229: consistent with brand palette */
+      overflow: hidden;
+    }
+    
+    .pricing-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Page Blueprints Eyebrow Text - Line 224 */
+    .hero-eyebrow {
+      font-size: 1rem; /* Page Blueprints Line 227: Eyebrow ~16px */
+      color: var(--color-primary-green);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    
+    /* Page Blueprints Main Headline - Line 225 */
+    .pricing-hero-headline {
+      font-size: 3.5rem; /* Page Blueprints Line 227: headline ~48-56px desktop */
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--color-dark-text);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Page Blueprints Subcopy - Line 226 */
+    .pricing-hero-subcopy {
+      font-size: 1.125rem; /* Page Blueprints Line 227: subcopy ~18px */
+      line-height: 1.6;
+      color: rgba(0, 5, 16, 0.8);
+      margin-bottom: 0;
+    }
+    
+    /* Page Blueprints Background Elements - Lines 228-235 */
+    .pricing-hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+    
+    .hero-background-base {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(252, 244, 226, 0.5) 0%, rgba(255, 250, 205, 0.3) 100%);
+    }
+    
+    .hero-seasonal-element {
+      position: absolute;
+      top: 20%;
+      right: 10%;
+      width: 200px;
+      height: 200px;
+      background: rgba(153, 227, 158, 0.05);
+      border-radius: 50%;
+    }
+    
+    /* Page Blueprints Minimal decorative accents - Line 234 */
+    .pricing-decorative {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+    
+    .musical-note-accent {
+      position: absolute;
+      font-size: 1.5rem;
+      color: var(--color-warm-yellow);
+      opacity: 0.2;
+    }
+    
+    .note-1 {
+      top: 25%;
+      left: 15%;
+      transform: rotate(-15deg);
+    }
+    
+    .note-2 {
+      bottom: 30%;
+      right: 20%;
+      transform: rotate(20deg);
+    }
+    
+    /* Billing Selector Section - Page Blueprints Lines 247-251 */
+    .billing-selector-section {
+      padding: var(--section-spacing-desktop) 0;
+      background: white;
+    }
+    
+    .billing-frequency-selector {
+      margin-bottom: 3rem;
+    }
+    
+    .billing-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .billing-option {
+      position: relative;
+      border: 2px solid #e0e0e0;
+      border-radius: var(--border-radius-medium);
+      transition: var(--transition-normal);
+      overflow: hidden;
+    }
+    
+    .billing-option:hover {
+      border-color: var(--color-primary-green);
+      box-shadow: 0 4px 12px rgba(153, 227, 158, 0.2);
+    }
+    
+    .billing-option.popular {
+      border-color: var(--color-primary-green);
+      box-shadow: 0 4px 12px rgba(153, 227, 158, 0.15);
+    }
+    
+    .popular-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--color-primary-green);
+      color: var(--color-dark-text);
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .billing-radio {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .billing-label {
+      display: block;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      cursor: pointer;
+      text-align: center;
+      transition: var(--transition-normal);
+    }
+    
+    .billing-option.popular .billing-label {
+      padding-top: 3rem; /* Account for popular badge */
+    }
+    
+    .billing-radio:checked + .billing-label {
+      background: rgba(153, 227, 158, 0.1);
+    }
+    
+    .billing-period {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-dark-text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .billing-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary-green);
+      margin-bottom: 0.5rem;
+    }
+    
+    .billing-description {
+      font-size: 0.875rem;
+      color: rgba(0, 5, 16, 0.7);
+      line-height: 1.4;
+    }
+    
+    /* Pricing Details */
+    .pricing-details {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    
+    .pricing-breakdown {
+      background: rgba(153, 227, 158, 0.05);
+      padding: 2rem;
+      border-radius: var(--border-radius-medium);
+    }
+    
+    .breakdown-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-dark-text);
+      margin-bottom: 1rem;
+    }
+    
+    .breakdown-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .breakdown-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(153, 227, 158, 0.2);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .breakdown-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .breakdown-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary-green);
+      font-weight: bold;
+    }
+    
+    /* Page Blueprints Pricing Disclaimer - Line 250 */
+    .pricing-disclaimer {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: var(--border-radius-medium);
+      padding: 1.5rem;
+    }
+    
+    .disclaimer-text {
+      font-size: 0.875rem;
+      color: var(--color-dark-text);
+      margin: 0;
+      text-align: center;
+    }
+    
+    /* Pricing CTA Section - Page Blueprints Lines 252-255 */
+    .pricing-cta-section {
+      padding: var(--section-spacing-desktop) 0;
+      background: var(--color-dark-text);
+      color: var(--color-warm-off-white);
+    }
+    
+    .cta-heading {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--color-warm-off-white);
+      margin-bottom: 1rem;
+    }
+    
+    .cta-description {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: rgba(252, 244, 226, 0.8);
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    /* Secondary CTA styling for dark background */
+    .pricing-cta-section .secondary-cta {
+      color: var(--color-warm-off-white);
+      border-color: var(--color-warm-off-white);
+    }
+    
+    .pricing-cta-section .secondary-cta:hover {
+      background: var(--color-warm-off-white);
+      color: var(--color-dark-text);
+    }
+    
+    /* Responsive Adjustments - Page Blueprints responsive guidelines */
+    @media (max-width: 1199px) {
+      .pricing-hero-headline {
+        font-size: 3rem;
+      }
+      
+      .billing-options {
+        gap: 1rem;
+      }
+      
+      .pricing-details {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .pricing-hero-headline {
+        font-size: 2.25rem;
+      }
+      
+      .pricing-hero-subcopy {
+        font-size: 1rem;
+      }
+      
+      .billing-options {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .billing-label {
+        padding: 1.5rem 1rem;
+      }
+      
+      .billing-option.popular .billing-label {
+        padding-top: 2.5rem;
+      }
+      
+      .billing-price {
+        font-size: 1.75rem;
+      }
+      
+      .cta-heading {
+        font-size: 2rem;
+      }
+      
+      .pricing-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      
+      .primary-cta,
+      .secondary-cta {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+    }
+    
+    /* Focus and Accessibility */
+    .billing-label:focus-within {
+      outline: 2px solid var(--color-primary-green);
+      outline-offset: 2px;
+    }
+    
+    .billing-radio:focus + .billing-label {
+      outline: 2px solid var(--color-primary-green);
+      outline-offset: 2px;
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .billing-option {
+        border-width: 3px;
+      }
+      
+      .billing-option:hover,
+      .billing-option.popular {
+        border-color: var(--color-dark-text);
+      }
+    }
+  </style>
+
+  <!-- Page-specific JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set active navigation state
+      const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === '/pricing') {
+          link.setAttribute('aria-current', 'page');
+          link.classList.add('active');
+        }
+      });
+      
+      // Billing frequency selector functionality
+      const billingOptions = document.querySelectorAll('.billing-radio');
+      const pricingDetails = document.querySelector('.pricing-breakdown');
+      
+      billingOptions.forEach(option => {
+        option.addEventListener('change', function() {
+          // Update pricing details based on selection
+          updatePricingDetails(this.value);
+          
+          // Update visual selection state
+          document.querySelectorAll('.billing-option').forEach(opt => {
+            opt.classList.remove('selected');
+          });
+          this.closest('.billing-option').classList.add('selected');
+        });
+      });
+      
+      function updatePricingDetails(frequency) {
+        const breakdownList = document.querySelector('.breakdown-list');
+        let additionalItems = '';
+        
+        switch(frequency) {
+          case 'semester':
+            additionalItems = '<li>Mid-semester progress review</li><li>Semester recital participation</li>';
+            break;
+          case 'yearly':
+            additionalItems = '<li>Quarterly progress reviews</li><li>Two recital performances</li><li>Priority booking for popular time slots</li>';
+            break;
+          default:
+            additionalItems = '';
+        }
+        
+        // Update the breakdown list with frequency-specific benefits
+        const baseItems = `
+          <li>30-minute one-on-one lessons</li>
+          <li>Personalized lesson plans</li>
+          <li>Progress tracking and feedback</li>
+          <li>Flexible rescheduling (24hr notice)</li>
+          <li>Performance opportunities</li>
+          ${additionalItems}
+        `;
+        
+        breakdownList.innerHTML = baseItems;
+      }
+      
+      // Initialize with default selection
+      const defaultOption = document.querySelector('.billing-radio:checked');
+      if (defaultOption) {
+        updatePricingDetails(defaultOption.value);
+        defaultOption.closest('.billing-option').classList.add('selected');
+      }
+    });
+  </script>
+</body>
+</html>

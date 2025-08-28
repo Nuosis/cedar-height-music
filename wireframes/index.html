@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cedar Heights Music Academy - Personal Music Lessons</title>
+  <meta name="description" content="Personal, one-on-one music lessons in Cedar Heights. Patient, professional instruction for kids and adults.">
+  
+  <!-- Page Blueprints Design System -->
+  <link rel="stylesheet" href="wireframe-styles.css">
+  
+  <!-- Accessibility -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Skip Navigation -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+</head>
+<body>
+  
+  <!-- Page Blueprints Global Navigation - Lines 27-30 -->
+  <div id="navigation-placeholder">
+    <!-- Navigation component will be loaded here -->
+    <script>
+      fetch('components/navigation.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('navigation-placeholder').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <main id="main-content">
+    
+    <!-- Page Blueprints Home Hero Section - Lines 40-111 -->
+    <section class="hero-section section" data-wireframe-section="home-hero" data-measurement-point="hero-section-height">
+      <div class="page-container">
+        
+        <!-- Page Blueprints Hero Canvas - Line 45: 1300px wide section, centered content group within ~856px max width -->
+        <div class="hero-content" data-measurement-point="hero-content-width" style="max-width: 856px; margin: 0 auto;">
+          
+          <!-- Page Blueprints Hero Stack - Lines 46-49: Foreground content group, decorative accent layer, background band -->
+          <div class="hero-foreground" data-wireframe-section="hero-foreground">
+            
+            <!-- Page Blueprints Tagline - Lines 55-59 -->
+            <div class="hero-tagline" data-typography-container="hero-tagline" data-measurement-point="tagline-spacing">
+              Personal, one-on-one music lessons in Cedar Heights.
+            </div>
+            
+            <!-- Page Blueprints Headline - Lines 60-64 -->
+            <h1 class="hero-headline" data-typography-container="hero-headline" data-measurement-point="headline-size">
+              Music lessons, made personal.
+            </h1>
+            
+            <!-- Page Blueprints CTAs - Lines 65-71 -->
+            <div class="cta-group" data-measurement-point="cta-group-spacing">
+              <a href="/enroll" class="primary-cta" data-measurement-point="primary-cta-size">
+                Enroll Now
+                <span class="cta-arrow" data-asset-container="arrow-icon">→</span>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Page Blueprints Decorative Accents - Lines 72-75 -->
+          <div class="hero-decorative" data-wireframe-section="hero-decorative" data-asset-container="decorative-accents">
+            <!-- Soft glows/shape chips lightly behind content group -->
+            <div class="decorative-accent accent-1"></div>
+            <div class="decorative-accent accent-2"></div>
+          </div>
+        </div>
+        
+        <!-- Page Blueprints Foreground Figure - Lines 76-91 -->
+        <!-- Moved outside hero-content to anchor to section, not centered content -->
+        <div class="hero-figure" data-asset-container="boy-guitar-figure" data-measurement-point="figure-positioning">
+          <!-- Asset: boy+guitar.png positioned per Page Blueprints specifications -->
+          <img src="../public/boy+guitar.png" alt="" role="presentation" class="hero-character" />
+        </div>
+        
+        <!-- Page Blueprints Seasonal Background - Lines 50-53 -->
+        <div class="hero-background" data-asset-container="seasonal-background" data-measurement-point="background-coverage">
+          <!-- Seasonal hero background band -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints Value Props Section - Lines 112-119 -->
+    <section class="value-props-section section" data-wireframe-section="value-props" data-measurement-point="value-props-height">
+      <div class="page-container">
+        <div class="three-column-grid" data-measurement-point="value-props-grid">
+          
+          <!-- Value Prop 1 - Page Blueprints Line 115 -->
+          <div class="value-prop-card card" data-wireframe-section="value-prop-1">
+            <div class="card-icon" data-asset-container="patient-instruction-icon"></div>
+            <h3 class="card-title" data-typography-container="value-prop-title">Patient, professional instruction</h3>
+            <p class="card-description" data-typography-container="value-prop-description">
+              Learn at your own pace with personalized guidance tailored to your musical goals.
+            </p>
+          </div>
+          
+          <!-- Value Prop 2 - Page Blueprints Line 116 -->
+          <div class="value-prop-card card" data-wireframe-section="value-prop-2">
+            <div class="card-icon" data-asset-container="flexible-scheduling-icon"></div>
+            <h3 class="card-title" data-typography-container="value-prop-title">Flexible scheduling</h3>
+            <p class="card-description" data-typography-container="value-prop-description">
+              Convenient lesson times that work with your family's busy schedule.
+            </p>
+          </div>
+          
+          <!-- Value Prop 3 - Page Blueprints Line 117 -->
+          <div class="value-prop-card card" data-wireframe-section="value-prop-3">
+            <div class="card-icon" data-asset-container="beginner-friendly-icon"></div>
+            <h3 class="card-title" data-typography-container="value-prop-title">Beginner-friendly studio</h3>
+            <p class="card-description" data-typography-container="value-prop-description">
+              Welcoming environment perfect for students just starting their musical journey.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints About Teaser Section - Lines 120-129 -->
+    <section class="about-teaser-section section" data-wireframe-section="about-teaser" data-measurement-point="about-teaser-height">
+      <div class="page-container">
+        <div class="two-column-grid" data-measurement-point="about-teaser-grid">
+          
+          <!-- Left Column - Page Blueprints Lines 122-126 -->
+          <div class="about-teaser-content" data-wireframe-section="about-teaser-text">
+            <div class="eyebrow" data-typography-container="about-eyebrow">About the studio</div>
+            <h2 class="section-heading" data-typography-container="about-heading">Personalized lessons from a dedicated teacher</h2>
+            <p class="section-description" data-typography-container="about-description">
+              At Cedar Heights Music Academy, we believe every student deserves individual attention. 
+              Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.
+            </p>
+            <a href="/about#teacher" class="inline-link" data-typography-container="meet-teacher-link">Meet your teacher</a>
+          </div>
+          
+          <!-- Right Column - Page Blueprints Lines 127-128 -->
+          <div class="about-teaser-image" data-asset-container="girl-guitar-collage" data-measurement-point="image-collage-size">
+            <img src="../public/girl+guitar.png" alt="Student learning guitar" class="rounded-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints Availability Snippet Section - Lines 130-147 -->
+    <section class="availability-section section" data-wireframe-section="availability-snippet" data-measurement-point="availability-height">
+      <div class="page-container">
+        <div class="availability-content" style="text-align: center;">
+          
+          <!-- Page Blueprints Title - Line 131 -->
+          <h2 class="section-heading" data-typography-container="availability-title">Availability</h2>
+          
+          <!-- Page Blueprints Slot Chips - Lines 133-145 -->
+          <div class="slots-grid" data-measurement-point="slots-grid-layout">
+            
+            <!-- Slot 1 -->
+            <div class="slot-chip" data-wireframe-section="time-slot-1" tabindex="0" role="button" aria-label="Monday 9:30 PM to 10:00 PM">
+              <div class="day" data-typography-container="slot-day">Monday</div>
+              <div class="time" data-typography-container="slot-time">
+                <span class="start-time">9:30 PM</span> • <span class="end-time">10:00 PM</span>
+              </div>
+            </div>
+            
+            <!-- Slot 2 -->
+            <div class="slot-chip highlighted" data-wireframe-section="time-slot-2" tabindex="0" role="button" aria-label="Wednesday 5:30 PM to 6:00 PM - Featured slot">
+              <div class="day" data-typography-container="slot-day">Wednesday</div>
+              <div class="time" data-typography-container="slot-time">
+                <span class="start-time">5:30 PM</span> • <span class="end-time">6:00 PM</span>
+              </div>
+            </div>
+            
+            <!-- Slot 3 -->
+            <div class="slot-chip" data-wireframe-section="time-slot-3" tabindex="0" role="button" aria-label="Thursday 6:00 PM to 6:30 PM">
+              <div class="day" data-typography-container="slot-day">Thursday</div>
+              <div class="time" data-typography-container="slot-time">
+                <span class="start-time">6:00 PM</span> • <span class="end-time">6:30 PM</span>
+              </div>
+            </div>
+            
+            <!-- Slot 4 -->
+            <div class="slot-chip" data-wireframe-section="time-slot-4" tabindex="0" role="button" aria-label="Friday 4:00 PM to 4:30 PM">
+              <div class="day" data-typography-container="slot-day">Friday</div>
+              <div class="time" data-typography-container="slot-time">
+                <span class="start-time">4:00 PM</span> • <span class="end-time">4:30 PM</span>
+              </div>
+            </div>
+            
+            <!-- Slot 5 -->
+            <div class="slot-chip" data-wireframe-section="time-slot-5" tabindex="0" role="button" aria-label="Saturday 10:00 AM to 10:30 AM">
+              <div class="day" data-typography-container="slot-day">Saturday</div>
+              <div class="time" data-typography-container="slot-time">
+                <span class="start-time">10:00 AM</span> • <span class="end-time">10:30 AM</span>
+              </div>
+            </div>
+            
+            <!-- Slot 6 -->
+            <div class="slot-chip" data-wireframe-section="time-slot-6" tabindex="0" role="button" aria-label="Saturday 2:00 PM to 2:30 PM">
+              <div class="day" data-typography-container="slot-day">Saturday</div>
+              <div class="time" data-typography-container="slot-time">
+                <span class="start-time">2:00 PM</span> • <span class="end-time">2:30 PM</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Page Blueprints Primary Button - Line 146 -->
+          <div class="availability-cta" data-measurement-point="availability-cta-spacing">
+            <a href="/enroll" class="primary-cta" data-measurement-point="availability-cta-size">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Blueprints Micro-FAQ Section - Lines 149-152 -->
+    <section class="micro-faq-section section" data-wireframe-section="micro-faq" data-measurement-point="faq-height">
+      <div class="page-container">
+        <div class="faq-content" style="max-width: 800px; margin: 0 auto;">
+          
+          <!-- Page Blueprints Inline Accordion - Line 150 -->
+          <div class="accordion" data-measurement-point="accordion-width">
+            
+            <!-- FAQ 1 -->
+            <div class="accordion-item" data-wireframe-section="faq-1">
+              <div class="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-1-content">
+                <span data-typography-container="faq-question">What age range do you teach?</span>
+                <span class="accordion-icon" data-asset-container="accordion-arrow">+</span>
+              </div>
+              <div class="accordion-content" id="faq-1-content" data-typography-container="faq-answer">
+                We welcome students of all ages, from young children (age 5+) to adults. Our teaching approach adapts to each student's developmental stage and learning style.
+              </div>
+            </div>
+            
+            <!-- FAQ 2 -->
+            <div class="accordion-item" data-wireframe-section="faq-2">
+              <div class="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-2-content">
+                <span data-typography-container="faq-question">How long are the lessons?</span>
+                <span class="accordion-icon" data-asset-container="accordion-arrow">+</span>
+              </div>
+              <div class="accordion-content" id="faq-2-content" data-typography-container="faq-answer">
+                Standard lessons are 30 minutes for most students. We also offer 45-minute and 60-minute sessions for advanced students or those who prefer longer sessions.
+              </div>
+            </div>
+            
+            <!-- FAQ 3 -->
+            <div class="accordion-item" data-wireframe-section="faq-3">
+              <div class="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="faq-3-content">
+                <span data-typography-container="faq-question">What's your cancellation policy?</span>
+                <span class="accordion-icon" data-asset-container="accordion-arrow">+</span>
+              </div>
+              <div class="accordion-content" id="faq-3-content" data-typography-container="faq-answer">
+                We require 24-hour notice for cancellations. Lessons cancelled with proper notice can be rescheduled within the same month.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Page Blueprints Global Footer - Lines 31-33 -->
+  <div id="footer-placeholder">
+    <!-- Footer component will be loaded here -->
+    <script>
+      fetch('components/footer.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('footer-placeholder').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <!-- Page-specific styles -->
+  <style>
+    /* Hero Section Specific Styles - Page Blueprints Lines 44-111 */
+    .hero-section {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: flex-start;
+      overflow: visible; /* Page Blueprints Line 83: allows overflow for figure */
+      padding-top: 120px
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 3; /* Higher z-index to ensure CTAs stay above figure */
+      text-align: center;
+      padding: 2rem 0 1rem 0; /* Add padding to raise content higher */
+      margin-top: -2rem; /* Pull content up to avoid collision with figure */
+    }
+    
+    .hero-tagline {
+      font-size: 1rem; /* Page Blueprints Line 57: ~16px desktop */
+      line-height: 1.4;
+      color: var(--color-dark-text);
+      opacity: 0.9;
+      margin-bottom: 0.75rem; /* Page Blueprints Line 98: 8-12px gap */
+    }
+    
+    .hero-headline {
+      font-size: 3.5rem; /* Page Blueprints Line 62: ~56-64px desktop */
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--color-dark-text);
+      max-width: 800px; /* Page Blueprints Line 64: ~800-860px for readable centering */
+      margin: 0 auto 1.5rem auto; /* Page Blueprints Line 99: 16-24px gap to CTAs */
+    }
+    
+    /* Hero Figure Positioning - Page Blueprints Lines 76-91 */
+    .hero-figure {
+      position: absolute;
+      bottom: -120px; /* Page Blueprints Line 81: -48 to -72px overflow */
+      left: 60px; /* Page Blueprints Line 80: ~120-180px from section's left edge */
+      z-index: 2; /* Page Blueprints Line 82: background < figure < text/CTAs */
+      pointer-events: none; /* Page Blueprints Line 82: CTAs must remain tappable */
+    }
+    
+    .hero-character {
+      width: 200px; /* Desktop size */
+      height: auto;
+    }
+    
+    /* Hero Decorative Accents - Page Blueprints Lines 72-75 */
+    .hero-decorative {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .decorative-accent {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15; /* Page Blueprints Line 74: ≈10-20% opacity */
+      background: var(--color-primary-green);
+    }
+    
+    .accent-1 {
+      width: 120px;
+      height: 120px;
+      top: 20%;
+      right: 20%;
+    }
+    
+    .accent-2 {
+      width: 80px;
+      height: 80px;
+      bottom: 30%;
+      left: 15%;
+    }
+    
+    /* Hero Background - Page Blueprints Lines 50-53 */
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, rgba(252, 244, 226, 0.9) 0%, rgba(255, 250, 205, 0.8) 100%);
+      /* Placeholder for seasonal background image */
+    }
+    
+    /* Value Props Section */
+    .value-props-section {
+      background: var(--color-warm-off-white);
+      padding: var(--section-spacing-desktop) 0;
+    }
+    
+    .value-prop-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+    
+    .card-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1rem auto;
+      background: var(--color-warm-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--color-dark-text);
+    }
+    
+    .card-description {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: rgba(0, 5, 16, 0.7);
+      margin-bottom: 1rem;
+    }
+    
+    .card-link {
+      color: var(--color-primary-green);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+    
+    .card-link:hover {
+      text-decoration: underline;
+    }
+    
+    /* About Teaser Section */
+    .about-teaser-section {
+      padding: var(--section-spacing-desktop) 0;
+    }
+    
+    .eyebrow {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary-green);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .section-heading {
+      font-size: 2.5rem;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--color-dark-text);
+      margin-bottom: 1rem;
+    }
+    
+    .section-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(0, 5, 16, 0.8);
+      margin-bottom: 1.5rem;
+    }
+    
+    .inline-link {
+      color: var(--color-primary-green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .inline-link:hover {
+      text-decoration: underline;
+    }
+    
+    /* Availability Section */
+    .availability-section {
+      background: rgba(153, 227, 158, 0.05);
+      padding: var(--section-spacing-desktop) 0;
+    }
+    
+    .availability-cta {
+      margin-top: 2rem;
+    }
+    
+    /* Micro FAQ Section */
+    .micro-faq-section {
+      padding: var(--section-spacing-desktop) 0;
+    }
+    
+    /* Responsive Adjustments - Page Blueprints responsive guidelines */
+    @media (max-width: 1199px) {
+      .hero-headline {
+        font-size: 3rem; /* Page Blueprints Line 106: ~44-52px tablet */
+      }
+      
+      .hero-figure {
+        margin-left: 100px;
+        margin-top: 1.5rem; /* Adjust spacing for tablet */
+      }
+      
+      .hero-character {
+        width: 140px; /* Page Blueprints Line 86: ~220-260px tablet */
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .hero-section {
+        padding-top: var(--section-spacing-mobile);
+        min-height: 60vh;
+      }
+      
+      .hero-headline {
+        font-size: 2.25rem; /* Page Blueprints Line 107: ~34-40px mobile */
+      }
+      
+      .hero-tagline {
+        font-size: 0.875rem; /* Page Blueprints Line 107: ~14px mobile */
+      }
+      
+      /* Page Blueprints Line 88-89: Mobile figure options */
+      .hero-figure {
+        text-align: center;
+        margin-left: 0; /* Center on mobile */
+        opacity: 0.15; /* Option A: center near bottom at 10-15% opacity */
+        order: 2; /* Maintain order on mobile */
+      }
+      
+      .hero-character {
+        width: 100px;
+      }
+      
+      .section-heading {
+        font-size: 2rem;
+      }
+    }
+  </style>
+
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Accordion functionality - Page Blueprints Line 150
+    document.addEventListener('DOMContentLoaded', function() {
+      const accordionHeaders = document.querySelectorAll('.accordion-header');
+      
+      accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+          const item = this.parentElement;
+          const content = item.querySelector('.accordion-content');
+          const icon = this.querySelector('.accordion-icon');
+          const isActive = item.classList.contains('active');
+          
+          // Close all other accordion items
+          accordionHeaders.forEach(otherHeader => {
+            const otherItem = otherHeader.parentElement;
+            const otherIcon = otherHeader.querySelector('.accordion-icon');
+            otherItem.classList.remove('active');
+            otherHeader.setAttribute('aria-expanded', 'false');
+            otherIcon.textContent = '+';
+          });
+          
+          // Toggle current item
+          if (!isActive) {
+            item.classList.add('active');
+            this.setAttribute('aria-expanded', 'true');
+            icon.textContent = '−';
+          }
+        });
+        
+        // Keyboard support
+        header.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+          }
+        });
+      });
+      
+      // Slot chip interactions
+      const slotChips = document.querySelectorAll('.slot-chip');
+      slotChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          // Redirect to enrollment with pre-selected timeslot
+          const day = this.querySelector('.day').textContent;
+          const time = this.querySelector('.time').textContent;
+          window.location.href = `/enroll?timeslot=${encodeURIComponent(day + ' ' + time)}`;
+        });
+        
+        chip.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

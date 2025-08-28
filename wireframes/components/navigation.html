@@ -1,0 +1,372 @@
+<!-- Cedar Heights Music Academy - Global Navigation Component
+     Implements Page Blueprints specifications exactly as written
+     Reference: ai_docs/context/core_docs/page_blueprints.md Lines 27-30, 94-95 -->
+
+<header class="global-header" data-wireframe-section="global-navigation" data-measurement-point="header-height">
+  <nav class="main-navigation" role="navigation" aria-label="Main navigation">
+    <div class="page-container">
+      <div class="nav-container">
+        
+        <!-- Page Blueprints Line 28: Left: Wordmark "Cedar Heights Music Academy" -->
+        <div class="nav-brand" data-measurement-point="brand-lockup">
+          <a href="/" class="brand-link" aria-label="Cedar Heights Music Academy - Home">
+            <span class="wordmark" data-typography-container="brand-wordmark">Cedar Heights Music Academy</span>
+          </a>
+        </div>
+
+        <!-- Page Blueprints Line 29: Right: Nav items: Home, About, Pricing, Enroll, Contact -->
+        <div class="nav-menu" data-measurement-point="nav-menu-width">
+          <ul class="nav-list" role="menubar">
+            <li class="nav-item" role="none">
+              <a href="/" class="nav-link" role="menuitem" data-nav-item="home">
+                <span data-typography-container="nav-text">Home</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a href="/about" class="nav-link" role="menuitem" data-nav-item="about">
+                <span data-typography-container="nav-text">About</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a href="/pricing" class="nav-link" role="menuitem" data-nav-item="pricing">
+                <span data-typography-container="nav-text">Pricing</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a href="/enroll" class="nav-link" role="menuitem" data-nav-item="enroll">
+                <span data-typography-container="nav-text">Enroll</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a href="/contact" class="nav-link" role="menuitem" data-nav-item="contact">
+                <span data-typography-container="nav-text">Contact</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Page Blueprints Line 30: Mobile hamburger to slide-out drawer -->
+        <button class="mobile-menu-toggle" 
+                aria-label="Toggle mobile menu" 
+                aria-expanded="false" 
+                aria-controls="mobile-menu"
+                data-measurement-point="mobile-toggle">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Drawer - Page Blueprints Line 30 -->
+    <div class="mobile-menu" id="mobile-menu" data-wireframe-section="mobile-navigation">
+      <div class="mobile-menu-content">
+        <ul class="mobile-nav-list" role="menu">
+          <li class="mobile-nav-item" role="none">
+            <a href="/" class="mobile-nav-link" role="menuitem" data-nav-item="home-mobile">
+              <span data-typography-container="mobile-nav-text">Home</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item" role="none">
+            <a href="/about" class="mobile-nav-link" role="menuitem" data-nav-item="about-mobile">
+              <span data-typography-container="mobile-nav-text">About</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item" role="none">
+            <a href="/pricing" class="mobile-nav-link" role="menuitem" data-nav-item="pricing-mobile">
+              <span data-typography-container="mobile-nav-text">Pricing</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item" role="none">
+            <a href="/enroll" class="mobile-nav-link" role="menuitem" data-nav-item="enroll-mobile">
+              <span data-typography-container="mobile-nav-text">Enroll</span>
+            </a>
+          </li>
+          <li class="mobile-nav-item" role="none">
+            <a href="/contact" class="mobile-nav-link" role="menuitem" data-nav-item="contact-mobile">
+              <span data-typography-container="mobile-nav-text">Contact</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+/* Global Header Styles - Page Blueprints Line 30: Sticky on scroll */
+.global-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-warm-off-white);
+  border-bottom: 1px solid rgba(0, 5, 16, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  min-height: 64px;
+}
+
+/* Page Blueprints Brand Lockup - Line 28 */
+.nav-brand {
+  flex-shrink: 0;
+}
+
+.brand-link {
+  text-decoration: none;
+  color: var(--color-dark-text);
+}
+
+.wordmark {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: var(--font-family-display);
+  letter-spacing: -0.025em;
+}
+
+/* Page Blueprints Navigation Menu - Line 29 */
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-dark-text);
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: var(--transition-normal);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--color-primary-green);
+}
+
+/* Page Blueprints Active state indicated per design system - Line 29 */
+.nav-link[aria-current="page"],
+.nav-link.active {
+  color: var(--color-primary-green);
+  font-weight: 600;
+}
+
+.nav-link[aria-current="page"]::after,
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary-green);
+  border-radius: 1px;
+}
+
+/* Mobile Menu Toggle - Page Blueprints Line 30 */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  gap: 4px;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background: var(--color-dark-text);
+  transition: var(--transition-normal);
+  border-radius: 1px;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Menu Drawer - Page Blueprints Line 30: slide-out drawer */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-warm-off-white);
+  border-top: 1px solid rgba(0, 5, 16, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-100%);
+  transition: transform var(--transition-normal);
+  z-index: 99;
+}
+
+.mobile-menu.active {
+  transform: translateY(0);
+}
+
+.mobile-menu-content {
+  padding: 1rem 0;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-item {
+  border-bottom: 1px solid rgba(0, 5, 16, 0.05);
+}
+
+.mobile-nav-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 1rem var(--content-padding-mobile);
+  text-decoration: none;
+  color: var(--color-dark-text);
+  font-weight: 500;
+  transition: var(--transition-normal);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link[aria-current="page"],
+.mobile-nav-link.active {
+  background: rgba(153, 227, 158, 0.1);
+  color: var(--color-primary-green);
+}
+
+/* Responsive Behavior - Page Blueprints responsive guidelines */
+@media (max-width: 767px) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .mobile-menu {
+    display: block;
+  }
+  
+  .wordmark {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 1199px) {
+  .nav-list {
+    gap: 1.5rem;
+  }
+}
+
+/* Focus Management for Accessibility */
+.nav-link:focus-visible,
+.mobile-nav-link:focus-visible,
+.mobile-menu-toggle:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip Navigation Link */
+.skip-nav {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-dark-text);
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  font-size: 0.875rem;
+}
+
+.skip-nav:focus {
+  top: 6px;
+}
+</style>
+
+<script>
+// Mobile Menu Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', function() {
+      const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+      
+      mobileToggle.setAttribute('aria-expanded', !isExpanded);
+      mobileMenu.classList.toggle('active');
+      
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = !isExpanded ? 'hidden' : '';
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+        mobileToggle.focus();
+      }
+    });
+  }
+  
+  // Set active navigation state based on current page
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPath || (currentPath === '/' && href === '/')) {
+      link.setAttribute('aria-current', 'page');
+      link.classList.add('active');
+    }
+  });
+});
+</script>

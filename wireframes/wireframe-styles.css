@@ -1,0 +1,476 @@
+/* Cedar Heights Music Academy - Low-Fidelity Wireframe Styles
+ * Implements Page Blueprints specifications exactly as written
+ * Reference: ai_docs/context/core_docs/page_blueprints.md
+ */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Page Blueprints Global Layout Specifications */
+:root {
+  /* Color Palette - Page Blueprints Line 21 */
+  --color-primary-green: #99E39E;
+  --color-dark-text: #000510;
+  --color-warm-yellow: #ffd700;
+  --color-warm-gold: #F3DA94;
+  --color-warm-off-white: #FCF4E2;
+  --color-warm-off-white-alt: #fffacd;
+  
+  /* Typography - Page Blueprints Line 20 */
+  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family-display: 'Georgia', 'Times New Roman', serif;
+  
+  /* Layout - Page Blueprints Line 19 */
+  --content-width: 1300px;
+  --content-padding-desktop: 80px;
+  --content-padding-tablet: 48px;
+  --content-padding-mobile: 24px;
+  
+  /* Spacing - Page Blueprints Line 22 */
+  --section-spacing-desktop: 120px;
+  --section-spacing-tablet: 80px;
+  --section-spacing-mobile: 56px;
+  
+  /* Border Radius - Page Blueprints Line 23 */
+  --border-radius-small: 8px;
+  --border-radius-medium: 12px;
+  --border-radius-large: 15px;
+  --border-radius-pill: 50px;
+  
+  /* Transitions */
+  --transition-normal: 250ms ease-in-out;
+  --transition-fast: 150ms ease-in-out;
+}
+
+/* Base Typography */
+body {
+  font-family: var(--font-family-primary);
+  color: var(--color-dark-text);
+  background-color: var(--color-warm-off-white);
+  line-height: 1.6;
+}
+
+/* Page Blueprints Canvas - Line 19 */
+.page-container {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--content-padding-desktop);
+}
+
+/* Page Blueprints Section Spacing - Line 22 */
+.section {
+  margin-bottom: var(--section-spacing-desktop);
+}
+
+/* Page Blueprints Typography Scale */
+h1 {
+  font-size: 3.5rem; /* ~56px desktop per Page Blueprints Line 62 */
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+/* Page Blueprints Tagline - Line 57 */
+.tagline {
+  font-size: 1rem; /* ~16px desktop per Page Blueprints Line 57 */
+  line-height: 1.4;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+}
+
+/* Page Blueprints Primary CTA - Line 66-70 */
+.primary-cta {
+  background: var(--color-primary-green);
+  color: var(--color-dark-text);
+  border: none;
+  padding: 10px 20px; /* Reduced padding for better proportions */
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius-medium); /* 12px radius per Page Blueprints Line 67 */
+  cursor: pointer;
+  transition: var(--transition-normal);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-height: 54px; /* Reduced min-height while maintaining accessibility */
+}
+
+.primary-cta:hover {
+  background: #8bd691; /* Slightly darker green per Page Blueprints Line 69 */
+  transform: translateY(-1px);
+}
+
+.primary-cta:focus-visible {
+  outline: 2px solid var(--color-warm-yellow);
+  outline-offset: 2px;
+}
+
+/* Page Blueprints Secondary CTA - Line 70-71 */
+.secondary-cta {
+  background: transparent;
+  color: var(--color-dark-text);
+  border: 2px solid var(--color-dark-text);
+  padding: 11px 22px; /* Adjusted for border */
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius-medium);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px; /* Accessibility requirement */
+}
+
+.secondary-cta:hover {
+  background: var(--color-dark-text);
+  color: var(--color-warm-off-white);
+}
+
+/* Page Blueprints CTA Group - Line 65 */
+.cta-group {
+  display: inline-flex;
+  gap: 12px; /* 8-12px gap per Page Blueprints Line 65 */
+  align-items: center;
+}
+
+/* Page Blueprints Cards - Line 24 */
+.card {
+  background: var(--color-warm-gold);
+  border-radius: var(--border-radius-medium);
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Page Blueprints Three-Column Layout - Line 113 */
+.three-column-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Page Blueprints Two-Column Layout - Line 121 */
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Page Blueprints Rounded Images - Line 23 */
+.rounded-image {
+  border-radius: var(--border-radius-medium);
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Page Blueprints Small Image Collage - Line 23 */
+.image-collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Page Blueprints Slot Chips - Line 133-145 */
+.slot-chip {
+  background: #f5f5f5; /* Light gray per Page Blueprints Line 142 */
+  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius-medium);
+  padding: 1rem;
+  width: 200px; /* ~200x80px per Page Blueprints Line 135 */
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.slot-chip:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.slot-chip.highlighted {
+  background: #ffb74d; /* Warm yellow/orange per Page Blueprints Line 142 */
+}
+
+.slot-chip .day {
+  font-weight: bold;
+  font-size: 0.875rem; /* ~14px per Page Blueprints Line 137 */
+}
+
+.slot-chip .time {
+  font-size: 0.75rem; /* ~12px per Page Blueprints Line 139 */
+}
+
+.slot-chip .time .start-time {
+  color: #4caf50; /* Green per Page Blueprints Line 138 */
+}
+
+.slot-chip .time .end-time {
+  color: #ff5722; /* Red/orange per Page Blueprints Line 138 */
+}
+
+/* Page Blueprints Slot Grid - Line 134 */
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px; /* Page Blueprints Line 144 */
+  max-width: 636px; /* 3 * 200px + 2 * 12px gaps */
+  margin: 0 auto; /* Center the grid container */
+}
+
+/* Page Blueprints Inline Accordion - Line 150 */
+.accordion {
+  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  background: #f8f9fa;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-content {
+  padding: 1rem 1.5rem;
+  display: none;
+}
+
+.accordion-item.active .accordion-content {
+  display: block;
+}
+
+/* Page Blueprints Form Styles */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-dark-text);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius-small);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition-normal);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary-green);
+  box-shadow: 0 0 0 3px rgba(153, 227, 158, 0.2);
+}
+
+/* Page Blueprints Responsive Layout Guidelines - Line 355-358 */
+@media (max-width: 1199px) {
+  .page-container {
+    padding: 0 var(--content-padding-tablet);
+  }
+  
+  .section {
+    margin-bottom: var(--section-spacing-tablet);
+  }
+  
+  /* Tablet 8-column grid per Page Blueprints Line 357 */
+  .three-column-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  h1 {
+    font-size: 3rem; /* ~48px tablet */
+  }
+}
+
+@media (max-width: 767px) {
+  .page-container {
+    padding: 0 var(--content-padding-mobile);
+  }
+  
+  .section {
+    margin-bottom: var(--section-spacing-mobile);
+  }
+  
+  /* Mobile 4-column grid, stacked sections per Page Blueprints Line 358 */
+  .three-column-grid,
+  .two-column-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .slots-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-group {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .primary-cta,
+  .secondary-cta {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  h1 {
+    font-size: 2.25rem; /* ~36px mobile per Page Blueprints Line 62 */
+  }
+  
+  .tagline {
+    font-size: 0.875rem; /* ~14px mobile per Page Blueprints Line 57 */
+  }
+}
+
+/* Page Blueprints Accessibility Requirements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus management for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-dark-text);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Page Blueprints Data Attributes for Phase 04 Validation */
+[data-wireframe-section] {
+  position: relative;
+}
+
+[data-wireframe-section]::before {
+  content: attr(data-wireframe-section);
+  position: absolute;
+  top: -20px;
+  left: 0;
+  font-size: 0.75rem;
+  color: #666;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: monospace;
+  z-index: 10;
+  opacity: 0.7;
+}
+
+/* Measurement points for Phase 04 validation */
+[data-measurement-point] {
+  position: relative;
+}
+
+[data-measurement-point]::after {
+  content: "📏 " attr(data-measurement-point);
+  position: absolute;
+  top: -15px;
+  right: 0;
+  font-size: 0.625rem;
+  color: #e74c3c;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-family: monospace;
+  z-index: 10;
+  opacity: 0.8;
+}
+
+/* Asset containers for Phase 04 */
+[data-asset-container] {
+  border: 1px dashed #ccc;
+  position: relative;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(153, 227, 158, 0.05);
+}
+
+[data-asset-container]::before {
+  content: "Asset: " attr(data-asset-container);
+  font-size: 0.75rem;
+  color: #666;
+  font-family: monospace;
+  text-align: center;
+}
+
+/* Typography containers for Phase 04 */
+[data-typography-container] {
+  border: 1px dotted #999;
+  padding: 0.25rem;
+  margin: 0.125rem 0;
+}
