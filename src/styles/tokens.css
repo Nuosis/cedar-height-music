@@ -1,0 +1,53 @@
+/* Design Tokens - Cedar Heights Music (Phase 1) */
+
+:root {
+  /* Colors */
+  --color-primary-green: #99E39E;
+  --color-dark-text: #000510;
+  --color-warm-yellow: #ffd700;
+  --color-warm-gold: #F3DA94;
+  --color-warm-off-white: #FCF4E2; /* ripe wheat */
+
+  /* Typography */
+  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family-display: 'Georgia', 'Times New Roman', serif;
+
+  --font-size-hero: 3.5rem; /* 56px */
+  --font-size-heading: 2.5rem; /* 40px */
+  --font-size-body: 1rem; /* 16px */
+
+  /* Layout */
+  --content-width: 1300px;
+  --content-padding-desktop: 80px;
+  --content-padding-tablet: 48px;
+  --content-padding-mobile: 24px;
+
+  /* Spacing */
+  --section-spacing-desktop: 60px;
+  --section-spacing-tablet: 40px;
+  --section-spacing-mobile: 28px;
+
+  /* Radius */
+  --border-radius-small: 8px;
+  --border-radius-medium: 12px;
+  --border-radius-large: 15px;
+  --border-radius-pill: 50px;
+
+  /* Transitions */
+  --transition-normal: 250ms ease-in-out;
+  --transition-fast: 150ms ease-in-out;
+}
+
+/* Base application variables using tokens */
+body {
+  font-family: var(--font-family-primary);
+  color: var(--color-dark-text);
+  background-color: var(--color-warm-off-white);
+  line-height: 1.6;
+}
+
+/* Breakpoints (reference):
+   Desktop ≥ 1200px
+   Tablet 768–1199px
+   Mobile < 768px
+*/

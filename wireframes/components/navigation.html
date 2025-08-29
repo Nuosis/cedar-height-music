@@ -2,55 +2,54 @@
      Implements Page Blueprints specifications exactly as written
      Reference: ai_docs/context/core_docs/page_blueprints.md Lines 27-30, 94-95 -->
 
-<header class="global-header" data-wireframe-section="global-navigation" data-measurement-point="header-height">
+<header class="global-header">
   <nav class="main-navigation" role="navigation" aria-label="Main navigation">
     <div class="page-container">
       <div class="nav-container">
         
         <!-- Page Blueprints Line 28: Left: Wordmark "Cedar Heights Music Academy" -->
-        <div class="nav-brand" data-measurement-point="brand-lockup">
-          <a href="/" class="brand-link" aria-label="Cedar Heights Music Academy - Home">
-            <span class="wordmark" data-typography-container="brand-wordmark">Cedar Heights Music Academy</span>
+        <div class="nav-brand">
+          <a href="index.html" class="brand-link" aria-label="Cedar Heights Music Academy - Home">
+            <span class="wordmark">Cedar Heights Music Academy</span>
           </a>
         </div>
 
         <!-- Page Blueprints Line 29: Right: Nav items: Home, About, Pricing, Enroll, Contact -->
-        <div class="nav-menu" data-measurement-point="nav-menu-width">
+        <div class="nav-menu">
           <ul class="nav-list" role="menubar">
             <li class="nav-item" role="none">
-              <a href="/" class="nav-link" role="menuitem" data-nav-item="home">
-                <span data-typography-container="nav-text">Home</span>
+              <a href="index.html" class="nav-link" role="menuitem">
+                <span>Home</span>
               </a>
             </li>
             <li class="nav-item" role="none">
-              <a href="/about" class="nav-link" role="menuitem" data-nav-item="about">
-                <span data-typography-container="nav-text">About</span>
+              <a href="about.html" class="nav-link" role="menuitem">
+                <span>About</span>
               </a>
             </li>
             <li class="nav-item" role="none">
-              <a href="/pricing" class="nav-link" role="menuitem" data-nav-item="pricing">
-                <span data-typography-container="nav-text">Pricing</span>
+              <a href="pricing.html" class="nav-link" role="menuitem">
+                <span>Pricing</span>
               </a>
             </li>
             <li class="nav-item" role="none">
-              <a href="/enroll" class="nav-link" role="menuitem" data-nav-item="enroll">
-                <span data-typography-container="nav-text">Enroll</span>
-              </a>
+              <button onclick="openEnrollModal()" class="nav-link enroll-button" role="menuitem">
+                <span>Enroll</span>
+              </button>
             </li>
             <li class="nav-item" role="none">
-              <a href="/contact" class="nav-link" role="menuitem" data-nav-item="contact">
-                <span data-typography-container="nav-text">Contact</span>
+              <a href="contact.html" class="nav-link" role="menuitem">
+                <span>Contact</span>
               </a>
             </li>
           </ul>
         </div>
 
         <!-- Page Blueprints Line 30: Mobile hamburger to slide-out drawer -->
-        <button class="mobile-menu-toggle" 
-                aria-label="Toggle mobile menu" 
-                aria-expanded="false" 
-                aria-controls="mobile-menu"
-                data-measurement-point="mobile-toggle">
+        <button class="mobile-menu-toggle"
+                aria-label="Toggle mobile menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -59,32 +58,32 @@
     </div>
 
     <!-- Mobile Menu Drawer - Page Blueprints Line 30 -->
-    <div class="mobile-menu" id="mobile-menu" data-wireframe-section="mobile-navigation">
+    <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-menu-content">
         <ul class="mobile-nav-list" role="menu">
           <li class="mobile-nav-item" role="none">
-            <a href="/" class="mobile-nav-link" role="menuitem" data-nav-item="home-mobile">
-              <span data-typography-container="mobile-nav-text">Home</span>
+            <a href="index.html" class="mobile-nav-link" role="menuitem">
+              <span>Home</span>
             </a>
           </li>
           <li class="mobile-nav-item" role="none">
-            <a href="/about" class="mobile-nav-link" role="menuitem" data-nav-item="about-mobile">
-              <span data-typography-container="mobile-nav-text">About</span>
+            <a href="about.html" class="mobile-nav-link" role="menuitem">
+              <span>About</span>
             </a>
           </li>
           <li class="mobile-nav-item" role="none">
-            <a href="/pricing" class="mobile-nav-link" role="menuitem" data-nav-item="pricing-mobile">
-              <span data-typography-container="mobile-nav-text">Pricing</span>
+            <a href="pricing.html" class="mobile-nav-link" role="menuitem">
+              <span>Pricing</span>
             </a>
           </li>
           <li class="mobile-nav-item" role="none">
-            <a href="/enroll" class="mobile-nav-link" role="menuitem" data-nav-item="enroll-mobile">
-              <span data-typography-container="mobile-nav-text">Enroll</span>
-            </a>
+            <button onclick="openEnrollModal()" class="mobile-nav-link enroll-button" role="menuitem">
+              <span>Enroll</span>
+            </button>
           </li>
           <li class="mobile-nav-item" role="none">
-            <a href="/contact" class="mobile-nav-link" role="menuitem" data-nav-item="contact-mobile">
-              <span data-typography-container="mobile-nav-text">Contact</span>
+            <a href="contact.html" class="mobile-nav-link" role="menuitem">
+              <span>Contact</span>
             </a>
           </li>
         </ul>
@@ -154,6 +153,23 @@
   padding: 0.5rem 0;
   transition: var(--transition-normal);
   position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.enroll-button {
+  background: var(--color-primary-green) !important;
+  color: var(--color-dark-text) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+
+.enroll-button:hover {
+  background: #8bd691 !important;
 }
 
 .nav-link:hover {
@@ -258,6 +274,22 @@
   color: var(--color-dark-text);
   font-weight: 500;
   transition: var(--transition-normal);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+.mobile-nav-link.enroll-button {
+  background: var(--color-primary-green) !important;
+  color: var(--color-dark-text) !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  margin: 0.5rem var(--content-padding-mobile) !important;
+  width: calc(100% - 2 * var(--content-padding-mobile)) !important;
 }
 
 .mobile-nav-link:hover,

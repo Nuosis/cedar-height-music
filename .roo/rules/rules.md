@@ -196,3 +196,6 @@
 
 ### Context Awareness
 - **roo.md** if a file is in a directory and that directory also has a roo.md file in it, the roo.md file contains important context specific to that directory and should be read prior to interacting with files in the directory
+
+## GENERAL
+- use curl -s -o /dev/null -w "%{http_code}" http://localhost:5173 to test if the dev server is running. Use this instead of 'npm run dev'

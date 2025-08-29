@@ -1,236 +1,174 @@
 # WBS Scratchpad — Cedar Heights Music Public Website
 
+## MAJOR UPDATE: Wireframes Completed (Phase 04)
+
+**Status:** Wireframes completed with high-fidelity styling and validation framework
+**Date:** 2025-08-28
+**Phase 04 Achievements:**
+- ✅ High-fidelity wireframes with Page Blueprints compliance
+- ✅ Design system tokens extracted and documented
+- ✅ Seasonal background system implemented
+- ✅ Typography lockup table completed
+- ✅ Screenshot validation framework established
+- ✅ Component boundaries defined with data attributes
+- ✅ Responsive breakpoint behaviors validated
+
+## Key Changes from Original WBS
+
+### New Foundation: Wireframe-Based Development
+- Wireframes now serve as authoritative visual reference
+- Design tokens extracted and ready for React implementation
+- Component structure defined with measurement points
+- Validation framework established for visual compliance
+
+### Updated Design System Tokens (Ready for Implementation)
+```css
+/* High Priority Tokens */
+--color-primary-green: #99E39E;
+--color-dark-text: #000510;
+--color-warm-yellow: #ffd700;
+--color-warm-gold: #F3DA94;
+--color-warm-off-white: #FCF4E2;
+
+--font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+--font-size-hero: 3.5rem; /* 56px */
+--font-size-heading: 2.5rem; /* 40px */
+--font-size-body: 1rem; /* 16px */
+
+--content-width: 1300px;
+--content-padding-desktop: 80px;
+--content-padding-tablet: 48px;
+--content-padding-mobile: 24px;
+--section-spacing-desktop: 120px;
+```
+
+### New Implementation Approach
+1. **Wireframe-to-React Migration**: Convert HTML wireframes to React components
+2. **Design System First**: Implement tokens before components
+3. **Component Library**: Extract reusable components from wireframes
+4. **Validation-Driven**: Use screenshot comparison for visual regression testing
+
+## Updated WBS Structure
+
+### Phase 05: React Implementation (NEW)
+- Convert wireframe HTML to React components
+- Implement design system tokens
+- Create component library
+- Establish visual regression testing
+
+### Updated Dependencies
+- React implementation depends on wireframe completion ✅
+- Design tokens available for immediate use ✅
+- Component boundaries defined ✅
+- Responsive behaviors validated ✅
+
+## Original Context (Still Valid)
 - Context loaded: project_charter.md, prd.md (v0.1 outline), add.md (architecture draft)
 - MVP scope: Public website only; no auth; mock→live switch pre-launch
 - Key endpoints (public): GET /public/teachers, GET /public/timeslots
 - Handoff URL: https://app.cedarheightsmusic.com/enroll/start with params instrument_id, teacher_id (optional), timeslot_id, billing_frequency, source=public_site
 - Pages: /, /about, /pricing, /enroll, /contact, /privacy, /terms
-- Priority: Build IA + Enroll configurator; strict Figma adherence; performance targets
+- Priority: Build IA + Enroll configurator; strict visual adherence; performance targets
 
-Open Questions to resolve during WBS:
-- Canonical instruments + IDs (OQ-1 PRD)
-- Final copy for pages (OQ-2 PRD)
-- Indicative pricing values by frequency (OQ-3 PRD)
-- Confirm final route names from Figma (add.md Q1)
-- Verify production API domain and CORS (add.md Q2)
-- Freshness policy triggers beyond SWR TTL (add.md Q3)
+## Open Questions (Updated)
+- ✅ Design tokens extracted from wireframes
+- ✅ Component structure defined
+- ✅ Responsive behaviors validated
+- ❓ Canonical instruments + IDs (OQ-1 PRD) - Still needed
+- ❓ Final copy for pages (OQ-2 PRD) - Still needed
+- ❓ Indicative pricing values by frequency (OQ-3 PRD) - Still needed
+- ❓ Production API domain and CORS (add.md Q2) - Still needed
 
-Initial WBS Areas (to iterate):
-1) Project Setup
-- Vite React app, routing, Tailwind config, asset pipeline, env config for API domain
+## Updated Implementation Areas
 
-2) Global Layout & Navigation
-- Header/Nav per Figma, Footer with Privacy/Terms, responsive breakpoints
+### 1) Design System Implementation (NEW - HIGH PRIORITY)
+- Extract CSS custom properties from wireframe-styles.css
+- Create React design system with tokens
+- Implement component library (Button, Card, Navigation, etc.)
+- Establish theme provider and context
 
-3) Pages
-- Home, About (bios/photos), Pricing (frequency + indicative pricing), Enroll (3-step), Contact (Formspree), Privacy, Terms
+### 2) Wireframe-to-React Migration (NEW)
+- Convert wireframe HTML to React components
+- Maintain 100% visual fidelity to wireframes
+- Implement component composition patterns
+- Add React-specific interactivity
 
-4) Data Layer
+### 3) Project Setup (UPDATED)
+- Vite React app with TypeScript
+- Install dependencies: react-router-dom, @tanstack/react-query
+- Configure Tailwind with extracted design tokens
+- Set up component library structure
+
+### 4) Component Library (NEW)
+- Navigation component with mobile menu
+- Footer component with social links
+- Modal component for enrollment
+- Form components with validation
+- Card components for content sections
+
+### 5) Data Layer (UNCHANGED)
 - Mock data JSONs (instruments, teachers, timeslots)
 - Data service with source toggle (mock|live)
-- Live fetch integration for /public/teachers and /public/timeslots
+- TanStack Query setup with staleTime=120_000ms
+- Error/loading handling patterns
 
-5) Enrollment Handoff
-- URL builder with query params, redirect behavior, validation and fallbacks
+### 6) Page Implementation (UPDATED APPROACH)
+- Convert wireframe pages to React
+- Implement seasonal background system
+- Add interactive behaviors (accordion, modal, form)
+- Maintain responsive breakpoint behaviors
 
-6) Styling & Theming
-- Tailwind tokens aligned to Figma, components per design
+### 7) Enrollment Flow (ENHANCED)
+- 3-step modal stepper from wireframes
+- State management for form data
+- URL builder for handoff redirect
+- Loading states and error handling
 
-7) Performance & SEO
-- Core Web Vitals targets, image optimization, basic meta tags
+### 8) Performance & SEO (ENHANCED)
+- Image optimization for seasonal backgrounds
+- Lazy loading for non-critical assets
+- Core Web Vitals monitoring
+- Meta tags and favicon
 
-8) Testing & QA
-- Unit tests for data adapters and URL builder
-- Integration tests for Enroll flow
-- Cross-browser, mobile QA
+### 9) Testing Strategy (UPDATED)
+- Visual regression testing with Playwright screenshots
+- Component unit tests
+- Integration tests for enrollment flow
+- Cross-browser compatibility testing
 
-9) Deployment & Config
-- Vercel setup, environment variables, preview vs production
+### 10) Deployment (ENHANCED)
+- Vercel deployment with wireframe assets
+- Environment configuration for API endpoints
+- Preview deployments for validation
+- Production deployment checklist
 
-10) Observability
-- Minimal logging, optional error tracking stub (later)
+## Updated Sprint Planning
 
-Risks & Mitigations (tracking):
-- CORS/endpoint readiness: Mock-first + swap adapter; early coordination
-- Content timing: placeholders; late swap
-- Pricing mismatch: label “indicative”; confirm in protected flow
-- Performance regressions: image optimization; lazy-load
+### Week 1: Design System + Core Components
+- Extract and implement design tokens
+- Create component library foundation
+- Convert navigation and footer components
+- Set up React project structure
 
-Next step: Draft detailed WBS tree with tasks, dependencies, and MVP sequencing; confirm any deltas from Figma route structure.
---- 
-Update 1 — Core docs reviewed; drafting detailed WBS next.
+### Week 2: Page Implementation
+- Convert wireframe pages to React
+- Implement enrollment modal flow
+- Add data layer and API integration
+- Performance optimization and testing
 
-Proposed organization: provide BOTH views
-- Feature-area WBS (authoritative breakdown + dependencies)
-- Sprint-mapped view (Week 1 mock-first, Week 2 live integration + polish)
+## Risks & Mitigations (Updated)
+- ✅ Visual design uncertainty - RESOLVED with wireframes
+- ✅ Component structure unknown - RESOLVED with wireframe components
+- ❓ CORS/endpoint readiness - Mock-first approach maintained
+- ❓ Content timing - Placeholders in wireframes ready
+- ❓ Performance regressions - Validation framework established
 
-If no objection, I’ll proceed with both views.
+## Next Steps
+1. Update WBS document with wireframe-based approach
+2. Create detailed React implementation plan
+3. Define component migration strategy
+4. Establish visual regression testing workflow
+5. Update sprint timeline based on wireframe foundation
+
 ---
-Update 2 — Drafting WBS (feature areas + sprint-mapped) with constraints:
-- Solo dev; minimal testing (unit only), manual QA; Vercel previews; no CI
-
-Feature-Area WBS (authoritative)
-1) Project Setup
-- Initialize TypeScript in React+Vite project; ensure TS config aligns with Tailwind (paths, JSX)
-- Install deps: react-router-dom, tailwindcss, postcss, autoprefixer, @tanstack/react-query
-- Configure Tailwind (init, content globs, base styles); map initial tokens per Figma (colors/typography/spacing)
-- .env handling for API base URL; example .env files (dev/stage/prod); guard undefined
-- Vercel project setup (link repo, env vars for preview/prod); configure vercel.json if needed
-- Linting/formatting: ESLint + Prettier base (optional-but-recommended)
-Dependencies: none
-Deliverable: running app shell with layout styles ready
-
-2) Global Layout & Navigation
-- App shell: header/nav per Figma (responsive), footer with Privacy/Terms links
-- Route scaffolding: /, /about, /pricing, /enroll, /contact, /privacy, /terms
-- Active link styles + mobile menu behavior (hamburger if applicable)
-- Global typography/spacing scale per Figma
-Dependencies: Project Setup
-Deliverable: routes render with placeholder content
-
-3) Data Layer
-- Define TypeScript types: Instrument, Teacher, Timeslot
-- Create local mock JSON: instruments.json, teachers.json, timeslots.json
-- Data service with source toggle (mock|live); config flag
-- Live fetch functions:
-  - getTeachers(): GET /public/teachers
-  - getTimeslots(params): GET /public/timeslots?teacher_id=&weekday=&active=true
-- TanStack Query setup + QueryClientProvider; default options (staleTime=120_000)
-- Error handling strategy for fetch (retry, user-facing fallback copy via calling components)
-Dependencies: Project Setup
-Deliverable: swappable data service, mocks in place
-
-4) Pages — Home (/)
-- Hero section per Figma; primary CTA to /enroll
-- Value props section; responsive layout; images optimized/lazy where needed
-Dependencies: Global Layout
-Deliverable: pixel-aligned Home
-
-5) Pages — About (/about)
-- Studio story/values
-- Teacher bios/cards layout (static v1 with placeholders; later content swap)
-Dependencies: Global Layout
-Deliverable: About page with teacher grid/cards
-
-6) Pages — Pricing (/pricing)
-- Billing frequency selector (monthly|yearly|semester)
-- Indicative pricing display (static mapping by frequency)
-- CTA to /enroll; ensure copy clarifies “indicative”
-Dependencies: Global Layout
-Deliverable: Pricing page with functioning selector
-
-7) Pages — Enroll (/enroll)
-- Stepper UX (3 steps) + state management
-  1) Instrument selection (instrument_id)
-  2) Preferred timeslot selection
-     - Week 1: from mock timeslots
-     - Pre-launch: switch to live /public/timeslots (filtering by teacher/weekday/active)
-  3) Billing frequency selection
-- Inline validation; disable “Next/Complete” until valid
-- Redirect builder (handoff URL + params)
-- Empty/error states for timeslot list; loading skeletons
-Dependencies: Data Layer (mocks first), Global Layout
-Deliverable: Full stepper flow with redirect
-
-8) Pages — Contact (/contact)
-- Client-side form (Formspree or similar)
-- Required fields + consent text; simple honeypot
-- Success/failure UX
-Dependencies: Global Layout
-Deliverable: Working client-side contact submission
-
-9) Pages — Privacy (/privacy) and Terms (/terms)
-- Static content pages
-Dependencies: Global Layout
-Deliverable: Rendered static policy content
-
-10) Enrollment Handoff
-- URL builder utility with types + unit tests:
-  - Input: instrument_id, teacher_id (optional), timeslot_id, billing_frequency
-  - Output: https://app.cedarheightsmusic.com/enroll/start?...&source=public_site
-- Ensure stable param encoding, omit undefined
-- Use from /enroll on completion
-Dependencies: Enroll page partial; Testing infra
-Deliverable: Reliable redirect utility and integration
-
-11) Styling & Theming
-- Tailwind token mapping pass to align with Figma (colors, typography scale, spacing)
-- Component tokens: buttons, inputs, cards, headings
-- Responsive breakpoints per Figma
-Dependencies: Project Setup, initial pages
-Deliverable: Consistent styling across pages
-
-12) Performance & SEO
-- Image optimization pass (sizes, formats); lazy loading
-- Basic meta tags per route; favicon
-- Bundle check: remove unused assets; ensure code-split if needed (optional)
-Dependencies: Pages implemented
-Deliverable: Meets LCP/CLS targets (baseline)
-
-13) Testing & QA (Minimal)
-- Unit tests:
-  - URL builder (handoff)
-  - Data adapter toggle logic (mock vs live)
-- Manual QA plan:
-  - Cross-browser smoke (Chrome/Safari/Firefox latest), mobile
-  - Navigation, responsive, form submission, enroll redirect
-Dependencies: Data/Handoff utilities ready
-Deliverable: Passing unit tests; manual QA checklist executed
-
-14) Deployment & Config
-- Vercel preview deployments
-- Production deploy gating checklist (content swapped, live endpoints verified, CORS allowed origins)
-- Env vars: API_BASE_URL per env; feature flag for data source
-Dependencies: All functional pieces
-Deliverable: Live site + pre-launch verification
-
-15) Observability (Minimal)
-- Console-error monitoring in dev
-- Optional: stub for future error tracker init
-Dependencies: Project Setup
-Deliverable: Baseline logging ready
-
-Key Dependencies
-- Enroll depends on Data Layer, Handoff utility
-- Pricing depends on tokenized styles, basic components
-- Performance/SEO pass depends on pages completed
-- Deployment depends on envs and CORS readiness
-
-Sprint-Mapped View
-Week 1 — Mock-first Build (Goal: end-to-end UX with mocks)
-- Project Setup
-- Global Layout & Navigation
-- Data Layer (mocks + adapter; scaffold live fetch fns but not wired)
-- Home, About (placeholders ok), Pricing (indicative), Contact (Formspree), Privacy, Terms
-- Enroll stepper functioning with mock data
-- Handoff URL builder + unit tests
-- Initial styling pass (Tailwind tokens v0)
-Exit Criteria:
-- All routes navigable; Enroll redirects with params; responsive baseline OK; unit tests for URL builder pass
-
-Week 2 — Live Integration + Polish (Goal: switch to live, QA, performance)
-- Wire live GET /public/teachers and /public/timeslots; verify staleTime alignment (120s)
-- Error/loading/empty states polish for Enroll timeslots
-- Content swap for teacher bios/photos
-- Styling refinement to match Figma closely
-- Performance pass (image optimization, lazy loading) + basic meta
-- Manual QA checklist; cross-browser/mobile; verify handoff URL correctness
-- Vercel production deployment; environment verification; CORS and API domain sanity checks
-Exit Criteria:
-- Live endpoints used on Enroll; performance targets met; launch-ready
-
-Minimal Unit Tests (as agreed)
-- tests/urlBuilder.test.ts: covers all param combinations; encoding; source fixed
-- tests/dataAdapter.test.ts: toggles mock/live path; ensures live calls only when flag enabled
-
-Risks to Track (active)
-- CORS ready for deployed domain; action: confirm allowed origins pre-switch
-- Content timing; action: placeholders; swap late Week 2
-- Price perception; action: “indicative” label; confirm in protected flow
-- Endpoint stability; action: mock fallback toggle if outages occur
-
-Requests/Confirmations Needed
-- Final list of instruments + IDs (PRD OQ-1)
-- Final copy for value props, teacher bios, privacy, terms (PRD OQ-2)
-- Indicative pricing values per frequency (PRD OQ-3)
-- Figma token extraction (colors, typography scale) for Tailwind
+**Status:** Ready to update main WBS document with wireframe-informed implementation plan

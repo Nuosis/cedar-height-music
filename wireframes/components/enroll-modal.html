@@ -4,149 +4,149 @@
      Reference: ai_docs/context/core_docs/page_blueprints.md Lines 259-304 -->
 
 <!-- Page Blueprints Modal Layout - Lines 262-266 -->
-<div class="enroll-modal-overlay" id="enroll-modal" data-wireframe-section="enroll-modal" data-measurement-point="modal-overlay" style="display: none;">
-  <div class="enroll-modal-container" data-measurement-point="modal-container">
+<div class="enroll-modal-overlay" id="enroll-modal" style="display: none;">
+  <div class="enroll-modal-container">
     
     <!-- Page Blueprints Modal Header - Lines 268-271 -->
-    <div class="enroll-modal-header" data-wireframe-section="modal-header" data-measurement-point="modal-header">
+    <div class="enroll-modal-header">
       
       <!-- Page Blueprints Close Button - Line 266 -->
-      <button class="modal-close" aria-label="Close enrollment modal" data-measurement-point="close-button">
-        <span class="close-icon" data-asset-container="close-icon">×</span>
+      <button class="modal-close" aria-label="Close enrollment modal">
+        <span class="close-icon">×</span>
       </button>
       
       <!-- Page Blueprints Title - Line 269 -->
-      <h2 class="modal-title" data-typography-container="modal-title">Start Your Musical Journey</h2>
+      <h2 class="modal-title">Start Your Musical Journey</h2>
       
       <!-- Page Blueprints Subtitle - Line 270 -->
-      <p class="modal-subtitle" data-typography-container="modal-subtitle">Just 3 quick steps to get started</p>
+      <p class="modal-subtitle">Just 3 quick steps to get started</p>
       
       <!-- Page Blueprints Progress Indicator - Line 271 -->
-      <div class="progress-indicator" data-wireframe-section="progress-indicator" data-measurement-point="progress-indicator">
+      <div class="progress-indicator">
         <div class="progress-steps">
           <div class="progress-step active" data-step="1">
-            <span class="step-number" data-typography-container="step-number">1</span>
-            <span class="step-label" data-typography-container="step-label">Instrument</span>
+            <span class="step-number">1</span>
+            <span class="step-label">Instrument</span>
           </div>
           <div class="progress-step" data-step="2">
-            <span class="step-number" data-typography-container="step-number">2</span>
-            <span class="step-label" data-typography-container="step-label">Time</span>
+            <span class="step-number">2</span>
+            <span class="step-label">Time</span>
           </div>
           <div class="progress-step" data-step="3">
-            <span class="step-number" data-typography-container="step-number">3</span>
-            <span class="step-label" data-typography-container="step-label">Billing</span>
+            <span class="step-number">3</span>
+            <span class="step-label">Billing</span>
           </div>
         </div>
         <div class="progress-bar">
-          <div class="progress-fill" data-measurement-point="progress-fill"></div>
+          <div class="progress-fill"></div>
         </div>
       </div>
     </div>
 
     <!-- Page Blueprints Modal Content - Lines 273-296 -->
-    <div class="enroll-modal-content" data-wireframe-section="modal-content" data-measurement-point="modal-content">
+    <div class="enroll-modal-content">
       
       <!-- Page Blueprints Step 1: Instrument Selection - Lines 274-278 -->
-      <div class="modal-step step-1 active" data-wireframe-section="step-instrument" data-measurement-point="step-1-content">
-        <h3 class="step-title" data-typography-container="step-title">Choose Your Instrument</h3>
-        <p class="step-description" data-typography-container="step-description">30-minute lessons</p>
+      <div class="modal-step step-1 active">
+        <h3 class="step-title">Choose Your Instrument</h3>
+        <p class="step-description">30-minute lessons</p>
         
-        <div class="instrument-grid" data-measurement-point="instrument-grid">
+        <div class="instrument-grid">
           <div class="instrument-option" data-instrument="piano" tabindex="0" role="button">
-            <div class="instrument-icon" data-asset-container="piano-icon">🎹</div>
-            <span class="instrument-name" data-typography-container="instrument-name">Piano</span>
+            <div class="instrument-icon">🎹</div>
+            <span class="instrument-name">Piano</span>
           </div>
           <div class="instrument-option" data-instrument="guitar" tabindex="0" role="button">
-            <div class="instrument-icon" data-asset-container="guitar-icon">🎸</div>
-            <span class="instrument-name" data-typography-container="instrument-name">Guitar</span>
+            <div class="instrument-icon">🎸</div>
+            <span class="instrument-name">Guitar</span>
           </div>
           <div class="instrument-option" data-instrument="violin" tabindex="0" role="button">
-            <div class="instrument-icon" data-asset-container="violin-icon">🎻</div>
-            <span class="instrument-name" data-typography-container="instrument-name">Violin</span>
+            <div class="instrument-icon">🎻</div>
+            <span class="instrument-name">Violin</span>
           </div>
           <div class="instrument-option" data-instrument="bass" tabindex="0" role="button">
-            <div class="instrument-icon" data-asset-container="bass-icon">🎸</div>
-            <span class="instrument-name" data-typography-container="instrument-name">Bass</span>
+            <div class="instrument-icon">🎸</div>
+            <span class="instrument-name">Bass</span>
           </div>
         </div>
       </div>
 
       <!-- Page Blueprints Step 2: Timeslot Selection - Lines 279-283 -->
-      <div class="modal-step step-2" data-wireframe-section="step-timeslot" data-measurement-point="step-2-content">
-        <h3 class="step-title" data-typography-container="step-title">Pick Your Perfect Time</h3>
-        <p class="step-description" data-typography-container="step-description">Available slots this week</p>
+      <div class="modal-step step-2">
+        <h3 class="step-title">Pick Your Perfect Time</h3>
+        <p class="step-description">Available slots this week</p>
         
         <!-- Page Blueprints Data Source - Line 280: Mock week 1 → Pre-launch live GET /public/timeslots -->
-        <div class="timeslot-loading" data-wireframe-section="timeslot-loading" style="display: none;">
-          <div class="loading-spinner" data-asset-container="loading-spinner">⏳</div>
-          <p class="loading-text" data-typography-container="loading-text">Loading available times...</p>
+        <div class="timeslot-loading" style="display: none;">
+          <div class="loading-spinner">⏳</div>
+          <p class="loading-text">Loading available times...</p>
         </div>
         
         <!-- Page Blueprints Display: Available slots in easy-to-scan format - Line 281 -->
-        <div class="timeslot-grid" data-measurement-point="timeslot-grid">
+        <div class="timeslot-grid">
           <div class="timeslot-option" data-timeslot="monday-4pm" tabindex="0" role="button">
-            <div class="timeslot-day" data-typography-container="timeslot-day">Monday</div>
-            <div class="timeslot-time" data-typography-container="timeslot-time">4:00 PM - 4:30 PM</div>
-            <div class="timeslot-teacher" data-typography-container="timeslot-teacher">Sarah Johnson</div>
+            <div class="timeslot-day">Monday</div>
+            <div class="timeslot-time">4:00 PM - 4:30 PM</div>
+            <div class="timeslot-teacher">Kaeden Ottenbreit</div>
           </div>
           <div class="timeslot-option" data-timeslot="wednesday-530pm" tabindex="0" role="button">
-            <div class="timeslot-day" data-typography-container="timeslot-day">Wednesday</div>
-            <div class="timeslot-time" data-typography-container="timeslot-time">5:30 PM - 6:00 PM</div>
-            <div class="timeslot-teacher" data-typography-container="timeslot-teacher">Sarah Johnson</div>
+            <div class="timeslot-day">Wednesday</div>
+            <div class="timeslot-time">5:30 PM - 6:00 PM</div>
+            <div class="timeslot-teacher">Kaeden Ottenbreit</div>
           </div>
           <div class="timeslot-option" data-timeslot="thursday-6pm" tabindex="0" role="button">
-            <div class="timeslot-day" data-typography-container="timeslot-day">Thursday</div>
-            <div class="timeslot-time" data-typography-container="timeslot-time">6:00 PM - 6:30 PM</div>
-            <div class="timeslot-teacher" data-typography-container="timeslot-teacher">Sarah Johnson</div>
+            <div class="timeslot-day">Thursday</div>
+            <div class="timeslot-time">6:00 PM - 6:30 PM</div>
+            <div class="timeslot-teacher">Kaeden Ottenbreit</div>
           </div>
           <div class="timeslot-option" data-timeslot="saturday-10am" tabindex="0" role="button">
-            <div class="timeslot-day" data-typography-container="timeslot-day">Saturday</div>
-            <div class="timeslot-time" data-typography-container="timeslot-time">10:00 AM - 10:30 AM</div>
-            <div class="timeslot-teacher" data-typography-container="timeslot-teacher">Sarah Johnson</div>
+            <div class="timeslot-day">Saturday</div>
+            <div class="timeslot-time">10:00 AM - 10:30 AM</div>
+            <div class="timeslot-teacher">Kaeden Ottenbreit</div>
           </div>
         </div>
       </div>
 
       <!-- Page Blueprints Step 3: Billing Selection - Lines 284-286 -->
-      <div class="modal-step step-3" data-wireframe-section="step-billing" data-measurement-point="step-3-content">
-        <h3 class="step-title" data-typography-container="step-title">Choose Your Payment Plan</h3>
-        <p class="step-description" data-typography-container="step-description">Final pricing confirmed during enrollment</p>
+      <div class="modal-step step-3">
+        <h3 class="step-title">Choose Your Payment Plan</h3>
+        <p class="step-description">Final pricing confirmed during enrollment</p>
         
         <!-- Page Blueprints Options: Monthly | Yearly | Semester with pricing preview - Line 285 -->
-        <div class="billing-options" data-measurement-point="billing-options">
+        <div class="billing-options">
           <div class="billing-option" data-billing="monthly" tabindex="0" role="button">
-            <div class="billing-period" data-typography-container="billing-period">Monthly</div>
-            <div class="billing-price" data-typography-container="billing-price">$120/month</div>
-            <div class="billing-description" data-typography-container="billing-description">4 lessons per month</div>
+            <div class="billing-period">Monthly</div>
+            <div class="billing-price">$120/month</div>
+            <div class="billing-description">4 lessons per month</div>
           </div>
           <div class="billing-option recommended" data-billing="semester" tabindex="0" role="button">
-            <div class="recommended-badge" data-typography-container="recommended-badge">Recommended</div>
-            <div class="billing-period" data-typography-container="billing-period">Semester</div>
-            <div class="billing-price" data-typography-container="billing-price">$480/semester</div>
-            <div class="billing-description" data-typography-container="billing-description">16 lessons, save $240</div>
+            <div class="recommended-badge">Recommended</div>
+            <div class="billing-period">Semester</div>
+            <div class="billing-price">$480/semester</div>
+            <div class="billing-description">16 lessons, save $240</div>
           </div>
           <div class="billing-option" data-billing="yearly" tabindex="0" role="button">
-            <div class="billing-period" data-typography-container="billing-period">Yearly</div>
-            <div class="billing-price" data-typography-container="billing-price">$1,200/year</div>
-            <div class="billing-description" data-typography-container="billing-description">48 lessons, save $240</div>
+            <div class="billing-period">Yearly</div>
+            <div class="billing-price">$1,200/year</div>
+            <div class="billing-description">48 lessons, save $240</div>
           </div>
         </div>
         
         <!-- Page Blueprints Enrollment Summary - Lines 284-286 -->
-        <div class="enrollment-summary" data-wireframe-section="enrollment-summary" data-measurement-point="enrollment-summary">
-          <h4 class="summary-title" data-typography-container="summary-title">Enrollment Summary</h4>
+        <div class="enrollment-summary">
+          <h4 class="summary-title">Enrollment Summary</h4>
           <div class="summary-details">
             <div class="summary-item">
-              <span class="summary-label" data-typography-container="summary-label">Instrument:</span>
-              <span class="summary-value" id="selected-instrument" data-typography-container="summary-value">Not selected</span>
+              <span class="summary-label">Instrument:</span>
+              <span class="summary-value" id="selected-instrument">Not selected</span>
             </div>
             <div class="summary-item">
-              <span class="summary-label" data-typography-container="summary-label">Time:</span>
-              <span class="summary-value" id="selected-timeslot" data-typography-container="summary-value">Not selected</span>
+              <span class="summary-label">Time:</span>
+              <span class="summary-value" id="selected-timeslot">Not selected</span>
             </div>
             <div class="summary-item">
-              <span class="summary-label" data-typography-container="summary-label">Billing:</span>
-              <span class="summary-value" id="selected-billing" data-typography-container="summary-value">Not selected</span>
+              <span class="summary-label">Billing:</span>
+              <span class="summary-value" id="selected-billing">Not selected</span>
             </div>
           </div>
         </div>
@@ -154,26 +154,26 @@
     </div>
 
     <!-- Page Blueprints Navigation - Lines 287-290 -->
-    <div class="enroll-modal-footer" data-wireframe-section="modal-footer" data-measurement-point="modal-footer">
-      <div class="modal-navigation" data-measurement-point="modal-navigation">
+    <div class="enroll-modal-footer">
+      <div class="modal-navigation">
         
         <!-- Page Blueprints Back/Next buttons - Line 288 -->
-        <button class="nav-button back-button" data-measurement-point="back-button" style="display: none;">
-          <span data-typography-container="nav-button-text">← Back</span>
+        <button class="nav-button back-button" style="display: none;">
+          <span>← Back</span>
         </button>
         
-        <button class="nav-button next-button primary-cta" data-measurement-point="next-button" disabled>
-          <span data-typography-container="nav-button-text">Next →</span>
+        <button class="nav-button next-button primary-cta" disabled>
+          <span>Next →</span>
         </button>
         
         <!-- Page Blueprints Final step: "Complete Enrollment" button - Line 290 -->
-        <button class="nav-button complete-button primary-cta" data-measurement-point="complete-button" style="display: none;">
-          <span data-typography-container="nav-button-text">Complete Enrollment</span>
+        <button class="nav-button complete-button primary-cta" style="display: none;">
+          <span>Complete Enrollment</span>
         </button>
         
         <!-- Page Blueprints "Save & Continue Later" option - Line 289 -->
-        <button class="save-later-button secondary-cta" data-measurement-point="save-later-button">
-          <span data-typography-container="save-later-text">Save & Continue Later</span>
+        <button class="save-later-button secondary-cta">
+          <span>Save & Continue Later</span>
         </button>
       </div>
     </div>

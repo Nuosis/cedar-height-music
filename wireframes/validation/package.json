@@ -1,0 +1,23 @@
+{
+  "name": "cedar-heights-wireframe-validation",
+  "version": "1.0.0",
+  "description": "Page Blueprints validation tools for Cedar Heights Music Academy",
+  "type": "module",
+  "main": "validate-wireframes.js",
+  "scripts": {
+    "validate": "node validate-wireframes.js",
+    "screenshots": "node take-screenshots.js",
+    "test": "node validate-wireframes.js"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
+  },
+  "keywords": [
+    "validation",
+    "wireframes",
+    "page-blueprints",
+    "cedar-heights"
+  ],
+  "author": "Cedar Heights Music Academy",
+  "license": "MIT"
+}

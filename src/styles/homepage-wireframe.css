@@ -1,0 +1,484 @@
+/* HomePage Wireframe-Compliant Styles
+ * Extracted from wireframes/wireframe-styles.css and adapted for React
+ * Implements Page Blueprints specifications exactly
+ */
+
+/* Hero Section Specific Styles - Page Blueprints Lines 44-111 */
+.hero-section {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-start;
+  overflow: visible; /* Page Blueprints Line 83: allows overflow for figure */
+  padding-top: 120px;
+  background: var(--color-warm-off-white);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3; /* Higher z-index to ensure CTAs stay above figure */
+  text-align: center;
+  padding: 2rem 0 1rem 0; /* Add padding to raise content higher */
+  margin-top: -2rem; /* Pull content up to avoid collision with figure */
+}
+
+.hero-tagline {
+  font-size: 1rem; /* Page Blueprints Line 57: ~16px desktop */
+  line-height: 1.4;
+  color: var(--color-dark-text);
+  opacity: 0.9;
+  margin-bottom: 0.75rem; /* Page Blueprints Line 98: 8-12px gap */
+}
+
+.hero-headline {
+  font-size: 3.5rem; /* Page Blueprints Line 62: ~56-64px desktop */
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--color-dark-text);
+  max-width: 800px; /* Page Blueprints Line 64: ~800-860px for readable centering */
+  margin: 0 auto 1.5rem auto; /* Page Blueprints Line 99: 16-24px gap to CTAs */
+}
+
+/* Hero Figure Positioning - Page Blueprints Lines 76-91 */
+.hero-figure {
+  position: absolute;
+  margin-left: 40px;
+  bottom: -60px; /* Page Blueprints Line 81: -48 to -72px overflow */
+  left: 60px; /* Page Blueprints Line 80: ~120-180px from section's left edge */
+  z-index: 2; /* Page Blueprints Line 82: background < figure < text/CTAs */
+  pointer-events: none; /* Page Blueprints Line 82: CTAs must remain tappable */
+}
+
+.hero-character {
+  width: 200px; /* Desktop size */
+  height: auto;
+}
+
+/* Hero Decorative Accents - Page Blueprints Lines 72-75 */
+.hero-decorative {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.decorative-accent {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15; /* Page Blueprints Line 74: ≈10-20% opacity */
+  background: var(--color-primary-green);
+}
+
+.accent-1 {
+  width: 120px;
+  height: 120px;
+  top: 20%;
+  right: 20%;
+}
+
+.accent-2 {
+  width: 80px;
+  height: 80px;
+  bottom: 30%;
+  left: 15%;
+}
+
+/* Hero Background - Page Blueprints Lines 50-53 */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: var(--color-warm-off-white);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Seasonal Background System - Design Brief Implementation */
+.seasonal-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Remove problematic overlays and blend modes */
+.seasonal-background.season-summer,
+.seasonal-background.season-fall,
+.seasonal-background.season-winter {
+  /* Clean seasonal background without overlays */
+}
+
+/* Value Props Section */
+.value-props-section {
+  background: var(--color-warm-off-white);
+  padding: var(--section-spacing-desktop) 0;
+}
+
+.value-prop-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--color-warm-gold); /* Wireframe specification */
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-normal);
+}
+
+.value-prop-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.card-icon {
+  width: 64px; /* Wireframe specification */
+  height: 64px;
+  margin: 0 auto 1rem auto;
+  background: var(--color-warm-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--color-dark-text);
+}
+
+.card-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(0, 5, 16, 0.7);
+  margin-bottom: 1rem;
+}
+
+/* About Teaser Section - Full White Background */
+.about-teaser-section {
+  background: white !important;
+  padding: 80px 0; /* Reduced from var(--section-spacing-desktop) to match wireframe height */
+}
+
+/* Override inline styles that force warm off-white background */
+.about-teaser-section.section {
+  background: white !important;
+}
+
+/* Two-column grid adjustments to reduce height */
+.about-teaser-section .two-column-grid {
+  gap: 2rem; /* Reduced from 3rem to decrease overall height */
+  align-items: flex-start; /* Changed from center to reduce vertical space */
+}
+
+.about-teaser-section .about-teaser-content {
+  max-width: 500px;
+  padding-right: 1rem; /* Add some spacing between columns */
+}
+
+.eyebrow {
+  font-size: 0.875rem; /* Slightly smaller to match wireframe proportions */
+  font-weight: 600;
+  color: var(--color-primary-green);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem; /* Reduced margin */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.section-heading {
+  font-size: 2.25rem; /* Reduced from 2.5rem to match wireframe */
+  font-weight: 600;
+  line-height: 1.1; /* Tighter line height to reduce vertical space */
+  color: var(--color-dark-text);
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  font-size: 1rem;
+  line-height: 1.5; /* Reduced from 1.6 to decrease height */
+  color: rgba(0, 5, 16, 0.8);
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+}
+
+.inline-link {
+  color: var(--color-primary-green);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+}
+
+/* Image adjustments to match wireframe proportions */
+.about-teaser-section .about-teaser-image {
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+}
+
+.about-teaser-section .rounded-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-large);
+  object-fit: cover;
+  max-height: 300px; /* Limit image height to control section height */
+}
+
+/* Availability Section */
+.availability-section {
+  background: rgb(252, 244, 226);
+  padding: var(--section-spacing-desktop) 0;
+}
+
+.availability-cta {
+  margin-top: 2rem;
+}
+
+/* Slot Chips - Wireframe Specifications */
+.slot-chip {
+  background: #f5f5f5; /* Light gray per wireframe specification */
+  border: 1px solid #e0e0e0;
+  border-radius: 12px; /* Wireframe specification: 12px border radius */
+  padding: 1rem;
+  width: 200px; /* Wireframe specification: ~200x100px */
+  height: 100px; /* Wireframe specification: exact 100px height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle depth */
+}
+
+.slot-chip:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced elevation on hover */
+  transform: translateY(-2px);
+  border-color: var(--color-primary-green);
+}
+
+.slot-chip.highlighted {
+  background: #ffb74d; /* Warm yellow/orange per wireframe specification */
+  border-color: #ff9800;
+  box-shadow: 0 2px 8px rgba(255, 183, 77, 0.3);
+}
+
+.slot-chip:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+}
+
+.slot-chip .day {
+  font-weight: bold;
+  font-size: 0.875rem; /* Wireframe specification: ~14px */
+  color: var(--color-dark-text);
+  line-height: 1.2;
+}
+
+.slot-chip .time {
+  font-size: 0.75rem; /* Wireframe specification: ~12px */
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the time strings */
+  gap: 4px;
+}
+
+.slot-chip .time .start-time {
+  color: #4caf50; /* Green per wireframe specification */
+  font-weight: 500;
+}
+
+.slot-chip .time .end-time {
+  color: #ff5722; /* Red/orange per wireframe specification */
+  font-weight: 500;
+}
+
+/* Two-column grid for about teaser section */
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Slot Grid - Wireframe Specification */
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Fixed 3-column grid */
+  gap: 12px; /* Wireframe specification */
+  max-width: 636px; /* 3 * 200px + 2 * 12px gaps */
+  margin: 0 auto; /* Center the grid container */
+}
+
+/* Micro FAQ Section */
+.micro-faq-section {
+  padding: var(--section-spacing-desktop) 0;
+  background: var(--color-warm-off-white) !important; /* Ensure solid background, no seasonal bleed-through */
+  margin-bottom: 0 !important; /* Remove any bottom margin to match wireframe */
+}
+
+/* Footer margin fix - remove unwanted top margin */
+.global-footer {
+  margin-top: 0 !important; /* Remove the 120px top margin that's wrong for wireframe */
+}
+
+/* Elegant FAQ Accordion Styling */
+.accordion {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: none;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: var(--border-radius-large);
+  padding: 1.5rem;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+}
+
+.accordion-item {
+  border-bottom: 1px solid rgba(0, 5, 16, 0.08);
+  transition: border-color 0.2s ease;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.accordion-header:hover {
+  opacity: 0.7;
+}
+
+.accordion-header:focus {
+  outline: none;
+  opacity: 0.7;
+}
+
+.accordion-question {
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: var(--color-dark-text);
+  line-height: 1.5;
+  margin: 0;
+  padding-right: 1rem;
+}
+
+.accordion-icon {
+  color: var(--color-primary-green);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accordion-content {
+  padding: 0 0 2rem 0;
+  color: rgba(0, 5, 16, 0.7);
+  line-height: 1.6;
+  font-size: 1rem;
+  max-width: 90%;
+}
+
+/* Responsive Adjustments - Wireframe responsive guidelines */
+@media (max-width: 1199px) {
+  .hero-headline {
+    font-size: 3rem; /* Wireframe specification: ~44-52px tablet */
+  }
+  
+  .hero-figure {
+    margin-left: -40px;
+    bottom: 0px;
+    margin-top: 1.5rem; /* Adjust spacing for tablet */
+  }
+  
+  .hero-character {
+    width: 200px; /* Wireframe specification: ~220-260px tablet */
+  }
+  
+  .slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .accordion-header {
+    padding: 1.5rem 1.5rem;
+  }
+  
+  .accordion-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-section {
+    padding-top: var(--section-spacing-mobile);
+    min-height: 60vh;
+  }
+  
+  .hero-headline {
+    font-size: 2.25rem; /* Wireframe specification: ~34-40px mobile */
+  }
+  
+  .hero-tagline {
+    font-size: 0.875rem; /* Wireframe specification: ~14px mobile */
+  }
+  
+  /* Wireframe mobile figure options */
+  .hero-figure {
+    margin-left: -20px;
+    bottom: 10px;
+    order: 2; /* Maintain order on mobile */
+  }
+  
+  .hero-character {
+    width: 140px;
+  }
+  
+  .section-heading {
+    font-size: 2rem;
+  }
+  
+  .slots-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .accordion-header {
+    padding: 1.25rem 1rem;
+  }
+  
+  .accordion-header:hover {
+    padding-left: 1.25rem;
+  }
+  
+  .accordion-content {
+    padding: 0 1rem 1.25rem 1rem;
+  }
+  
+  .accordion-question {
+    font-size: 1rem;
+  }
+  
+  .accordion-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 1.125rem;
+  }
+}

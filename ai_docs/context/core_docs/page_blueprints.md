@@ -53,7 +53,7 @@ Sections in order:
   - Contrast: If background is busy, add a very soft radial or linear gradient behind the text group (not a heavy overlay) so headline/CTA meet AA.
 - Elements (foreground):
   - Tagline (small, above headline)
-    - Copy: "Personal, one-on-one music lessons in Cedar Heights."
+    - Copy: "Personal, one-on-one music lessons in Cedar & Nanaimo"
     - Type scale: ~16px desktop (line-height ≈ 22.4px), ~14px mobile (line-height ≈ 20px)
     - Weight: Regular (400–500); Color: #000510 at 80–100% opacity
     - Alignment: Center desktop/tablet; center mobile
@@ -121,7 +121,7 @@ Sections in order:
 - Position: Two-column band; left text, right small image collage
 - Left elements:
   - Eyebrow: “About the studio”
-  - Heading: “Personalized lessons from a dedicated teacher”
+  - Heading: “Personalized lessons from your dedicated teacher”
   - Paragraph: Short intro aligned with Design Brief narrative.
   - Inline link: “Meet your teacher” → /about#teacher
 - Right elements:
@@ -396,7 +396,7 @@ Guidelines
 - CTA pairing: Primary “Enroll Now”, secondary “Contact”.
 
 Primary recommendation
-- Headline: “Music lessons, made personal.”
+- Headline: “Where Your Musical Journey Starts”
 - Subheadline: “One-on-one instruction in Cedar Heights—patient, flexible, beginner‑friendly.”
 
 Additional vetted options (choose one)

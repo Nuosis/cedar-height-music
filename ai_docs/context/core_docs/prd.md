@@ -26,15 +26,18 @@ Date: 2025-08-11
     - Studio story and values
     - Teacher bios with photos (static content v1)
   - Pricing (/pricing)
-    - Billing frequency selection (monthly | yearly | semester)
-    - Indicative pricing (based on billing frequency only; clearly labeled “indicative” until live data)
+    - Single monthly price display ($125 placeholder; pulled from backend pre-launch)
+    - Clear note: “Commitment: current semester”; pricing labeled “indicative” until live data
     - CTA to /enroll
   - Enroll (/enroll)
-    - 3-step configurator: 
+    - 2-step configurator:
       1) Instrument (mapped to instrument_id)
       2) Preferred timeslot (from mock → live /public/timeslots)
-      3) Billing frequency (monthly | yearly | semester)
     - On completion: immediate redirect to protected app (see interface requirements)
+    <!-- Updated 2025-08-28: Pricing simplification confirmed; removed billing frequency selector.
+    WBS Evidence: Prior plan included frequency selector and 3rd step billing [Pricing Page](ai_docs/context/core_docs/wbs.md:128), [Enroll Modal](ai_docs/context/core_docs/wbs.md:139).
+    Business Rationale: Simplify decision-making; align with semester commitment policy.
+    Stakeholder Impact: Update marketing copy, UI components, and handoff parameters. -->
   - Contact (/contact)
     - Client-side contact form using Formspree (or similar), includes consent text and basic spam protection
   - Privacy (/privacy), Terms (/terms)
@@ -51,12 +54,13 @@ Date: 2025-08-11
 4. Key User Journeys (Public Site)
 - Journey A: Discover → Enroll
   1) Land on Home → primary CTA → /enroll
-  2) Select instrument → select preferred timeslot → choose billing frequency
+  2) Select instrument → select preferred timeslot
   3) Redirect immediately to protected app with context params
 - Journey B: Research → Pricing → Enroll
-  1) Navigate to /pricing → choose billing frequency to view indicative price
+  <!-- Updated 2025-08-28 -->
+  1) Navigate to /pricing → view single monthly price and semester commitment
   2) CTA → /enroll
-  3) Complete 3-step configurator → redirect with params
+  3) Complete 2-step configurator → redirect with params
 - Journey C: About → Enroll
   1) View teacher bios/studio story at /about
   2) CTA to /enroll → complete steps → redirect
@@ -75,15 +79,20 @@ Date: 2025-08-11
 - F-AB-2: Render teacher bios with photos (static v1 content); maintain layout consistency with Figma cards/typography
 
 5.4 Pricing (/pricing)
-- F-PR-1: Allow user to choose billing frequency (monthly | yearly | semester)
-- F-PR-2: Compute and display an indicative price based solely on chosen billing frequency (instrument does not change price)
-- F-PR-3: Label pricing as “indicative” until live backend pricing; provide CTA to /enroll
+<!-- Updated 2025-08-28: Simplified pricing model
+WBS Evidence: Prior plan included frequency selector [Pricing Page](ai_docs/context/core_docs/wbs.md:128).
+Business Rationale: One price per month with semester commitment reduces decision friction.
+Stakeholder Impact: Update Pricing UI to static price; remove selector; QA and copy changes. -->
+- F-PR-1: Display a single monthly price (placeholder $125) sourced from backend pre-launch; instrument does not affect price
+- F-PR-2: Show note “Commitment: current semester”; pricing labeled “indicative” until live backend value
+- F-PR-3: Provide CTA to /enroll
 
 5.5 Enroll (/enroll)
+<!-- Updated 2025-08-28: Two-step flow; removed billing frequency -->
 - F-EN-1: Step 1 — Instrument selection (maps to backend instrument_id)
 - F-EN-2: Step 2 — Preferred timeslot selection (mock data in Week 1; switch to GET /public/timeslots pre-launch)
-- F-EN-3: Step 3 — Billing frequency selection (monthly | yearly | semester)
-- F-EN-4: On completion, immediately redirect to protected app handoff URL with required query params
+- F-EN-3: On completion, immediately redirect to protected app handoff URL with required query params
+- F-EN-4: Enrollment summary displays “$125/month” and “Commitment: current semester”
 
 5.6 Contact (/contact)
 - F-CT-1: Client-side form using Formspree (or similar) to submit inquiries
@@ -100,8 +109,12 @@ Date: 2025-08-11
   - instrument_id: UUID for instrument chosen on /enroll
   - teacher_id: Optional; implied by selected timeslot (if available)
   - timeslot_id: UUID for chosen preferred weekly 30-min slot
-  - billing_frequency: monthly | yearly | semester
   - source: public_site (fixed for attribution)
+  <!-- Updated 2025-08-28: Removed billing_frequency per pricing simplification.
+  WBS Evidence: Frequency selector and Step 3 billing removed [Pricing Page](ai_docs/context/core_docs/wbs.md:128), [Enroll Modal](ai_docs/context/core_docs/wbs.md:139).
+  Business Rationale: Single monthly price with semester commitment; no user-selected frequency.
+  Stakeholder Impact: Update handoff builder and tests to reflect parameter removal.
+  Pending: Confirm if semester_id should be included in handoff or determined server-side. -->
 - Behavior:
   - I-EN-1: On /enroll completion, redirect immediately (no modal) with the above parameters
   - I-EN-2: If some selections are missing, still redirect with available params; protected flow will prompt for missing details
@@ -130,7 +143,9 @@ Date: 2025-08-11
   - NFR-R-1: All public routes load without backend dependency failures during Week 1 (mock fallback)
 - Security/Privacy:
   - NFR-S-1: No server-side PII collection; /contact form uses a third-party client-side submission (e.g., Formspree)
-  - NFR-S-2: Do not include personal data in handoff URL; only UUID identifiers and frequency
+  - NFR-S-2: Do not include personal data in handoff URL; only UUID identifiers
+  <!-- Updated 2025-08-28: Removed "frequency" due to pricing simplification and handoff param removal.
+  WBS Evidence: Frequency selection removed [Enroll Modal](ai_docs/context/core_docs/wbs.md:139). -->
 - SEO:
   - NFR-SEO-1: Basic metadata per page; later enhancement post-launch if needed (sitemap, etc.)
 - Analytics:
@@ -142,7 +157,8 @@ Date: 2025-08-11
   - C-2: Public-only site; authentication and booking occur in protected app
   - C-3: CORS and backend domain coordination required pre-launch for live public endpoints
 - Assumptions:
-  - A-1: Billing frequency determines indicative price; instrument choice does not affect price
+  <!-- Updated 2025-08-28: Pricing simplification and semester commitment -->
+  - A-1: Single monthly price model set via backend (use $125 placeholder on public site until live integration). Instrument choice does not affect price. Users commit to the current semester per school calendar stored in backend.
   - A-2: Preferred timeslot is non-binding on public site; actual booking/locking occurs in protected app
   - A-3: Figma defines canonical component styles and page layouts
 
@@ -154,12 +170,15 @@ Date: 2025-08-11
   - AC-AB-1: Displays studio story and values content
   - AC-AB-2: Renders teacher bios with photos per Figma component styles
 - Pricing (/pricing)
-  - AC-PR-1: Selecting billing frequency shows an indicative price labeled “indicative”
+  <!-- Updated 2025-08-28 -->
+  - AC-PR-1: Page displays single monthly price ($125 placeholder) labeled “indicative” and shows “Commitment: current semester”
   - AC-PR-2: CTA to /enroll present and functional
 - Enroll (/enroll)
-  - AC-EN-1: 3 steps function in order: instrument → preferred timeslot → billing frequency
-  - AC-EN-2: On completion, browser redirects to https://app.cedarheightsmusic.com/enroll/start with params instrument_id, teacher_id (if implied), timeslot_id, billing_frequency, source=public_site
-  - AC-EN-3: Week 1 operates with mock data; pre-launch switch uses GET /public/teachers and /public/timeslots
+  <!-- Updated 2025-08-28 -->
+  - AC-EN-1: 2 steps function in order: instrument → preferred timeslot
+  - AC-EN-2: On completion, browser redirects to https://app.cedarheightsmusic.com/enroll/start with params instrument_id, teacher_id (if implied), timeslot_id, source=public_site
+  - AC-EN-3: Enrollment summary displays “$125/month” and “Commitment: current semester”
+  - AC-EN-4: Week 1 operates with mock data; pre-launch switch uses GET /public/teachers and /public/timeslots
 - Contact (/contact)
   - AC-CT-1: Client-side Formspree (or similar) form submits successfully
   - AC-CT-2: Consent text and spam prevention (honeypot) are present
@@ -172,8 +191,12 @@ Date: 2025-08-11
 11. Prioritization (MoSCoW)
 - Must Have:
   - Pages: /, /about, /pricing, /enroll, /contact, /privacy, /terms
-  - /enroll 3-step configurator and handoff redirect with params
-  - Pricing indicative display by billing frequency
+  - /enroll 2-step configurator and handoff redirect with params (no billing frequency)
+  - Pricing shows single monthly price with “Commitment: current semester” and “indicative” label
+  <!-- Updated 2025-08-28: Simplified pricing and enrollment flow.
+  WBS Evidence: Prior WBS sections defined frequency selector and Step 3 billing [Pricing Page](ai_docs/context/core_docs/wbs.md:128) and [Enroll Modal](ai_docs/context/core_docs/wbs.md:139).
+  Business Rationale: Reduce friction and align to semester commitment policy.
+  Stakeholder Impact: Marketing copy, UI components, and QA scenarios updated. -->
   - Contact form via Formspree (client-side)
   - Mock → live data switch for teachers/timeslots
 - Should Have:
@@ -205,10 +228,16 @@ Date: 2025-08-11
 14. Open Questions
 - OQ-1: Confirm canonical list of instruments and IDs for public site mapping (source of truth during mock phase)
 - OQ-2: Final copy for value props, teacher bios, privacy, and terms (owner and delivery dates)
-- OQ-3: Exact indicative price values per billing frequency for v1 labeling
+<!-- Updated 2025-08-28: Pricing simplification -->
+- OQ-3: Confirm public endpoint for current monthly price and semester details (effective dates, label). Should semester_id be included in handoff URL or determined server-side?
 
 15. Appendix
-- Handoff URL (final): https://app.cedarheightsmusic.com/enroll/start?instrument_id=&teacher_id=&timeslot_id=&billing_frequency=&source=public_site
+- Handoff URL (final): https://app.cedarheightsmusic.com/enroll/start?instrument_id=&teacher_id=&timeslot_id=&source=public_site
+<!-- Updated 2025-08-28: Removed billing_frequency. Pending confirmation: whether to include semester_id or rely on server-side "current semester".
+WBS Evidence: URL builder originally included billing_frequency [WBS Enrollment Handoff Utility](ai_docs/context/core_docs/wbs.md:170).
+Business Rationale: Pricing simplified to single monthly price with semester commitment; frequency selection removed; parameter no longer needed.
+Stakeholder Impact: Update URL builder utility, tests, and any tracking relying on billing_frequency. -->
+
 - Public endpoints (pre-launch):
   - GET /public/teachers
   - GET /public/timeslots?teacher_id=&weekday=&active=true

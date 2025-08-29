@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cedar Heights Music Academy - Personal Music Lessons</title>
-  <meta name="description" content="Personal, one-on-one music lessons in Cedar Heights. Patient, professional instruction for kids and adults.">
+  <meta name="description" content="Personal, one-on-one music lessons in Cedar & Nanaimo. Patient, professional instruction for kids and adults.">
   
   <!-- Page Blueprints Design System -->
   <link rel="stylesheet" href="wireframe-styles.css">
@@ -13,21 +13,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <!-- Skip Navigation -->
-  <a href="#main-content" class="skip-nav">Skip to main content</a>
 </head>
 <body>
   
   <!-- Page Blueprints Global Navigation - Lines 27-30 -->
   <div id="navigation-placeholder">
     <!-- Navigation component will be loaded here -->
-    <script>
-      fetch('components/navigation.html')
-        .then(response => response.text())
-        .then(html => {
-          document.getElementById('navigation-placeholder').innerHTML = html;
-        });
-    </script>
   </div>
 
   <main id="main-content">
@@ -44,20 +35,20 @@
             
             <!-- Page Blueprints Tagline - Lines 55-59 -->
             <div class="hero-tagline" data-typography-container="hero-tagline" data-measurement-point="tagline-spacing">
-              Personal, one-on-one music lessons in Cedar Heights.
+              Personal, one-on-one music lessons in Cedar & Nanaimo.
             </div>
             
             <!-- Page Blueprints Headline - Lines 60-64 -->
             <h1 class="hero-headline" data-typography-container="hero-headline" data-measurement-point="headline-size">
-              Music lessons, made personal.
+              Where Your Musical Journey Starts
             </h1>
             
             <!-- Page Blueprints CTAs - Lines 65-71 -->
             <div class="cta-group" data-measurement-point="cta-group-spacing">
-              <a href="/enroll" class="primary-cta" data-measurement-point="primary-cta-size">
+              <button onclick="openEnrollModal()" class="primary-cta" data-measurement-point="primary-cta-size">
                 Enroll Now
                 <span class="cta-arrow" data-asset-container="arrow-icon">→</span>
-              </a>
+              </button>
             </div>
           </div>
           
@@ -77,8 +68,8 @@
         </div>
         
         <!-- Page Blueprints Seasonal Background - Lines 50-53 -->
-        <div class="hero-background" data-asset-container="seasonal-background" data-measurement-point="background-coverage">
-          <!-- Seasonal hero background band -->
+        <div class="hero-background seasonal-background" data-asset-container="seasonal-background" data-measurement-point="background-coverage">
+          <!-- Seasonal hero background band - dynamically loaded based on current season -->
         </div>
       </div>
     </section>
@@ -126,7 +117,7 @@
           <!-- Left Column - Page Blueprints Lines 122-126 -->
           <div class="about-teaser-content" data-wireframe-section="about-teaser-text">
             <div class="eyebrow" data-typography-container="about-eyebrow">About the studio</div>
-            <h2 class="section-heading" data-typography-container="about-heading">Personalized lessons from a dedicated teacher</h2>
+            <h2 class="section-heading" data-typography-container="about-heading">Personalized lessons from your dedicated teacher</h2>
             <p class="section-description" data-typography-container="about-description">
               At Cedar Heights Music Academy, we believe every student deserves individual attention. 
               Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.
@@ -204,7 +195,7 @@
           
           <!-- Page Blueprints Primary Button - Line 146 -->
           <div class="availability-cta" data-measurement-point="availability-cta-spacing">
-            <a href="/enroll" class="primary-cta" data-measurement-point="availability-cta-size">Enroll Now</a>
+            <button onclick="openEnrollModal()" class="primary-cta" data-measurement-point="availability-cta-size">Enroll Now</button>
           </div>
         </div>
       </div>
@@ -256,16 +247,184 @@
     </section>
   </main>
 
-  <!-- Page Blueprints Global Footer - Lines 31-33 -->
+  <!-- Footer Component -->
   <div id="footer-placeholder">
     <!-- Footer component will be loaded here -->
-    <script>
-      fetch('components/footer.html')
-        .then(response => response.text())
-        .then(html => {
-          document.getElementById('footer-placeholder').innerHTML = html;
-        });
-    </script>
+  </div>
+
+  <!-- Enroll Modal Component -->
+  <div id="enroll-modal-placeholder">
+    <!-- Modal component will be loaded here -->
+  </div>
+
+  <!-- Enroll Modal Component (Fallback) -->
+  <div class="enroll-modal-overlay" id="enroll-modal" style="display: none;">
+    <div class="enroll-modal-container">
+      
+      <!-- Page Blueprints Modal Header - Lines 268-271 -->
+      <div class="enroll-modal-header">
+        
+        <!-- Page Blueprints Close Button - Line 266 -->
+        <button class="modal-close" aria-label="Close enrollment modal">
+          <span class="close-icon">×</span>
+        </button>
+        
+        <!-- Page Blueprints Title - Line 269 -->
+        <h2 class="modal-title">Start Your Musical Journey</h2>
+        
+        <!-- Page Blueprints Subtitle - Line 270 -->
+        <p class="modal-subtitle">Just 3 quick steps to get started</p>
+        
+        <!-- Page Blueprints Progress Indicator - Line 271 -->
+        <div class="progress-indicator">
+          <div class="progress-steps">
+            <div class="progress-step active" data-step="1">
+              <span class="step-number">1</span>
+              <span class="step-label">Instrument</span>
+            </div>
+            <div class="progress-step" data-step="2">
+              <span class="step-number">2</span>
+              <span class="step-label">Time</span>
+            </div>
+            <div class="progress-step" data-step="3">
+              <span class="step-number">3</span>
+              <span class="step-label">Billing</span>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Blueprints Modal Content - Lines 273-296 -->
+      <div class="enroll-modal-content">
+        
+        <!-- Page Blueprints Step 1: Instrument Selection - Lines 274-278 -->
+        <div class="modal-step step-1 active">
+          <h3 class="step-title">Choose Your Instrument</h3>
+          <p class="step-description">30-minute lessons</p>
+          
+          <div class="instrument-grid">
+            <div class="instrument-option" data-instrument="piano" tabindex="0" role="button">
+              <div class="instrument-icon">🎹</div>
+              <span class="instrument-name">Piano</span>
+            </div>
+            <div class="instrument-option" data-instrument="guitar" tabindex="0" role="button">
+              <div class="instrument-icon">🎸</div>
+              <span class="instrument-name">Guitar</span>
+            </div>
+            <div class="instrument-option" data-instrument="violin" tabindex="0" role="button">
+              <div class="instrument-icon">🎻</div>
+              <span class="instrument-name">Violin</span>
+            </div>
+            <div class="instrument-option" data-instrument="bass" tabindex="0" role="button">
+              <div class="instrument-icon">🎸</div>
+              <span class="instrument-name">Bass</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Blueprints Step 2: Timeslot Selection - Lines 279-283 -->
+        <div class="modal-step step-2">
+          <h3 class="step-title">Pick Your Perfect Time</h3>
+          <p class="step-description">Available slots this week</p>
+          
+          <div class="timeslot-loading" style="display: none;">
+            <div class="loading-spinner">⏳</div>
+            <p class="loading-text">Loading available times...</p>
+          </div>
+          
+          <div class="timeslot-grid">
+            <div class="timeslot-option" data-timeslot="monday-4pm" tabindex="0" role="button">
+              <div class="timeslot-day">Monday</div>
+              <div class="timeslot-time">4:00 PM - 4:30 PM</div>
+              <div class="timeslot-teacher">Kaeden Ottenbreit</div>
+            </div>
+            <div class="timeslot-option" data-timeslot="wednesday-530pm" tabindex="0" role="button">
+              <div class="timeslot-day">Wednesday</div>
+              <div class="timeslot-time">5:30 PM - 6:00 PM</div>
+              <div class="timeslot-teacher">Kaeden Ottenbreit</div>
+            </div>
+            <div class="timeslot-option" data-timeslot="thursday-6pm" tabindex="0" role="button">
+              <div class="timeslot-day">Thursday</div>
+              <div class="timeslot-time">6:00 PM - 6:30 PM</div>
+              <div class="timeslot-teacher">Kaeden Ottenbreit</div>
+            </div>
+            <div class="timeslot-option" data-timeslot="saturday-10am" tabindex="0" role="button">
+              <div class="timeslot-day">Saturday</div>
+              <div class="timeslot-time">10:00 AM - 10:30 AM</div>
+              <div class="timeslot-teacher">Kaeden Ottenbreit</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Blueprints Step 3: Billing Selection - Lines 284-286 -->
+        <div class="modal-step step-3">
+          <h3 class="step-title">Choose Your Payment Plan</h3>
+          <p class="step-description">Final pricing confirmed during enrollment</p>
+          
+          <div class="billing-options">
+            <div class="billing-option" data-billing="monthly" tabindex="0" role="button">
+              <div class="billing-period">Monthly</div>
+              <div class="billing-price">$120/month</div>
+              <div class="billing-description">4 lessons per month</div>
+            </div>
+            <div class="billing-option recommended" data-billing="semester" tabindex="0" role="button">
+              <div class="recommended-badge">Recommended</div>
+              <div class="billing-period">Semester</div>
+              <div class="billing-price">$480/semester</div>
+              <div class="billing-description">16 lessons, save $240</div>
+            </div>
+            <div class="billing-option" data-billing="yearly" tabindex="0" role="button">
+              <div class="billing-period">Yearly</div>
+              <div class="billing-price">$1,200/year</div>
+              <div class="billing-description">48 lessons, save $240</div>
+            </div>
+          </div>
+          
+          <div class="enrollment-summary">
+            <h4 class="summary-title">Enrollment Summary</h4>
+            <div class="summary-details">
+              <div class="summary-item">
+                <span class="summary-label">Instrument:</span>
+                <span class="summary-value" id="selected-instrument">Not selected</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Time:</span>
+                <span class="summary-value" id="selected-timeslot">Not selected</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Billing:</span>
+                <span class="summary-value" id="selected-billing">Not selected</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Blueprints Navigation - Lines 287-290 -->
+      <div class="enroll-modal-footer">
+        <div class="modal-navigation">
+          
+          <button class="nav-button back-button" style="display: none;">
+            <span>← Back</span>
+          </button>
+          
+          <button class="nav-button next-button primary-cta" disabled>
+            <span>Next →</span>
+          </button>
+          
+          <button class="nav-button complete-button primary-cta" style="display: none;">
+            <span>Complete Enrollment</span>
+          </button>
+          
+          <button class="save-later-button secondary-cta">
+            <span>Save & Continue Later</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Page-specific styles -->
@@ -308,7 +467,7 @@
     /* Hero Figure Positioning - Page Blueprints Lines 76-91 */
     .hero-figure {
       position: absolute;
-      bottom: -120px; /* Page Blueprints Line 81: -48 to -72px overflow */
+      bottom: -60px; /* Page Blueprints Line 81: -48 to -72px overflow */
       left: 60px; /* Page Blueprints Line 80: ~120-180px from section's left edge */
       z-index: 2; /* Page Blueprints Line 82: background < figure < text/CTAs */
       pointer-events: none; /* Page Blueprints Line 82: CTAs must remain tappable */
@@ -360,7 +519,9 @@
       bottom: 0;
       z-index: 0;
       background: linear-gradient(135deg, rgba(252, 244, 226, 0.9) 0%, rgba(255, 250, 205, 0.8) 100%);
-      /* Placeholder for seasonal background image */
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
     }
     
     /* Value Props Section */
@@ -413,6 +574,12 @@
     /* About Teaser Section */
     .about-teaser-section {
       padding: var(--section-spacing-desktop) 0;
+      background: white !important;
+    }
+    
+    /* Ensure about teaser section has white background */
+    .about-teaser-section.section {
+      background: white !important;
     }
     
     .eyebrow {
@@ -452,7 +619,7 @@
     
     /* Availability Section */
     .availability-section {
-      background: rgba(153, 227, 158, 0.05);
+      background: rgb(252, 244, 226);
       padding: var(--section-spacing-desktop) 0;
     }
     
@@ -472,12 +639,13 @@
       }
       
       .hero-figure {
-        margin-left: 100px;
+        margin-left: 0px;
+        bottom: 100px;
         margin-top: 1.5rem; /* Adjust spacing for tablet */
       }
       
       .hero-character {
-        width: 140px; /* Page Blueprints Line 86: ~220-260px tablet */
+        width: 200px; /* Page Blueprints Line 86: ~220-260px tablet */
       }
     }
     
@@ -497,14 +665,13 @@
       
       /* Page Blueprints Line 88-89: Mobile figure options */
       .hero-figure {
-        text-align: center;
-        margin-left: 0; /* Center on mobile */
-        opacity: 0.15; /* Option A: center near bottom at 10-15% opacity */
+        margin-left: 0px;
+        bottom: 140px;
         order: 2; /* Maintain order on mobile */
       }
       
       .hero-character {
-        width: 100px;
+        width: 140px;
       }
       
       .section-heading {
@@ -515,8 +682,423 @@
 
   <!-- Page-specific JavaScript -->
   <script>
-    // Accordion functionality - Page Blueprints Line 150
+    // Enhanced Component Loading System with file:// protocol support
+    async function loadComponents() {
+      try {
+        await Promise.all([
+          loadComponent('navigation', 'navigation-placeholder'),
+          loadComponent('footer', 'footer-placeholder'),
+          loadComponent('enroll-modal', 'enroll-modal-placeholder')
+        ]);
+        
+        // Initialize components after loading
+        initializeComponents();
+      } catch (error) {
+        console.error('Failed to load components:', error);
+        // Fallback to inline components
+        loadFallbackComponents();
+      }
+    }
+
+    async function loadComponent(componentName, placeholderId) {
+      const placeholder = document.getElementById(placeholderId);
+      if (!placeholder) {
+        console.warn(`Placeholder ${placeholderId} not found`);
+        return;
+      }
+
+      try {
+        // Try to load component via fetch first
+        const response = await fetch(`components/${componentName}.html`);
+        if (response.ok) {
+          const html = await response.text();
+          placeholder.innerHTML = html;
+          return;
+        }
+      } catch (error) {
+        // Fetch failed, likely file:// protocol
+      }
+
+      // Fallback: Load component content directly
+      loadComponentFallback(componentName, placeholder);
+    }
+
+    function loadComponentFallback(componentName, placeholder) {
+      switch (componentName) {
+        case 'navigation':
+          loadNavigationFallback(placeholder);
+          break;
+        case 'footer':
+          loadFooterFallback(placeholder);
+          break;
+        case 'enroll-modal':
+          loadEnrollModalFallback(placeholder);
+          break;
+      }
+    }
+
+    function loadNavigationFallback(placeholder) {
+      placeholder.innerHTML = `
+        <header class="global-header">
+          <nav class="main-navigation" role="navigation" aria-label="Main navigation">
+            <div class="page-container">
+              <div class="nav-container">
+                <div class="nav-brand">
+                  <a href="index.html" class="brand-link" aria-label="Cedar Heights Music Academy - Home">
+                    <span class="wordmark">Cedar Heights Music Academy</span>
+                  </a>
+                </div>
+                <div class="nav-menu">
+                  <ul class="nav-list" role="menubar">
+                    <li class="nav-item" role="none">
+                      <a href="index.html" class="nav-link active" role="menuitem">
+                        <span>Home</span>
+                      </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                      <a href="about.html" class="nav-link" role="menuitem">
+                        <span>About</span>
+                      </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                      <a href="pricing.html" class="nav-link" role="menuitem">
+                        <span>Pricing</span>
+                      </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                      <button onclick="openEnrollModal()" class="nav-link enroll-button" role="menuitem">
+                        <span>Enroll</span>
+                      </button>
+                    </li>
+                    <li class="nav-item" role="none">
+                      <a href="contact.html" class="nav-link" role="menuitem">
+                        <span>Contact</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                  <span class="hamburger-line"></span>
+                  <span class="hamburger-line"></span>
+                  <span class="hamburger-line"></span>
+                </button>
+              </div>
+            </div>
+            <div class="mobile-menu" id="mobile-menu">
+              <div class="mobile-menu-content">
+                <ul class="mobile-nav-list" role="menu">
+                  <li class="mobile-nav-item" role="none">
+                    <a href="index.html" class="mobile-nav-link active" role="menuitem">
+                      <span>Home</span>
+                    </a>
+                  </li>
+                  <li class="mobile-nav-item" role="none">
+                    <a href="about.html" class="mobile-nav-link" role="menuitem">
+                      <span>About</span>
+                    </a>
+                  </li>
+                  <li class="mobile-nav-item" role="none">
+                    <a href="pricing.html" class="mobile-nav-link" role="menuitem">
+                      <span>Pricing</span>
+                    </a>
+                  </li>
+                  <li class="mobile-nav-item" role="none">
+                    <button onclick="openEnrollModal()" class="mobile-nav-link enroll-button" role="menuitem">
+                      <span>Enroll</span>
+                    </button>
+                  </li>
+                  <li class="mobile-nav-item" role="none">
+                    <a href="contact.html" class="mobile-nav-link" role="menuitem">
+                      <span>Contact</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
+      `;
+    }
+
+    function loadFooterFallback(placeholder) {
+      placeholder.innerHTML = `
+        <footer class="global-footer" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: var(--color-warm-off-white); border-top: 3px solid var(--color-primary-green); box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);">
+          <div class="page-container">
+            <div class="footer-content" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; padding: 4rem 0 2.5rem 0;">
+              <div class="footer-column footer-brand" style="max-width: 350px;">
+                <div class="footer-logo">
+                  <span class="footer-wordmark" style="font-size: 1.75rem; font-weight: 700; color: var(--color-warm-off-white); display: block; margin-bottom: 1.25rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">Cedar Heights Music Academy</span>
+                </div>
+                <p class="footer-description" style="font-size: 0.95rem; line-height: 1.7; color: rgba(252, 244, 226, 0.85); margin: 0;">
+                  Personal, one-on-one music lessons in Cedar & Nanaimo. Nurturing young musicians in a supportive environment.
+                </p>
+              </div>
+              <div class="footer-column footer-links">
+                <h3 class="footer-heading" style="font-size: 1.1rem; font-weight: 600; color: var(--color-warm-off-white); margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--color-primary-green); padding-bottom: 0.5rem; display: inline-block;">Quick Links</h3>
+                <ul class="footer-nav-list" style="list-style: none; margin: 0; padding: 0;">
+                  <li class="footer-nav-item" style="margin-bottom: 0.75rem;">
+                    <a href="about.html" class="footer-nav-link" style="color: rgba(252, 244, 226, 0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; display: inline-block; padding: 0.25rem 0;">About</a>
+                  </li>
+                  <li class="footer-nav-item" style="margin-bottom: 0.75rem;">
+                    <a href="pricing.html" class="footer-nav-link" style="color: rgba(252, 244, 226, 0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; display: inline-block; padding: 0.25rem 0;">Pricing</a>
+                  </li>
+                  <li class="footer-nav-item" style="margin-bottom: 0.75rem;">
+                    <button onclick="openEnrollModal()" class="footer-nav-link footer-enroll-button" style="background: none; border: none; cursor: pointer; font-family: inherit; font-size: 0.9rem; color: rgba(252, 244, 226, 0.8); text-decoration: none; transition: all 0.3s ease; display: inline-block; padding: 0.25rem 0; text-align: left; width: 100%;">Enroll</button>
+                  </li>
+                  <li class="footer-nav-item" style="margin-bottom: 0.75rem;">
+                    <a href="contact.html" class="footer-nav-link" style="color: rgba(252, 244, 226, 0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; display: inline-block; padding: 0.25rem 0;">Contact</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="footer-column footer-legal">
+                <h3 class="footer-heading" style="font-size: 1.1rem; font-weight: 600; color: var(--color-warm-off-white); margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--color-primary-green); padding-bottom: 0.5rem; display: inline-block;">Legal</h3>
+                <ul class="footer-nav-list" style="list-style: none; margin: 0; padding: 0;">
+                  <li class="footer-nav-item" style="margin-bottom: 0.75rem;">
+                    <a href="privacy.html" class="footer-nav-link" style="color: rgba(252, 244, 226, 0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; display: inline-block; padding: 0.25rem 0;">Privacy Policy</a>
+                  </li>
+                  <li class="footer-nav-item" style="margin-bottom: 0.75rem;">
+                    <a href="terms.html" class="footer-nav-link" style="color: rgba(252, 244, 226, 0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; display: inline-block; padding: 0.25rem 0;">Terms of Service</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="footer-column footer-social">
+                <h3 class="footer-heading" style="font-size: 1.1rem; font-weight: 600; color: var(--color-warm-off-white); margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--color-primary-green); padding-bottom: 0.5rem; display: inline-block;">Connect</h3>
+                <div class="social-links" style="display: flex; flex-direction: column; gap: 1rem;">
+                  <a href="mailto:hello@cedarheightsmusic.com" class="social-link" aria-label="Email us" style="color: rgba(252, 244, 226, 0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; border-radius: 6px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <span class="social-icon" style="font-size: 1.2rem; flex-shrink: 0;">📧</span>
+                    <span class="social-text">hello@cedarheightsmusic.com</span>
+                  </a>
+                  <a href="tel:+1-250-555-0123" class="social-link" aria-label="Call us" style="color: rgba(252, 244, 226, 0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; border-radius: 6px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <span class="social-icon" style="font-size: 1.2rem; flex-shrink: 0;">📞</span>
+                    <span class="social-text">(250) 555-0123</span>
+                  </a>
+                  <div class="social-link location-info" style="color: rgba(252, 244, 226, 0.8); font-size: 0.9rem; display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; border-radius: 6px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <span class="social-icon" style="font-size: 1.2rem; flex-shrink: 0;">📍</span>
+                    <span class="social-text">Cedar Heights, Nanaimo BC</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer-bottom" style="border-top: 1px solid rgba(252, 244, 226, 0.2); padding: 2rem 0; text-align: center; background: rgba(0, 0, 0, 0.2);">
+              <p class="copyright" style="font-size: 0.875rem; color: rgba(252, 244, 226, 0.7); margin: 0;">
+                Cedar Heights Music Academy © 2025. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </footer>
+      `;
+    }
+
+    function loadEnrollModalFallback(placeholder) {
+      // Load the modal content directly - this will be a large block
+      // For now, we'll create a placeholder and load it after DOM is ready
+      placeholder.innerHTML = '<div id="enroll-modal" style="display: none;"></div>';
+    }
+
+    function initializeComponents() {
+      // Initialize mobile menu functionality
+      initializeMobileMenu();
+      
+      // Initialize modal functionality
+      initializeEnrollModal();
+      
+      // Set active navigation states
+      setActiveNavigation();
+    }
+
+    function initializeMobileMenu() {
+      const mobileToggle = document.querySelector('.mobile-menu-toggle');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      
+      if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', function() {
+          const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+          
+          mobileToggle.setAttribute('aria-expanded', !isExpanded);
+          mobileMenu.classList.toggle('active');
+          
+          document.body.style.overflow = !isExpanded ? 'hidden' : '';
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+            mobileToggle.focus();
+          }
+        });
+      }
+    }
+
+    function setActiveNavigation() {
+      const currentPath = window.location.pathname;
+      const currentPage = currentPath.split('/').pop() || 'index.html';
+      
+      // Remove active class from all nav links
+      const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+      });
+      
+      // Add active class to current page links
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'page');
+        }
+      });
+    }
+
+    function loadFallbackComponents() {
+      // If all else fails, ensure basic navigation exists
+      const navPlaceholder = document.getElementById('navigation-placeholder');
+      if (navPlaceholder && !navPlaceholder.innerHTML.trim()) {
+        loadNavigationFallback(navPlaceholder);
+      }
+      
+      const footerPlaceholder = document.getElementById('footer-placeholder');
+      if (footerPlaceholder && !footerPlaceholder.innerHTML.trim()) {
+        loadFooterFallback(footerPlaceholder);
+      }
+      
+      initializeComponents();
+    }
+
+    // Seasonal Background System - Page Blueprints Design Brief
+    function initializeSeasonalBackground() {
+      const heroBackground = document.querySelector('.seasonal-background');
+      if (!heroBackground) return;
+      
+      const currentDate = new Date();
+      const month = currentDate.getMonth() + 1; // JavaScript months are 0-indexed
+      
+      let seasonalImage = '';
+      let seasonClass = '';
+      
+      // Page Blueprints seasonal logic: Jun-Aug (Summer), Sep-Nov (Fall), Dec-Feb (Winter), Mar-May (Fall fallback)
+      if (month >= 6 && month <= 8) {
+        // Summer: June, July, August
+        seasonalImage = '../public/summer_bg_lrg.png';
+        seasonClass = 'season-summer';
+      } else if (month >= 9 && month <= 11) {
+        // Fall: September, October, November
+        seasonalImage = '../public/fall_bg_lrg.png';
+        seasonClass = 'season-fall';
+      } else if (month >= 12 || month <= 2) {
+        // Winter: December, January, February
+        seasonalImage = '../public/winter_bg_lrg.png';
+        seasonClass = 'season-winter';
+      } else {
+        // Spring fallback to Fall: March, April, May - user authorized change
+        seasonalImage = '../public/summer_bg_lrg.png';
+        seasonClass = 'season-summer';
+      }
+      
+      // Apply seasonal background
+      heroBackground.style.backgroundImage = `url('${seasonalImage}')`;
+      heroBackground.classList.add(seasonClass);
+      
+      console.log(`Applied seasonal background: ${seasonClass} (${seasonalImage})`);
+    }
+
+    // Global modal functions
+    function openEnrollModal() {
+      const modal = document.getElementById('enroll-modal');
+      if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Focus first focusable element
+        const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (firstFocusable) {
+          firstFocusable.focus();
+        }
+      }
+    }
+
+    function closeEnrollModal() {
+      const modal = document.getElementById('enroll-modal');
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+
+    function initializeEnrollModal() {
+      const modal = document.getElementById('enroll-modal');
+      if (!modal) return;
+
+      // Add modal functionality if it doesn't exist
+      if (!modal.innerHTML.trim()) {
+        // Create basic modal structure
+        modal.innerHTML = `
+          <div class="enroll-modal-overlay" style="display: none;">
+            <div class="enroll-modal-container">
+              <div class="enroll-modal-header">
+                <button class="modal-close" aria-label="Close enrollment modal" onclick="closeEnrollModal()">
+                  <span class="close-icon">×</span>
+                </button>
+                <h2 class="modal-title">Start Your Musical Journey</h2>
+                <p class="modal-subtitle">Contact us to begin your enrollment</p>
+              </div>
+              <div class="enroll-modal-content">
+                <div class="modal-step active">
+                  <h3 class="step-title">Ready to Get Started?</h3>
+                  <p class="step-description">Contact us today to schedule your first lesson and begin your musical journey.</p>
+                  <div style="text-align: center; margin-top: 2rem;">
+                    <a href="contact.html" class="primary-cta" style="text-decoration: none;">
+                      Contact Us
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Add event listeners
+      const closeButton = modal.querySelector('.modal-close');
+      if (closeButton) {
+        closeButton.addEventListener('click', closeEnrollModal);
+      }
+
+      // Close on escape key
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.style.display === 'flex') {
+          closeEnrollModal();
+        }
+      });
+
+      // Close on outside click
+      modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          closeEnrollModal();
+        }
+      });
+    }
+
+    // Initialize everything when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
+      // Load all components first
+      loadComponents();
+      
+      // Initialize seasonal background
+      initializeSeasonalBackground();
+      
       const accordionHeaders = document.querySelectorAll('.accordion-header');
       
       accordionHeaders.forEach(header => {
