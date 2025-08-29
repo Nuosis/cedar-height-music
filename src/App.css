@@ -66,16 +66,13 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 4px;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
   margin-bottom: 15px;
-  animation: pulse 2s infinite;
 }
 
 .tagline {
   font-size: 1.2rem;
   color: #fff;
   opacity: 0.95;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   margin-bottom: 40px;
 }
 
@@ -284,14 +281,6 @@
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-}
 
 @keyframes slideIn {
   from {

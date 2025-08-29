@@ -359,6 +359,26 @@ const CORE_CSS = `
   transform: translateX(4px);
 }
 .footer-nav-link:hover::before { width: 100%; }
+.footer-enroll-button {
+  background: var(--color-primary-green) !important;
+  color: var(--color-dark-text) !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  width: auto;
+  text-align: center;
+  padding: 0.5rem 1rem !important;
+  display: inline-block;
+  min-height: 36px;
+}
+.footer-enroll-button:hover {
+  background: #3d8542 !important;
+  transform: translateX(4px);
+}
+.footer-enroll-button:hover::before { display: none; }
 .footer-bottom {
   border-top: 1px solid rgba(252, 244, 226, 0.2);
   padding: 2rem 0;

@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import { Header, Footer, EnrollmentModalShell } from './components/core.jsx'
 import { ENV } from './config/env.js'
+import ComingSoon from './components/ComingSoon.jsx'
 
 // Import page components
 import HomePage from './pages/HomePage.jsx'
@@ -23,9 +24,14 @@ function App() {
     setShowEnrollModal(false)
   }
 
+  // If under maintenance, show only the ComingSoon component
+  if (ENV.UNDER_MAINTENANCE) {
+    return <ComingSoon />
+  }
+
   return (
     <div className="app">
-      {!ENV.UNDER_MAINTENANCE && <Header onEnrollClick={handleEnrollClick} />}
+      <Header onEnrollClick={handleEnrollClick} />
       <main id="main-content">
         <Routes>
           <Route path="/" element={<HomePage onEnrollClick={handleEnrollClick} />} />
@@ -36,8 +42,8 @@ function App() {
           <Route path="/terms" element={<TermsPage />} />
         </Routes>
       </main>
-      {!ENV.UNDER_MAINTENANCE && <Footer onEnrollClick={handleEnrollClick} />}
-      {!ENV.UNDER_MAINTENANCE && <EnrollmentModalShell open={showEnrollModal} onClose={handleCloseModal} />}
+      <Footer onEnrollClick={handleEnrollClick} />
+      <EnrollmentModalShell open={showEnrollModal} onClose={handleCloseModal} />
     </div>
   )
 }

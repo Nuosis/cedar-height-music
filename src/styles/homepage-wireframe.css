@@ -457,7 +457,9 @@
   }
   
   .slots-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px; /* Slightly smaller gap for mobile */
+    max-width: 420px; /* 2 * 200px + 1 * 8px gap + some padding */
   }
   
   .accordion-header {

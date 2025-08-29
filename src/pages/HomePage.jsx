@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Button, Card } from '../components/core.jsx'
 import { Plus, X } from 'lucide-react'
+import ValuePropsCarousel from '../components/ValuePropsCarousel.jsx'
 import '../styles/homepage-wireframe.css'
 
 /**
@@ -189,8 +190,7 @@ const HomePage = ({ onEnrollClick }) => {
                   className="primary-cta"
                   data-measurement-point="primary-cta-size"
                 >
-                  Enroll Now
-                  <span className="cta-arrow" data-asset-container="arrow-icon">→</span>
+                  Free Demo Lesson
                 </Button>
               </div>
             </div>
@@ -221,38 +221,10 @@ const HomePage = ({ onEnrollClick }) => {
         </div>
       </section>
 
-      {/* Value Props Section - Wireframe Compliant */}
+      {/* Value Props Section - Carousel Implementation */}
       <section className="value-props-section section" data-wireframe-section="value-props" data-measurement-point="value-props-height">
         <div className="page-container">
-          <div className="three-column-grid" data-measurement-point="value-props-grid">
-            
-            {/* Value Prop 1 */}
-            <div className="value-prop-card card" data-wireframe-section="value-prop-1">
-              <div className="card-icon" data-asset-container="patient-instruction-icon"></div>
-              <h3 className="card-title" data-typography-container="value-prop-title">Patient, professional instruction</h3>
-              <p className="card-description" data-typography-container="value-prop-description">
-                Learn at your own pace with personalized guidance tailored to your musical goals.
-              </p>
-            </div>
-            
-            {/* Value Prop 2 */}
-            <div className="value-prop-card card" data-wireframe-section="value-prop-2">
-              <div className="card-icon" data-asset-container="flexible-scheduling-icon"></div>
-              <h3 className="card-title" data-typography-container="value-prop-title">Flexible scheduling</h3>
-              <p className="card-description" data-typography-container="value-prop-description">
-                Convenient lesson times that work with your family's busy schedule.
-              </p>
-            </div>
-            
-            {/* Value Prop 3 */}
-            <div className="value-prop-card card" data-wireframe-section="value-prop-3">
-              <div className="card-icon" data-asset-container="beginner-friendly-icon"></div>
-              <h3 className="card-title" data-typography-container="value-prop-title">Beginner-friendly studio</h3>
-              <p className="card-description" data-typography-container="value-prop-description">
-                Welcoming environment perfect for students just starting their musical journey.
-              </p>
-            </div>
-          </div>
+          <ValuePropsCarousel />
         </div>
       </section>
 
