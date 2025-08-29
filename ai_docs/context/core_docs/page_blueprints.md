@@ -396,7 +396,7 @@ Guidelines
 - CTA pairing: Primary “Enroll Now”, secondary “Contact”.
 
 Primary recommendation
-- Headline: “Where Your Musical Journey Starts”
+- Headline: “Where Your Musical Journey Begins”
 - Subheadline: “One-on-one instruction in Cedar Heights—patient, flexible, beginner‑friendly.”
 
 Additional vetted options (choose one)

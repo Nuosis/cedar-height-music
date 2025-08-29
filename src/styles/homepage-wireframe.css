@@ -315,6 +315,8 @@
   gap: 12px; /* Wireframe specification */
   max-width: 636px; /* 3 * 200px + 2 * 12px gaps */
   margin: 0 auto; /* Center the grid container */
+  justify-items: center; /* Center chips horizontally within their columns */
+  align-items: center; /* Center chips vertically within row tracks */
 }
 
 /* Micro FAQ Section */

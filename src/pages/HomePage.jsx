@@ -179,7 +179,7 @@ const HomePage = ({ onEnrollClick }) => {
               
               {/* Headline */}
               <h1 className="hero-headline" data-typography-container="hero-headline" data-measurement-point="headline-size">
-                Where Your Musical Journey Starts
+                Where Your Musical Journey Begins
               </h1>
               
               {/* CTAs */}

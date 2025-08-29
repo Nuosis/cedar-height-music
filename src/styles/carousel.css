@@ -45,25 +45,41 @@
   right: 0;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
   padding: 3rem 2rem 2rem 2rem;
+  /* Keep default color, but specific element rules below win */
   color: white;
   text-align: center;
 }
 
-.card-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+/* Hard-scope carousel text colors to "ripe wheat" so external styles cannot override */
+.value-props-carousel .slide-text-overlay .card-title {
+  color: var(--color-warm-off-white) !important;
+  font-size: 2.5rem; /* Larger desktop title */
+  line-height: 1.2;
 }
 
+.value-props-carousel .slide-text-overlay .card-description {
+  color: var(--color-warm-off-white) !important;
+  opacity: 0.98;
+  font-size: 1.25rem; /* Larger desktop body */
+}
+
+/* Keep base tokens but rely on scoped selectors above for final color */
+.card-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-warm-off-white);
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Keep base tokens but rely on scoped selectors above for final color */
 .card-description {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.95);
-  max-width: 500px;
-  margin: 0 auto;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--color-warm-off-white);
+  max-width: 640px;
+  margin: 0.5rem auto 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Responsive Design */
@@ -85,11 +101,11 @@
   }
   
   .card-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
   .card-description {
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
 }
 
@@ -107,13 +123,13 @@
   }
   
   .card-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     margin-bottom: 0.75rem;
   }
   
   .card-description {
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 }
 

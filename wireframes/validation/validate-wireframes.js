@@ -210,7 +210,7 @@ class PageBlueprintsValidator {
           }
 
           // Check headline content (Page Blueprints Line 399)
-          if (headline.textContent.includes('Where Your Musical Journey Starts')) {
+          if (headline.textContent.includes('Where Your Musical Journey Begins')) {
             results.hero.passed.push('Headline content matches Page Blueprints specification');
           } else {
             results.hero.failed.push('Headline content does not match Page Blueprints Line 399');
