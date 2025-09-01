@@ -3,25 +3,65 @@
 /* Hero Section */
 .hero-section {
   position: relative;
-  min-height: 60vh;
+  min-height: 80vh;
+  max-height: 100vh; /* Use viewport height for better scaling */
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 2rem;
   overflow: hidden;
   background: var(--color-warm-off-white);
+}
+
+/* Enhanced scaling for larger screens */
+@media (min-width: 950px) {
+  .hero-section {
+    min-height: calc(80vh + (100vw - 950px) * 0.1); /* Grows with screen width */
+    max-height: calc(100vh + (100vw - 950px) * 0.05); /* Controlled max growth */
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-section {
+    min-height: calc(85vh + (100vw - 1200px) * 0.08); /* More aggressive scaling for very wide screens */
+    max-height: calc(100vh + (100vw - 1200px) * 0.03);
+  }
+}
+
+@media (min-width: 1600px) {
+  .hero-section {
+    min-height: calc(90vh + (100vw - 1600px) * 0.05); /* Cap the growth for ultra-wide screens */
+    max-height: calc(100vh + (100vw - 1600px) * 0.02);
+  }
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   width: 100%;
+  max-width: 856px;
+  margin: 0 auto;
 }
 
 .hero-foreground {
   max-width: 600px;
+  width: 100%;
+}
+
+.hero-logo {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-image {
+  max-width: 120px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .hero-tagline {
@@ -43,6 +83,7 @@
   display: flex;
   gap: 1rem;
   align-items: center;
+  justify-content: center;
 }
 
 .cta-arrow {
@@ -55,8 +96,11 @@
 }
 
 .hero-figure {
-  position: relative;
+  position: absolute;
+  left: 20%;
+  bottom: 0;
   z-index: 1;
+  pointer-events: none;
 }
 
 .hero-character {
@@ -72,9 +116,9 @@
   right: 0;
   bottom: 0;
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
   background-repeat: no-repeat;
-  opacity: 0.3;
+  opacity: 1;
   z-index: 0;
 }
 
@@ -89,24 +133,15 @@
 }
 
 .decorative-accent {
-  position: absolute;
-  border-radius: 50%;
-  background: var(--color-primary-green);
-  opacity: 0.1;
+  display: none; /* Hide decorative accents */
 }
 
 .accent-1 {
-  width: 100px;
-  height: 100px;
-  top: 20%;
-  right: 10%;
+  display: none; /* Hide decorative accents */
 }
 
 .accent-2 {
-  width: 60px;
-  height: 60px;
-  bottom: 30%;
-  left: 15%;
+  display: none; /* Hide decorative accents */
 }
 
 /* Sections */
@@ -218,47 +253,69 @@
 
 .slots-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px; /* Page Blueprints Line 144 */
+  max-width: 636px; /* 3 * 200px + 2 * 12px gaps */
+  margin: 2rem auto; /* Center the grid container */
   justify-items: center;
-  align-items: center;
 }
 
 .slot-chip {
-  background: var(--color-warm-gold);
-  border: 2px solid transparent;
-  border-radius: var(--border-radius-medium);
+  background: #f5f5f5; /* Light gray per Page Blueprints Line 142 */
+  border: 1px solid #e0e0e0;
+  border-radius: 12px; /* Page Blueprints Line 135: 12px border radius */
   padding: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  min-height: 100px;
+  width: 200px; /* Page Blueprints Line 135: ~200x80px */
+  height: 100px; /* Page Blueprints Line 135: exact 80px height - user override for 100px*/
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle depth */
 }
 
 .slot-chip:hover {
-  border-color: var(--color-primary-green);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced elevation on hover */
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-color: var(--color-primary-green);
 }
 
 .slot-chip.highlighted {
-  background: var(--color-primary-green);
-  color: var(--color-dark-text);
+  background: #ffb74d; /* Warm yellow/orange per Page Blueprints Line 142 */
+  border-color: #ff9800;
+  box-shadow: 0 2px 8px rgba(255, 183, 77, 0.3);
+}
+
+.slot-chip:focus-visible {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
 }
 
 .slot-chip .day {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 0.875rem; /* Page Blueprints Line 137: ~14px */
+  color: var(--color-dark-text);
+  line-height: 1.2;
 }
 
 .slot-chip .time {
-  font-size: 0.875rem;
-  opacity: 0.8;
+  font-size: 0.75rem; /* Page Blueprints Line 139: ~12px */
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.slot-chip .time .start-time {
+  color: #4caf50; /* Green per Page Blueprints Line 138 */
+  font-weight: 500;
+}
+
+.slot-chip .time .end-time {
+  color: #ff5722; /* Red/orange per Page Blueprints Line 138 */
+  font-weight: 500;
 }
 
 .availability-cta {
@@ -334,8 +391,21 @@
     padding: var(--section-spacing-tablet) 0;
   }
   
+  .hero-section {
+    min-height: 70vh;
+    max-height: 90vh; /* Use viewport height for tablets */
+  }
+  
   .hero-headline {
     font-size: 3rem;
+  }
+
+  .hero-character {
+    max-width: 200px;
+  }
+
+  .hero-figure {
+    left: 10%;
   }
   
   .section-heading {
@@ -348,10 +418,13 @@
     padding: var(--section-spacing-mobile) 0;
   }
   
+  .hero-section {
+    min-height: 60vh;
+    max-height: 80vh; /* Use viewport height for mobile */
+  }
+  
   .hero-content {
-    grid-template-columns: 1fr;
     text-align: center;
-    gap: 2rem;
   }
   
   .hero-headline {
@@ -383,6 +456,14 @@
   }
   
   .hero-character {
-    max-width: 250px;
+    max-width: 150px;
+  }
+
+  .hero-figure {
+    left: 0%;
+  }
+  
+  .logo-image {
+    max-width: 100px;
   }
 }

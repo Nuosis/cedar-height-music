@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Button } from '../components/core.jsx'
+import { Mail, Phone, Clock, CheckCircle, AlertCircle } from 'lucide-react'
 
 /**
  * Contact Page Component
@@ -172,126 +173,134 @@ const ContactPage = ({ onEnrollClick }) => {
                   Fill out the form below and we'll get back to you within 24 hours.
                 </p>
                 
-                <form className="contact-form" onSubmit={handleSubmit}>
-                  
-                  {/* Honeypot field */}
-                  <div className="honeypot">
-                    <input 
-                      type="text" 
-                      name="website" 
-                      tabIndex="-1" 
-                      autoComplete="off"
-                      value={formData.website}
-                      onChange={handleInputChange}
-                    />
+                {submitStatus === 'success' ? (
+                  <div className="success-message">
+                    <div className="status-icon">
+                      <CheckCircle size={20} />
+                    </div>
+                    <h3>Thank You!</h3>
+                    <p>Your message has been sent successfully. We'll get back to you within 24 hours.</p>
                   </div>
-                  
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="contact-name" className="form-label">Name *</label>
-                      <input 
-                        type="text" 
-                        id="contact-name" 
-                        name="name" 
-                        className={`form-input ${errors.name ? 'error' : ''}`}
-                        value={formData.name}
+                ) : (
+                  <form className="contact-form" onSubmit={handleSubmit}>
+                    
+                    {/* Honeypot field */}
+                    <div className="honeypot">
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex="-1"
+                        autoComplete="off"
+                        value={formData.website}
                         onChange={handleInputChange}
-                        required 
-                      />
-                      {errors.name && <span className="error-text">{errors.name}</span>}
-                    </div>
-                  </div>
-                  
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="contact-email" className="form-label">Email *</label>
-                      <input 
-                        type="email" 
-                        id="contact-email" 
-                        name="email" 
-                        className={`form-input ${errors.email ? 'error' : ''}`}
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required 
-                      />
-                      {errors.email && <span className="error-text">{errors.email}</span>}
-                    </div>
-                  </div>
-                  
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="contact-phone" className="form-label">Phone</label>
-                      <input 
-                        type="tel" 
-                        id="contact-phone" 
-                        name="phone" 
-                        className="form-input"
-                        value={formData.phone}
-                        onChange={handlePhoneChange}
-                        placeholder="(250) 555-0123"
                       />
                     </div>
-                  </div>
-                  
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="contact-message" className="form-label">Message *</label>
-                      <textarea 
-                        id="contact-message" 
-                        name="message" 
-                        className={`form-textarea ${errors.message ? 'error' : ''}`}
-                        rows="5" 
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        required 
-                      />
-                      {errors.message && <span className="error-text">{errors.message}</span>}
-                    </div>
-                  </div>
-                  
-                  <div className="form-row">
-                    <div className="form-group checkbox-group">
-                      <label className="checkbox-label">
-                        <input 
-                          type="checkbox" 
-                          id="contact-consent" 
-                          name="consent" 
-                          className="form-checkbox"
-                          checked={formData.consent}
+                    
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="contact-name" className="form-label">Name *</label>
+                        <input
+                          type="text"
+                          id="contact-name"
+                          name="name"
+                          className={`form-input ${errors.name ? 'error' : ''}`}
+                          value={formData.name}
                           onChange={handleInputChange}
-                          required 
+                          required
                         />
-                        <span className="checkbox-text">I agree to be contacted by Cedar Heights Music Academy regarding my inquiry. *</span>
-                      </label>
-                      {errors.consent && <span className="error-text">{errors.consent}</span>}
+                        {errors.name && <span className="error-text">{errors.name}</span>}
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="form-row">
-                    <Button 
-                      type="submit" 
-                      variant="primary"
-                      className={`form-submit ${isSubmitting ? 'loading' : ''}`}
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? 'Sending...' : 'Send Message'}
-                    </Button>
-                  </div>
-                  
-                  {/* Status Messages */}
-                  <div className="form-status">
-                    {submitStatus === 'success' && (
-                      <div className="success-message">
-                        <p>✅ Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.</p>
+                    
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="contact-email" className="form-label">Email *</label>
+                        <input
+                          type="email"
+                          id="contact-email"
+                          name="email"
+                          className={`form-input ${errors.email ? 'error' : ''}`}
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                        />
+                        {errors.email && <span className="error-text">{errors.email}</span>}
                       </div>
-                    )}
+                    </div>
+                    
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="contact-phone" className="form-label">Phone</label>
+                        <input
+                          type="tel"
+                          id="contact-phone"
+                          name="phone"
+                          className="form-input"
+                          value={formData.phone}
+                          onChange={handlePhoneChange}
+                          placeholder="(250) 555-0123"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="contact-message" className="form-label">Message *</label>
+                        <textarea
+                          id="contact-message"
+                          name="message"
+                          className={`form-textarea ${errors.message ? 'error' : ''}`}
+                          rows="5"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          required
+                        />
+                        {errors.message && <span className="error-text">{errors.message}</span>}
+                      </div>
+                    </div>
+                    
+                    <div className="form-row">
+                      <div className="form-group checkbox-group">
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            id="contact-consent"
+                            name="consent"
+                            className="form-checkbox"
+                            checked={formData.consent}
+                            onChange={handleInputChange}
+                            required
+                          />
+                          <span className="checkbox-text">I agree to be contacted by Cedar Heights Music Academy regarding my inquiry. *</span>
+                        </label>
+                        {errors.consent && <span className="error-text">{errors.consent}</span>}
+                      </div>
+                    </div>
+                    
+                    <div className="form-row">
+                      <Button
+                        type="submit"
+                        variant="primary"
+                        className={`form-submit ${isSubmitting ? 'loading' : ''}`}
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                      </Button>
+                    </div>
+                    
+                    {/* Error Message */}
                     {submitStatus === 'error' && (
-                      <div className="error-message">
-                        <p>❌ Sorry, there was an error sending your message. Please try again or contact us directly.</p>
+                      <div className="form-status">
+                        <div className="error-message">
+                          <div className="status-icon">
+                            <AlertCircle size={20} />
+                          </div>
+                          <p>Sorry, there was an error sending your message. Please try again or contact us directly.</p>
+                        </div>
                       </div>
                     )}
-                  </div>
-                </form>
+                  </form>
+                )}
               </div>
               
               {/* Direct Contact Info */}
@@ -301,32 +310,26 @@ const ContactPage = ({ onEnrollClick }) => {
                 <div className="contact-methods">
                   
                   <div className="contact-method">
-                    <div className="method-icon">📧</div>
+                    <div className="method-icon">
+                      <Mail size={20} />
+                    </div>
                     <div className="method-details">
                       <div className="method-label">Email</div>
-                      <a href="mailto:hello@cedarheightsmusic.com" className="method-link">
-                        hello@cedarheightsmusic.com
+                      <a href="mailto:kaeden@cedarheightsmusicacademy.com" className="method-link">
+                        kaeden@cedarheightsmusicacademy.com
                       </a>
                     </div>
                   </div>
                   
                   <div className="contact-method">
-                    <div className="method-icon">📞</div>
-                    <div className="method-details">
-                      <div className="method-label">Phone</div>
-                      <a href="tel:+1-250-555-0123" className="method-link">
-                        (250) 555-0123
-                      </a>
+                    <div className="method-icon">
+                      <Clock size={20} />
                     </div>
-                  </div>
-                  
-                  <div className="contact-method">
-                    <div className="method-icon">🕐</div>
                     <div className="method-details">
                       <div className="method-label">Hours</div>
                       <div className="method-text">
                         By appointment<br/>
-                        Monday - Saturday
+                        Tuesday - Saturday
                       </div>
                     </div>
                   </div>

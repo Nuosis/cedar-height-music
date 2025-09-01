@@ -40,7 +40,7 @@ Maintain the same warm, supportive tone throughout all pages (Home → About →
 - **Concept**: Hero background changes based on time of year
 - **Assets**: 
   - Summer: `summer_bg_lrg.png`
-  - Fall: `fall_bg_lrg.png` 
+  - Fall: `fall_bg.png` 
   - Winter: `winter_bg_lrg.png`
 - **Benefits**: Creates returning visitor engagement and seasonal relevance
 - **Implementation**: Date-based logic for automatic background selection
@@ -63,7 +63,7 @@ Maintain the same warm, supportive tone throughout all pages (Home → About →
 #### Seasonal Background System
 - **Base Color**: Ripe wheat (rgb(252, 244, 226)) - warm, nurturing foundation
 - **Summer Background**: `public/summer_bg_lrg.png` (Large format, hero background) - **ACTIVE**
-- **Fall Background**: `public/fall_bg_lrg.png` (Large format, hero background)
+- **Fall Background**: `public/fall_bg.png` (Large format, hero background)
 - **Winter Background**: `public/winter_bg_lrg.png` (Large format, hero background)
 - **Implementation**: Background images overlay the ripe wheat base color for enhanced warmth
 
@@ -154,7 +154,7 @@ Maintain the same warm, supportive tone throughout all pages (Home → About →
   - **Usage**: Exact reproduction without modification
 
 - **Seasonal Background System**:
-  - `summer_bg_lrg.png`, `fall_bg_lrg.png`, `winter_bg_lrg.png`
+  - `summer_bg_lrg.png`, `fall_bg.png`, `winter_bg_lrg.png`
   - **Source**: Custom seasonal illustrations for Cedar Heights
   - **Usage**: Hero background rotation based on calendar date
   - **Implementation**: Date-driven background selection logic

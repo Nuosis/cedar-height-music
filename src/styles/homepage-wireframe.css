@@ -1,12 +1,13 @@
 /* HomePage Wireframe-Compliant Styles
  * Extracted from wireframes/wireframe-styles.css and adapted for React
  * Implements Page Blueprints specifications exactly
+ * DO NOT USE IN PRODUCTION
  */
 
 /* Hero Section Specific Styles - Page Blueprints Lines 44-111 */
 .hero-section {
   position: relative;
-  min-height: 80vh;
+  min-height: 600px;
   display: flex;
   align-items: flex-start;
   overflow: visible; /* Page Blueprints Line 83: allows overflow for figure */
@@ -18,8 +19,8 @@
   position: relative;
   z-index: 3; /* Higher z-index to ensure CTAs stay above figure */
   text-align: center;
-  padding: 2rem 0 1rem 0; /* Add padding to raise content higher */
-  margin-top: -2rem; /* Pull content up to avoid collision with figure */
+  margin-top: -2rem;
+  padding: 2rem 0 1rem 0; /* Add padding to raise content higher */ /* Pull content up to avoid collision with figure */
 }
 
 .hero-tagline {
@@ -96,14 +97,14 @@
   z-index: 0;
   background: var(--color-warm-off-white);
   background-size: cover;
-  background-position: center center;
+  background-position: bottom;
   background-repeat: no-repeat;
 }
 
 /* Seasonal Background System - Design Brief Implementation */
 .seasonal-background {
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
   background-repeat: no-repeat;
 }
 

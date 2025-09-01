@@ -7,7 +7,7 @@ import './ComingSoon.css'
  * Displays a maintenance mode placeholder with inquiry form when the site is under maintenance
  */
 const ComingSoon = () => {
-  const [showForm, setShowForm] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -115,6 +115,81 @@ This inquiry was submitted through the maintenance mode form.`
     }
   }
 
+  const handleCloseModal = () => {
+    setShowModal(false)
+    setSubmitStatus(null)
+  }
+
+  const handleModalOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleCloseModal()
+    }
+  }
+
+  // Handle ESC key to close modal
+  React.useEffect(() => {
+    const handleEscKey = (e) => {
+      if (e.key === 'Escape' && showModal) {
+        handleCloseModal()
+      }
+    }
+
+    if (showModal) {
+      document.addEventListener('keydown', handleEscKey)
+      document.body.style.overflow = 'hidden'
+      
+      // INVESTIGATION: Log CSS Grid and layout properties
+      setTimeout(() => {
+        const timestamp = new Date().toISOString()
+        const formElement = document.querySelector('.inquiry-form')
+        const firstFormGroup = document.querySelector('.inquiry-form .form-group')
+        const studentNameLabel = document.querySelector('label[for="name"]')
+        const studentNameInput = document.querySelector('input[name="name"]')
+        
+        if (formElement && firstFormGroup && studentNameLabel && studentNameInput) {
+          const formStyles = window.getComputedStyle(formElement)
+          const groupStyles = window.getComputedStyle(firstFormGroup)
+          const labelStyles = window.getComputedStyle(studentNameLabel)
+          const inputStyles = window.getComputedStyle(studentNameInput)
+          
+          console.log(`[${timestamp}] MODAL SPACING INVESTIGATION:`)
+          console.log(`[${timestamp}] Form display: ${formStyles.display}`)
+          console.log(`[${timestamp}] Form grid-template-rows: ${formStyles.gridTemplateRows}`)
+          console.log(`[${timestamp}] Form grid-row-gap: ${formStyles.gridRowGap}`)
+          console.log(`[${timestamp}] Form gap: ${formStyles.gap}`)
+          
+          console.log(`[${timestamp}] First form-group display: ${groupStyles.display}`)
+          console.log(`[${timestamp}] First form-group margin: ${groupStyles.margin}`)
+          console.log(`[${timestamp}] First form-group padding: ${groupStyles.padding}`)
+          
+          console.log(`[${timestamp}] Label margin: ${labelStyles.margin}`)
+          console.log(`[${timestamp}] Label padding: ${labelStyles.padding}`)
+          console.log(`[${timestamp}] Label position: ${labelStyles.position}`)
+          console.log(`[${timestamp}] Label transform: ${labelStyles.transform}`)
+          
+          console.log(`[${timestamp}] Input margin: ${inputStyles.margin}`)
+          console.log(`[${timestamp}] Input padding: ${inputStyles.padding}`)
+          console.log(`[${timestamp}] Input position: ${inputStyles.position}`)
+          console.log(`[${timestamp}] Input transform: ${inputStyles.transform}`)
+          
+          // Get actual positioning
+          const labelRect = studentNameLabel.getBoundingClientRect()
+          const inputRect = studentNameInput.getBoundingClientRect()
+          const actualGap = inputRect.top - labelRect.bottom
+          
+          console.log(`[${timestamp}] Label bottom: ${labelRect.bottom}`)
+          console.log(`[${timestamp}] Input top: ${inputRect.top}`)
+          console.log(`[${timestamp}] Actual gap between label and input: ${actualGap}px`)
+        }
+      }, 100)
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey)
+      document.body.style.overflow = 'unset'
+    }
+  }, [showModal])
+
   return (
     <div className="coming-soon">
       <div className="coming-soon-container">
@@ -145,7 +220,7 @@ This inquiry was submitted through the maintenance mode form.`
               <div className="coming-soon-cta">
                 <button
                   className="primary-cta"
-                  onClick={() => setShowForm(!showForm)}
+                  onClick={() => setShowModal(true)}
                 >
                   Inquire Now
                   <span className="cta-arrow">→</span>
@@ -154,11 +229,37 @@ This inquiry was submitted through the maintenance mode form.`
             </div>
           </div>
 
-          {showForm && (
-            <div className="inquiry-form-section">
+        </div>
+      </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div
+          className="inquiry-modal-overlay"
+          onClick={handleModalOverlayClick}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
+          <div className="inquiry-modal-content">
+            <div className="inquiry-modal-header">
+              <h3 id="modal-title" className="form-title">Music Lesson Inquiry</h3>
+              <button
+                className="modal-close-button"
+                onClick={handleCloseModal}
+                aria-label="Close modal"
+              >
+                ×
+              </button>
+            </div>
+            
+            {submitStatus === 'success' ? (
+              <div className="form-message success">
+                <h3>Thank You!</h3>
+                <p>You'll be hearing from us soon!.</p>
+              </div>
+            ) : (
               <form onSubmit={handleSubmit} className="inquiry-form">
-                <h3 className="form-title">Music Lesson Inquiry</h3>
-                
                 <div className="form-group">
                   <label htmlFor="name" className="form-label">Student Name</label>
                   <input
@@ -244,23 +345,16 @@ This inquiry was submitted through the maintenance mode form.`
                   </button>
                 </div>
 
-                {submitStatus === 'success' && (
-                  <div className="form-message success">
-                    <p>Thank you! We'll contact you soon.</p>
-                  </div>
-                )}
-
                 {submitStatus === 'error' && (
                   <div className="form-message error">
                     <p>Please try again or contact us directly.</p>
                   </div>
                 )}
               </form>
-            </div>
-          )}
-
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

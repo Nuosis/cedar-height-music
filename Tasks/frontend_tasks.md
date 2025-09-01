@@ -242,7 +242,7 @@ cd wireframes && npm run screenshot
      const month = new Date().getMonth();
      if (month >= 2 && month <= 4) return 'spring_bg_lrg.png';
      if (month >= 5 && month <= 7) return 'summer_bg_lrg.png';
-     if (month >= 8 && month <= 10) return 'fall_bg_lrg.png';
+     if (month >= 8 && month <= 10) return 'fall_bg.png';
      return 'winter_bg_lrg.png';
    };
    ```

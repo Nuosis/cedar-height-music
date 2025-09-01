@@ -8,32 +8,36 @@ const AboutPage = ({ onEnrollClick }) => {
   return (
     <div className="about-page">
       {/* About Hero Section */}
-      <section className="about-hero-section section">
-        <div className="page-container">      
-          <h1 className="about-hero-headline">
+      <section className="about-hero-section section" data-wireframe-section="about-hero" data-measurement-point="about-hero-height">
+        <div className="page-container">
+          {/* Page Blueprints Main Headline - Line 163 */}
+          <h1 className="about-hero-headline" data-typography-container="about-hero-headline" data-measurement-point="about-headline-size">
             Teaching music with heart and patience
           </h1>
 
-          <div className="about-hero-content">
-            <div className="about-hero-cta">
-              <Button 
-                variant="primary" 
+          {/* Page Blueprints Hero Layout Structure - Lines 161-165 */}
+          <div className="about-hero-content" data-measurement-point="about-hero-content">
+            {/* Page Blueprints Call-to-Action - Lines 178-181 */}
+            <div className="about-hero-cta" data-measurement-point="about-hero-cta">
+              <Button
+                variant="primary"
                 onClick={onEnrollClick}
                 className="primary-cta"
+                data-measurement-point="about-primary-cta"
               >
-                Enroll Now
-                <span className="cta-arrow">→</span>
+                Free Demo Lesson
               </Button>
             </div>
           </div>
 
-          {/* Background Composition */}
-          <div className="about-hero-background">
-            <div className="hero-background-shape"></div>
+          {/* Page Blueprints Background Composition - Lines 165-177 */}
+          <div className="about-hero-background" data-wireframe-section="about-hero-background">
+            {/* Page Blueprints Central Element - Line 167: Group 255.png */}
+            <div className="hero-background-shape" data-asset-container="group-255-background" data-measurement-point="background-shape-size"></div>
           </div>
 
-          {/* Character Illustration */}
-          <div className="hero-character-container">
+          {/* Page Blueprints Character Illustration - Lines 169-173 */}
+          <div className="hero-character-container" data-asset-container="girl-guitar-character" data-measurement-point="character-positioning">
             <img src="/girl&guitar.png" alt="" role="presentation" className="about-hero-character" />
           </div>
         </div>

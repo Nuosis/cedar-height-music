@@ -371,7 +371,7 @@ Enroll Completion → Protected App Handoff (external dependency)
 
 **Asset-Driven Content Structure**
 - **Hero Backgrounds**: Seasonal rotation supports information hierarchy
-  - [`summer_bg_lrg.png`](public/summer_bg_lrg.png), [`fall_bg_lrg.png`](public/fall_bg_lrg.png), [`winter_bg_lrg.png`](public/winter_bg_lrg.png)
+  - [`summer_bg_lrg.png`](public/summer_bg_lrg.png), [`fall_bg.png`](public/fall_bg.png), [`winter_bg_lrg.png`](public/winter_bg_lrg.png)
   - Background selection logic: Jun-Aug (Summer), Sep-Nov (Fall), Dec-Feb (Winter), Mar-May (Fall fallback)
 - **Character Placement**: [`boy+guitar.png`](public/boy+guitar.png), [`girl+guitar.png`](public/girl+guitar.png) positioned per hero layout
   - Bottom-right positioning with drop-shadow effects

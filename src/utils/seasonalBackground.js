@@ -40,7 +40,7 @@ export const getSeasonalBackground = (date = new Date()) => {
   const backgroundMap = {
     spring: '/summer_bg_lrg.png', // Use summer background for spring (closest available)
     summer: '/summer_bg_lrg.png',
-    fall: '/fall_bg_lrg.png',
+    fall: '/fall_bg.png',
     winter: '/winter_bg_lrg.png'
   }
   

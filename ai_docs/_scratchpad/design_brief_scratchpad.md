@@ -43,7 +43,7 @@
 - **Constraint**: Strict adherence required for brand trust and consistency
 
 ### Available Assets (public/)
-- **Seasonal Backgrounds**: summer_bg_lrg.png, fall_bg_lrg.png, winter_bg_lrg.png
+- **Seasonal Backgrounds**: summer_bg_lrg.png, fall_bg.png, winter_bg_lrg.png
 - **Character Assets**: boy+guitar.png, girl+guitar.png, girl&guitar.png
 - **Brand Elements**: logo.JPG, Group 255.png, Mask group.png
 - **Current**: fall_bg.png (smaller version)

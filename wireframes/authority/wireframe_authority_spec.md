@@ -49,7 +49,7 @@
 | Asset | Path | Format | Usage | Implementation |
 |-------|------|--------|-------|----------------|
 | Summer Background | `public/summer_bg_lrg.png` | PNG | Hero background (Jun-Aug) | **ACTIVE** - Current season |
-| Fall Background | `public/fall_bg_lrg.png` | PNG | Hero background (Sep-Nov) | Date-driven selection |
+| Fall Background | `public/fall_bg.png` | PNG | Hero background (Sep-Nov) | Date-driven selection |
 | Winter Background | `public/winter_bg_lrg.png` | PNG | Hero background (Dec-Feb) | Date-driven selection |
 | Base Color | rgb(252, 244, 226) | CSS | Warm, nurturing foundation | Background overlay base |
 

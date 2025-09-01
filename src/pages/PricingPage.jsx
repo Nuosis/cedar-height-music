@@ -1,59 +1,19 @@
-import { useState } from 'react'
 import { Button } from '../components/core.jsx'
 
 /**
  * Pricing Page Component
- * Updated per WBS - simplified pricing with single monthly price and semester commitment
+ * Updated per core docs - simplified pricing with single monthly price and semester commitment
+ * Removed billing frequency selector per 2025-08-28 update
  */
 const PricingPage = ({ onEnrollClick }) => {
-  const [selectedBilling, setSelectedBilling] = useState('monthly')
-
-  const billingOptions = [
-    {
-      id: 'monthly',
-      period: 'Monthly',
-      price: '$125/month',
-      description: '4 lessons per month',
-      popular: false
-    },
-    {
-      id: 'semester',
-      period: 'Semester',
-      price: '$500/semester',
-      description: '16 lessons, save $100',
-      popular: true
-    },
-    {
-      id: 'yearly',
-      period: 'Yearly',
-      price: '$1,200/year',
-      description: '48 lessons, save $300',
-      popular: false
-    }
+  // Single pricing model - no frequency selection needed
+  const monthlyPrice = '$125'
+  
+  const includedFeatures = [
+    '30-minute one-on-one lessons',
+    'Personalized lesson plans',
+    'Progress tracking and feedback'
   ]
-
-  const handleBillingChange = (billingId) => {
-    setSelectedBilling(billingId)
-  }
-
-  const getIncludedFeatures = (frequency) => {
-    const baseFeatures = [
-      '30-minute one-on-one lessons',
-      'Personalized lesson plans',
-      'Progress tracking and feedback',
-      'Flexible rescheduling (24hr notice)',
-      'Performance opportunities'
-    ]
-
-    switch(frequency) {
-      case 'semester':
-        return [...baseFeatures, 'Mid-semester progress review', 'Semester recital participation']
-      case 'yearly':
-        return [...baseFeatures, 'Quarterly progress reviews', 'Two recital performances', 'Priority booking for popular time slots']
-      default:
-        return baseFeatures
-    }
-  }
 
   return (
     <div className="pricing-page">
@@ -71,12 +31,12 @@ const PricingPage = ({ onEnrollClick }) => {
             </h1>
             
             <p className="pricing-hero-subcopy">
-              Clear, straightforward pricing with flexible payment options. No hidden fees, no surprises—just honest pricing for exceptional music instruction.
+              Clear, straightforward pricing with semester commitment. No hidden fees, no surprises—just honest pricing for exceptional music instruction.
             </p>
           </div>
           
           {/* Background Elements */}
-          <div className="pricing-hero-background">
+          {/* <div className="pricing-hero-background">
             <div className="hero-background-base"></div>
             <div className="hero-seasonal-element"></div>
             
@@ -84,45 +44,20 @@ const PricingPage = ({ onEnrollClick }) => {
               <div className="musical-note-accent note-1">♪</div>
               <div className="musical-note-accent note-2">♫</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
-      {/* Billing Selector Section */}
-      <section className="billing-selector-section section">
+      {/* Simplified Pricing Section */}
+      <section className="pricing-display-section section">
         <div className="page-container">
-          <div className="billing-selector-content">
+          <div className="pricing-display-content">
             
-            <div className="billing-frequency-selector">
-              <div className="billing-options">
-                
-                {billingOptions.map((option) => (
-                  <div 
-                    key={option.id}
-                    className={`billing-option ${option.popular ? 'popular' : ''} ${selectedBilling === option.id ? 'selected' : ''}`}
-                  >
-                    {option.popular && (
-                      <div className="popular-badge">Most Popular</div>
-                    )}
-                    
-                    <input 
-                      type="radio" 
-                      id={option.id} 
-                      name="billing-frequency" 
-                      value={option.id} 
-                      className="billing-radio"
-                      checked={selectedBilling === option.id}
-                      onChange={() => handleBillingChange(option.id)}
-                    />
-                    
-                    <label htmlFor={option.id} className="billing-label">
-                      <div className="billing-period">{option.period}</div>
-                      <div className="billing-price">{option.price}</div>
-                      <div className="billing-description">{option.description}</div>
-                    </label>
-                  </div>
-                ))}
-                
+            {/* Single Price Display */}
+            <div className="single-price-display">
+              <div className="price-card">
+                <div className="price-amount">{monthlyPrice}</div>
+                <div className="price-period">per month</div>
               </div>
             </div>
             
@@ -130,7 +65,7 @@ const PricingPage = ({ onEnrollClick }) => {
               <div className="pricing-breakdown">
                 <h3 className="breakdown-title">What's included:</h3>
                 <ul className="breakdown-list">
-                  {getIncludedFeatures(selectedBilling).map((feature, index) => (
+                  {includedFeatures.map((feature, index) => (
                     <li key={index}>{feature}</li>
                   ))}
                 </ul>
@@ -139,8 +74,8 @@ const PricingPage = ({ onEnrollClick }) => {
               {/* Pricing Disclaimer */}
               <div className="pricing-disclaimer">
                 <p className="disclaimer-text">
-                  <strong>Price shown is per month; final price confirmed during enrollment.</strong><br/>
-                  Commitment: current semester (aligned to school calendar)
+                  <strong>Commitment: current semester</strong><br/>
+                  Final pricing confirmed during enrollment
                 </p>
               </div>
             </div>
@@ -155,17 +90,16 @@ const PricingPage = ({ onEnrollClick }) => {
             
             <h2 className="cta-heading">Ready to start your musical journey?</h2>
             <p className="cta-description">
-              Choose your preferred payment plan and begin with a personalized lesson that fits your schedule and goals.
+              Begin with a personalized lesson that fits your schedule and goals. Commitment is for the current semester.
             </p>
             
             <div className="pricing-cta-buttons">
-              <Button 
-                variant="primary" 
+              <Button
+                variant="primary"
                 onClick={onEnrollClick}
                 className="primary-cta"
               >
                 Enroll Now
-                <span className="cta-arrow">→</span>
               </Button>
               
               <Button 

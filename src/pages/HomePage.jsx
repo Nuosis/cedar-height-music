@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Button, Card } from '../components/core.jsx'
 import { Plus, X } from 'lucide-react'
 import ValuePropsCarousel from '../components/ValuePropsCarousel.jsx'
-import '../styles/homepage-wireframe.css'
+import '../styles/homepage.css'
 
 /**
  * Seasonal background system - determines background based on current date
@@ -21,7 +21,7 @@ const getSeasonalBackground = () => {
   } else if (month >= 9 && month <= 11) {
     // Fall: September, October, November
     return {
-      image: '/fall_bg_lrg.png',
+      image: '/fall_bg.png',
       className: 'season-fall'
     }
   } else if (month >= 12 || month <= 2) {
@@ -172,6 +172,11 @@ const HomePage = ({ onEnrollClick }) => {
             {/* Hero Stack - Foreground content group, decorative accent layer, background band */}
             <div className="hero-foreground" data-wireframe-section="hero-foreground">
               
+              {/* Logo */}
+              <div className="hero-logo" data-asset-container="hero-logo" data-measurement-point="logo-spacing">
+                <img src="/logo.JPG" alt="Cedar Heights Music Academy" className="logo-image" />
+              </div>
+              
               {/* Tagline */}
               <div className="hero-tagline" data-typography-container="hero-tagline" data-measurement-point="tagline-spacing">
                 Personal, one-on-one music lessons in Cedar & Nanaimo.
@@ -260,10 +265,10 @@ const HomePage = ({ onEnrollClick }) => {
             {/* Title */}
             <h2 className="section-heading" data-typography-container="availability-title">Availability</h2>
             
-            {/* Slot Chips */}
+            {/* Slot Chips - Matching wireframe exactly */}
             <div className="slots-grid" data-measurement-point="slots-grid-layout">
               
-              {/* Slot 1 */}
+              {/* Slot 1 - Monday 9:30 PM to 10:00 PM */}
               <div className="slot-chip" data-wireframe-section="time-slot-1" tabIndex={0} role="button" aria-label="Monday 9:30 PM to 10:00 PM" onClick={handleSlotClick}>
                 <div className="day" data-typography-container="slot-day">Monday</div>
                 <div className="time" data-typography-container="slot-time">
@@ -271,7 +276,7 @@ const HomePage = ({ onEnrollClick }) => {
                 </div>
               </div>
               
-              {/* Slot 2 */}
+              {/* Slot 2 - Wednesday 5:30 PM to 6:00 PM */}
               <div className="slot-chip" data-wireframe-section="time-slot-2" tabIndex={0} role="button" aria-label="Wednesday 5:30 PM to 6:00 PM" onClick={handleSlotClick}>
                 <div className="day" data-typography-container="slot-day">Wednesday</div>
                 <div className="time" data-typography-container="slot-time">
@@ -279,7 +284,7 @@ const HomePage = ({ onEnrollClick }) => {
                 </div>
               </div>
               
-              {/* Slot 3 */}
+              {/* Slot 3 - Thursday 6:00 PM to 6:30 PM */}
               <div className="slot-chip" data-wireframe-section="time-slot-3" tabIndex={0} role="button" aria-label="Thursday 6:00 PM to 6:30 PM" onClick={handleSlotClick}>
                 <div className="day" data-typography-container="slot-day">Thursday</div>
                 <div className="time" data-typography-container="slot-time">
@@ -287,7 +292,7 @@ const HomePage = ({ onEnrollClick }) => {
                 </div>
               </div>
               
-              {/* Slot 4 */}
+              {/* Slot 4 - Friday 4:00 PM to 4:30 PM */}
               <div className="slot-chip" data-wireframe-section="time-slot-4" tabIndex={0} role="button" aria-label="Friday 4:00 PM to 4:30 PM" onClick={handleSlotClick}>
                 <div className="day" data-typography-container="slot-day">Friday</div>
                 <div className="time" data-typography-container="slot-time">
@@ -295,7 +300,7 @@ const HomePage = ({ onEnrollClick }) => {
                 </div>
               </div>
               
-              {/* Slot 5 */}
+              {/* Slot 5 - Saturday 10:00 AM to 10:30 AM */}
               <div className="slot-chip" data-wireframe-section="time-slot-5" tabIndex={0} role="button" aria-label="Saturday 10:00 AM to 10:30 AM" onClick={handleSlotClick}>
                 <div className="day" data-typography-container="slot-day">Saturday</div>
                 <div className="time" data-typography-container="slot-time">
@@ -303,7 +308,7 @@ const HomePage = ({ onEnrollClick }) => {
                 </div>
               </div>
               
-              {/* Slot 6 */}
+              {/* Slot 6 - Saturday 2:00 PM to 2:30 PM */}
               <div className="slot-chip" data-wireframe-section="time-slot-6" tabIndex={0} role="button" aria-label="Saturday 2:00 PM to 2:30 PM" onClick={handleSlotClick}>
                 <div className="day" data-typography-container="slot-day">Saturday</div>
                 <div className="time" data-typography-container="slot-time">

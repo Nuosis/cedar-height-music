@@ -24,7 +24,7 @@
 
 3. **Authority Integration Verified**
    - All visual elements sourced from approved authority assets
-   - Seasonal backgrounds: summer_bg_lrg.png, fall_bg_lrg.png, winter_bg_lrg.png
+   - Seasonal backgrounds: summer_bg_lrg.png, fall_bg.png, winter_bg_lrg.png
    - Character illustrations: boy+guitar.png, girl+guitar.png
    - Brand assets: logo.JPG and supporting elements
 
