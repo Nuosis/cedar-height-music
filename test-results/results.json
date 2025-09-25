@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 6
+      "actualWorkers": 3
     },
     "preserveOutput": "always",
     "reporter": [
@@ -39,7 +39,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 3
         },
         "id": "chromium",
         "name": "chromium",
@@ -55,7 +55,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 3
         },
         "id": "firefox",
         "name": "firefox",
@@ -71,7 +71,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 3
         },
         "id": "webkit",
         "name": "webkit",
@@ -87,7 +87,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 3
         },
         "id": "Mobile Chrome",
         "name": "Mobile Chrome",
@@ -103,7 +103,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 3
         },
         "id": "Mobile Safari",
         "name": "Mobile Safari",
@@ -119,7 +119,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 3
         },
         "id": "iPad",
         "name": "iPad",
@@ -145,414 +145,216 @@
   },
   "suites": [
     {
-      "title": "layout-investigation.spec.js",
-      "file": "layout-investigation.spec.js",
+      "title": "maintenance-mode.spec.js",
+      "file": "maintenance-mode.spec.js",
       "column": 0,
       "line": 0,
-      "specs": [
+      "specs": [],
+      "suites": [
         {
-          "title": "Boy+Guitar Layout Position Investigation",
-          "ok": true,
-          "tags": [],
-          "tests": [
+          "title": "Maintenance Mode",
+          "file": "maintenance-mode.spec.js",
+          "line": 8,
+          "column": 6,
+          "specs": [
             {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
+              "title": "should show normal website when VITE_UNDER_MAINTENANCE is False",
+              "ok": false,
+              "tags": [],
+              "tests": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 694,
-                  "errors": [],
-                  "stdout": [
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
                     {
-                      "text": "[2025-08-29T05:30:39.101Z] LAYOUT INVESTIGATION - Starting test\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] POSITIONING EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Main content left: 240\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Hero image left: 867.416259765625\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Content right left: 240\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Hero image is left of content: false\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] COMPUTED STYLES EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Main content display: flex\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Main content flex-direction: row\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Hero image order: 0\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Content right order: 0\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Hero image flex: 0 0 auto\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Content right flex: 1 1 0%\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] DOM ORDER EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Children order: [\"hero-image\",\"content-right\"]\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] - Hero image is first child: true\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] FINAL EVIDENCE: Boy+guitar is on LEFT side: false\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.101Z] PROBLEM CONFIRMED: Boy+guitar is incorrectly positioned on the RIGHT\n"
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5542,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('main#main-content')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main#main-content')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('main#main-content')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main#main-content')\u001b[22m\n\n    at /Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js:14:53",
+                        "location": {
+                          "file": "/Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js",
+                          "column": 53,
+                          "line": 14
+                        },
+                        "snippet": "  12 |     \n  13 |     // Should show normal website content\n> 14 |     await expect(page.locator('main#main-content')).toBeVisible()\n     |                                                     ^\n  15 |     \n  16 |     // Should not show maintenance message\n  17 |     await expect(page.getByText('We\\'re Making Some Improvements')).not.toBeVisible()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js",
+                            "column": 53,
+                            "line": 14
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('main#main-content')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main#main-content')\u001b[22m\n\n\n  12 |     \n  13 |     // Should show normal website content\n> 14 |     await expect(page.locator('main#main-content')).toBeVisible()\n     |                                                     ^\n  15 |     \n  16 |     // Should not show maintenance message\n  17 |     await expect(page.getByText('We\\'re Making Some Improvements')).not.toBeVisible()\n    at /Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js:14:53"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-25T17:39:52.857Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/marcusswift/javascript/cedar-height-music-website/test-results/maintenance-mode-Maintenan-34f4b--UNDER-MAINTENANCE-is-False-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/marcusswift/javascript/cedar-height-music-website/test-results/maintenance-mode-Maintenan-34f4b--UNDER-MAINTENANCE-is-False-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/marcusswift/javascript/cedar-height-music-website/test-results/maintenance-mode-Maintenan-34f4b--UNDER-MAINTENANCE-is-False-webkit/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js",
+                        "column": 53,
+                        "line": 14
+                      }
                     }
                   ],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-08-29T05:30:38.405Z",
-                  "annotations": [],
-                  "attachments": []
+                  "status": "unexpected"
                 }
               ],
-              "status": "expected"
+              "id": "746d4ec3cc4443393a0b-c107bd063253263ee4a4",
+              "file": "maintenance-mode.spec.js",
+              "line": 9,
+              "column": 3
+            },
+            {
+              "title": "should show coming soon page when VITE_UNDER_MAINTENANCE is True",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "/Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js",
+                        "line": 41,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "skipped",
+                      "duration": 420,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-25T17:39:52.854Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js",
+                            "line": 41,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "746d4ec3cc4443393a0b-dc9860c4e5a5a90cc0a9",
+              "file": "maintenance-mode.spec.js",
+              "line": 24,
+              "column": 3
             }
-          ],
-          "id": "e3e55147a69b2a2ae72b-06c893ed9d9cb36e5b50",
-          "file": "layout-investigation.spec.js",
-          "line": 3,
-          "column": 1
+          ]
         },
         {
-          "title": "Boy+Guitar Layout Position Investigation",
-          "ok": false,
-          "tags": [],
-          "tests": [
+          "title": "Maintenance Mode Visual Tests",
+          "file": "maintenance-mode.spec.js",
+          "line": 45,
+          "column": 6,
+          "specs": [
             {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox",
-              "projectName": "firefox",
-              "results": [
+              "title": "should match coming soon page visual design",
+              "ok": true,
+              "tags": [],
+              "tests": [
                 {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "failed",
-                  "duration": 1,
-                  "error": {
-                    "message": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                    "stack": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                  },
-                  "errors": [
+                  "timeout": 30000,
+                  "annotations": [
                     {
-                      "message": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                      "type": "skip",
+                      "location": {
+                        "file": "/Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js",
+                        "line": 49,
+                        "column": 10
+                      }
                     }
                   ],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-08-29T05:30:38.409Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "unexpected"
-            }
-          ],
-          "id": "e3e55147a69b2a2ae72b-b629633be4823487d907",
-          "file": "layout-investigation.spec.js",
-          "line": 3,
-          "column": 1
-        },
-        {
-          "title": "Boy+Guitar Layout Position Investigation",
-          "ok": false,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "webkit",
-              "projectName": "webkit",
-              "results": [
-                {
-                  "workerIndex": 2,
-                  "parallelIndex": 2,
-                  "status": "failed",
-                  "duration": 0,
-                  "error": {
-                    "message": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                    "stack": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                  },
-                  "errors": [
+                  "expectedStatus": "skipped",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
                     {
-                      "message": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "skipped",
+                      "duration": 420,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-25T17:39:52.854Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "location": {
+                            "file": "/Users/marcusswift/javascript/cedar-height-music-website/tests/maintenance-mode.spec.js",
+                            "line": 49,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
                     }
                   ],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-08-29T05:30:38.407Z",
-                  "annotations": [],
-                  "attachments": []
+                  "status": "skipped"
                 }
               ],
-              "status": "unexpected"
+              "id": "746d4ec3cc4443393a0b-b7b7f7b07935ebb9bce1",
+              "file": "maintenance-mode.spec.js",
+              "line": 46,
+              "column": 3
             }
-          ],
-          "id": "e3e55147a69b2a2ae72b-7a9f66483afdbba6afa0",
-          "file": "layout-investigation.spec.js",
-          "line": 3,
-          "column": 1
-        },
-        {
-          "title": "Boy+Guitar Layout Position Investigation",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Mobile Chrome",
-              "projectName": "Mobile Chrome",
-              "results": [
-                {
-                  "workerIndex": 3,
-                  "parallelIndex": 3,
-                  "status": "passed",
-                  "duration": 854,
-                  "errors": [],
-                  "stdout": [
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] LAYOUT INVESTIGATION - Starting test\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] POSITIONING EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Main content left: 24\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Hero image left: 40.693145751953125\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Content right left: 24\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Hero image is left of content: false\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] COMPUTED STYLES EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Main content display: flex\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Main content flex-direction: column\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Hero image order: 2\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Content right order: 1\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Hero image flex: 0 0 auto\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Content right flex: 1 1 0%\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] DOM ORDER EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Children order: [\"hero-image\",\"content-right\"]\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] - Hero image is first child: true\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] FINAL EVIDENCE: Boy+guitar is on LEFT side: false\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.071Z] PROBLEM CONFIRMED: Boy+guitar is incorrectly positioned on the RIGHT\n"
-                    }
-                  ],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-08-29T05:30:38.406Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "e3e55147a69b2a2ae72b-d6d28aaef27326b83ba4",
-          "file": "layout-investigation.spec.js",
-          "line": 3,
-          "column": 1
-        },
-        {
-          "title": "Boy+Guitar Layout Position Investigation",
-          "ok": false,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Mobile Safari",
-              "projectName": "Mobile Safari",
-              "results": [
-                {
-                  "workerIndex": 4,
-                  "parallelIndex": 4,
-                  "status": "failed",
-                  "duration": 1,
-                  "error": {
-                    "message": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                    "stack": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                  },
-                  "errors": [
-                    {
-                      "message": "Error: browserType.launch: Executable doesn't exist at /Users/marcusswift/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                    }
-                  ],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-08-29T05:30:38.407Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "unexpected"
-            }
-          ],
-          "id": "e3e55147a69b2a2ae72b-3be018bf7660542cf816",
-          "file": "layout-investigation.spec.js",
-          "line": 3,
-          "column": 1
-        },
-        {
-          "title": "Boy+Guitar Layout Position Investigation",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "iPad",
-              "projectName": "iPad",
-              "results": [
-                {
-                  "workerIndex": 5,
-                  "parallelIndex": 5,
-                  "status": "passed",
-                  "duration": 733,
-                  "errors": [],
-                  "stdout": [
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] LAYOUT INVESTIGATION - Starting test\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] POSITIONING EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Main content left: 240\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Hero image left: 868.949951171875\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Content right left: 240\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Hero image is left of content: false\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] COMPUTED STYLES EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Main content display: flex\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Main content flex-direction: row\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Hero image order: 0\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Content right order: 0\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Hero image flex: 0 0 auto\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Content right flex: 1 1 0%\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] DOM ORDER EVIDENCE:\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Children order: [\"hero-image\",\"content-right\"]\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] - Hero image is first child: true\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] FINAL EVIDENCE: Boy+guitar is on LEFT side: false\n"
-                    },
-                    {
-                      "text": "[2025-08-29T05:30:39.135Z] PROBLEM CONFIRMED: Boy+guitar is incorrectly positioned on the RIGHT\n"
-                    }
-                  ],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-08-29T05:30:38.409Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "e3e55147a69b2a2ae72b-9c0dee2f668a5408c8ec",
-          "file": "layout-investigation.spec.js",
-          "line": 3,
-          "column": 1
+          ]
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-08-29T05:30:38.032Z",
-    "duration": 1776.395,
-    "expected": 3,
-    "skipped": 0,
-    "unexpected": 3,
+    "startTime": "2025-09-25T17:39:52.577Z",
+    "duration": 6038.841,
+    "expected": 0,
+    "skipped": 2,
+    "unexpected": 1,
     "flaky": 0
   }
 }

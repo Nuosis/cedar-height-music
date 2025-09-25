@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "vercel:env": "node scripts/set-vercel-env.js"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.85.5",

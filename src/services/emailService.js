@@ -43,6 +43,20 @@ function getBrevoConfig() {
 }
 
 /**
+ * Gets environment configuration for the new API
+ * @returns {Object} Configuration object
+ */
+function getApiConfig() {
+    const clarityApiKey = import.meta.env.VITE_CLARITY_API_KEY;
+    
+    if (!clarityApiKey) {
+        throw new Error('VITE_CLARITY_API_KEY environment variable is not configured');
+    }
+    
+    return { clarityApiKey };
+}
+
+/**
  * Sends a contact form email to the business
  * @param {Object} contactData - Contact form data
  * @param {string} contactData.name - Contact name
@@ -273,6 +287,92 @@ This is an automated confirmation email. Please do not reply to this message.
 
     } catch (error) {
         console.error('Failed to send confirmation email:', error);
+        throw error;
+    }
+}
+
+/**
+ * Sends an inquiry email using the new API endpoint
+ * @param {Object} inquiryData - Inquiry form data
+ * @param {string} inquiryData.name - Contact name (1-100 chars)
+ * @param {string} inquiryData.email - Contact email
+ * @param {string} inquiryData.phone - Contact phone (optional, max 20 chars)
+ * @param {string} inquiryData.subject - Contact subject (1-200 chars)
+ * @param {string} inquiryData.message - Contact message (1-2000 chars)
+ * @returns {Promise<Object>} Response from the API endpoint
+ */
+export async function sendInquiryEmail(inquiryData) {
+    const { name, email, phone, subject, message } = inquiryData;
+
+    // Validate required fields
+    if (!name || !email || !message) {
+        throw new Error('Missing required fields: name, email, and message are required');
+    }
+
+    if (!validateEmail(email)) {
+        throw new Error('Invalid email address format');
+    }
+
+    // Validate field lengths according to API schema
+    if (name.length < 1 || name.length > 100) {
+        throw new Error('Name must be between 1 and 100 characters');
+    }
+
+    if (message.length < 1 || message.length > 2000) {
+        throw new Error('Message must be between 1 and 2000 characters');
+    }
+
+    if (phone && phone.length > 20) {
+        throw new Error('Phone number must be 20 characters or less');
+    }
+
+    // Get API configuration
+    const { clarityApiKey } = getApiConfig();
+
+    // Sanitize inputs - subject is required by the API
+    const sanitizedData = {
+        name: sanitizeText(name),
+        email: sanitizeText(email),
+        message: sanitizeText(message),
+        subject: sanitizeText(subject || `New Inquiry from ${name}`)
+    };
+
+    // Only include phone if provided
+    if (phone && phone.trim()) {
+        sanitizedData.phone = sanitizeText(phone);
+    }
+
+    try {
+        const response = await fetch('https://api.cedarheightsmusicacademy.com/api/v1/public/email-inquiry', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-Key': clarityApiKey
+            },
+            body: JSON.stringify(sanitizedData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            
+            // Handle specific authentication/authorization errors
+            if (response.status === 401) {
+                throw new Error('Authentication failed - invalid API key');
+            } else if (response.status === 403) {
+                throw new Error('Access denied - insufficient permissions');
+            } else if (response.status === 422) {
+                throw new Error(`Validation error: ${errorData.detail || 'Invalid data provided'}`);
+            } else {
+                throw new Error(`API error: ${response.status} - ${errorData.message || errorData.detail || response.statusText}`);
+            }
+        }
+
+        const result = await response.json();
+        console.log('Inquiry email sent successfully:', result);
+        return result;
+
+    } catch (error) {
+        console.error('Failed to send inquiry email:', error);
         throw error;
     }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { sendContactEmails } from '../services/emailService.js'
+import { sendInquiryEmail } from '../services/emailService.js'
 import './ComingSoon.css'
 
 /**
@@ -80,7 +80,7 @@ const ComingSoon = () => {
     setSubmitStatus(null)
 
     try {
-      const emailData = {
+      const inquiryData = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -97,16 +97,21 @@ ${formData.message}
 This inquiry was submitted through the maintenance mode form.`
       }
 
-      await sendContactEmails(emailData)
-      setSubmitStatus('success')
-      setFormData({
-        name: '',
-        age: '',
-        instrument: 'piano',
-        email: '',
-        phone: '',
-        message: ''
-      })
+      const result = await sendInquiryEmail(inquiryData)
+      
+      if (result.success) {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          age: '',
+          instrument: 'piano',
+          email: '',
+          phone: '',
+          message: ''
+        })
+      } else {
+        throw new Error(result.message || 'Failed to send inquiry')
+      }
     } catch (error) {
       console.error('Failed to send inquiry:', error)
       setSubmitStatus('error')
