@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 import { Squash as Hamburger } from 'hamburger-react'
+import { useInstruments } from '../hooks/usePublicAPI.js'
 
 // Inject component CSS (derived from wireframes) once
 const CORE_STYLE_ID = 'chm-core-components-styles'
@@ -960,7 +961,41 @@ export function EnrollmentModalShell({ open, onClose }) {
   })
   const dialogRef = useRef(null)
 
+  // Fetch instruments data from API
+  const {
+    data: instruments,
+    isLoading: instrumentsLoading,
+    error: instrumentsError
+  } = useInstruments()
+
   const progressWidth = useMemo(() => `${((step - 1) / 2) * 100}%`, [step])
+
+  // Fallback instruments if API fails
+  const fallbackInstruments = [
+    { id: 'piano', display_name: 'Piano', sort_order: 1 },
+    { id: 'guitar', display_name: 'Guitar', sort_order: 2 },
+    { id: 'bass', display_name: 'Bass', sort_order: 3 }
+  ]
+
+  // Get instruments to display (API data or fallback)
+  const availableInstruments = instruments && instruments.length > 0
+    ? instruments.sort((a, b) => a.sort_order - b.sort_order)
+    : fallbackInstruments
+
+  // Get instrument emoji mapping
+  const getInstrumentEmoji = (instrumentId) => {
+    const emojiMap = {
+      piano: '🎹',
+      guitar: '🎸',
+      bass: '🎸',
+      violin: '🎻',
+      drums: '🥁',
+      saxophone: '🎷',
+      trumpet: '🎺',
+      flute: '🪈'
+    }
+    return emojiMap[instrumentId.toLowerCase()] || '🎵'
+  }
 
   // Mock available time slots
   const availableTimeSlots = [
@@ -1064,30 +1099,29 @@ export function EnrollmentModalShell({ open, onClose }) {
         <div className="enroll-modal-content">
           <div className={clsx('modal-step', step === 1 && 'active')}>
             <h3 className="step-title">Choose Your Instrument</h3>
-            <p className="step-description">Piano, Guitar, Bass</p>
+            <p className="step-description">
+              {instrumentsLoading ? 'Loading instruments...' :
+               instrumentsError ? 'Piano, Guitar, Bass' :
+               availableInstruments.map(inst => inst.display_name).join(', ')}
+            </p>
             {/* Instrument selection with auto-advance */}
             <div role="group" aria-label="Instrument options" style={{ display: 'grid', gap: '0.75rem' }}>
-              <Button
-                variant="secondary"
-                onClick={() => handleInstrumentSelect('piano')}
-                className={selectedInstrument === 'piano' ? 'selected' : ''}
-              >
-                🎹 Piano
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => handleInstrumentSelect('guitar')}
-                className={selectedInstrument === 'guitar' ? 'selected' : ''}
-              >
-                🎸 Guitar
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => handleInstrumentSelect('bass')}
-                className={selectedInstrument === 'bass' ? 'selected' : ''}
-              >
-                🎸 Bass
-              </Button>
+              {instrumentsLoading ? (
+                <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+                  Loading instruments...
+                </div>
+              ) : (
+                availableInstruments.map((instrument) => (
+                  <Button
+                    key={instrument.id}
+                    variant="secondary"
+                    onClick={() => handleInstrumentSelect(instrument.id)}
+                    className={selectedInstrument === instrument.id ? 'selected' : ''}
+                  >
+                    {getInstrumentEmoji(instrument.id)} {instrument.display_name}
+                  </Button>
+                ))
+              )}
             </div>
           </div>
 

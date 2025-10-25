@@ -1,10 +1,20 @@
 import { Button, Card } from '../components/core.jsx'
+import { useTeachers } from '../hooks/usePublicAPI.js'
 
 /**
  * About Page Component
  * Matches wireframe specifications exactly with hero, studio story, teacher card, and CTA sections
  */
 const AboutPage = ({ onEnrollClick }) => {
+  // Fetch teachers data from API
+  const {
+    data: teachers,
+    isLoading: teachersLoading,
+    error: teachersError
+  } = useTeachers()
+
+  // Get primary teacher for display (first active teacher)
+  const primaryTeacher = teachers?.[0]
   return (
     <div className="about-page">
       {/* About Hero Section */}
@@ -110,29 +120,83 @@ const AboutPage = ({ onEnrollClick }) => {
           <div className="teacher-card-container">
             
             <Card className="teacher-card">
-              {/* Teacher Photo */}
-              <div className="teacher-photo">
-                <img src="/logo.JPG" alt="Cedar Heights Music Academy Teacher" className="teacher-image" />
-              </div>
-              
-              <div className="teacher-info">
-                <h3 className="teacher-name">Kaeden Ottenbreit</h3>
-                
-                <div className="teacher-instruments">
-                  Piano, Guitar, Bass
+              {teachersLoading ? (
+                <div className="teacher-loading" style={{ padding: '2rem', textAlign: 'center' }}>
+                  Loading teacher information...
                 </div>
-                
-                <p className="teacher-bio">
-                  Kaeden brings patience and expertise to every lesson. He specializes in helping beginners build confidence while challenging advanced students to reach new heights. 
-                  Kaeden has already help many musicians and believes every student can find joy in music.
-                </p>
-                
-                {/* Availability Chips */}
-                <div className="teacher-availability">
-                  <span className="availability-chip">Daytime Appointments Available</span>
-                  <span className="availability-chip">Open Wed/Thu</span>
+              ) : teachersError ? (
+                <div className="teacher-error" style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>
+                  <div className="teacher-photo">
+                    <img src="/logo.JPG" alt="Cedar Heights Music Academy Teacher" className="teacher-image" />
+                  </div>
+                  <div className="teacher-info">
+                    <h3 className="teacher-name">Kaeden Ottenbreit</h3>
+                    <div className="teacher-instruments">Piano, Guitar, Bass</div>
+                    <p className="teacher-bio">
+                      Kaeden brings patience and expertise to every lesson. He specializes in helping beginners build confidence while challenging advanced students to reach new heights.
+                      Kaeden has already help many musicians and believes every student can find joy in music.
+                    </p>
+                    <div className="teacher-availability">
+                      <span className="availability-chip">Daytime Appointments Available</span>
+                      <span className="availability-chip">Open Wed/Thu</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ) : primaryTeacher ? (
+                <>
+                  {/* Teacher Photo */}
+                  <div className="teacher-photo">
+                    <img src="/logo.JPG" alt={`${primaryTeacher.name} - Cedar Heights Music Academy Teacher`} className="teacher-image" />
+                  </div>
+                  
+                  <div className="teacher-info">
+                    <h3 className="teacher-name">{primaryTeacher.name}</h3>
+                    
+                    <div className="teacher-instruments">
+                      {primaryTeacher.instruments ? primaryTeacher.instruments.join(', ') : 'Piano, Guitar, Bass'}
+                    </div>
+                    
+                    <p className="teacher-bio">
+                      {primaryTeacher.bio || 'Experienced music instructor dedicated to helping students of all levels achieve their musical goals through personalized, one-on-one instruction.'}
+                    </p>
+                    
+                    {/* Availability Summary */}
+                    {primaryTeacher.availability_summary && (
+                      <div className="teacher-availability">
+                        {primaryTeacher.availability_summary.available_slots > 0 && (
+                          <span className="availability-chip">
+                            {primaryTeacher.availability_summary.available_slots} slots available
+                          </span>
+                        )}
+                        {primaryTeacher.availability_summary.next_available && (
+                          <span className="availability-chip">
+                            Next: {new Date(primaryTeacher.availability_summary.next_available).toLocaleDateString()}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </>
+              ) : (
+                // Fallback content when no teacher data is available
+                <>
+                  <div className="teacher-photo">
+                    <img src="/logo.JPG" alt="Cedar Heights Music Academy Teacher" className="teacher-image" />
+                  </div>
+                  <div className="teacher-info">
+                    <h3 className="teacher-name">Kaeden Ottenbreit</h3>
+                    <div className="teacher-instruments">Piano, Guitar, Bass</div>
+                    <p className="teacher-bio">
+                      Kaeden brings patience and expertise to every lesson. He specializes in helping beginners build confidence while challenging advanced students to reach new heights.
+                      Kaeden has already help many musicians and believes every student can find joy in music.
+                    </p>
+                    <div className="teacher-availability">
+                      <span className="availability-chip">Daytime Appointments Available</span>
+                      <span className="availability-chip">Open Wed/Thu</span>
+                    </div>
+                  </div>
+                </>
+              )}
             </Card>
           </div>
         </div>

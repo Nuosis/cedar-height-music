@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Button, Card } from '../components/core.jsx'
 import { Plus, X } from 'lucide-react'
 import ValuePropsCarousel from '../components/ValuePropsCarousel.jsx'
+import { useTeachers, useNextAvailableSlots } from '../hooks/usePublicAPI.js'
 import '../styles/homepage.css'
 
 /**
@@ -148,16 +149,50 @@ const TimeSlotChip = ({ day, startTime, endTime, highlighted = false, onClick })
  */
 const HomePage = ({ onEnrollClick }) => {
   const [seasonalBg, setSeasonalBg] = useState(null)
+  
+  // Fetch teachers data from API
+  const {
+    data: teachers,
+    isLoading: teachersLoading,
+    error: teachersError
+  } = useTeachers()
+
+  // Fetch next available timeslots (limit to 6 for display)
+  const {
+    data: availableSlots,
+    isLoading: slotsLoading,
+    error: slotsError
+  } = useNextAvailableSlots(6)
 
   useEffect(() => {
     const bgInfo = getSeasonalBackground()
     setSeasonalBg(bgInfo)
   }, [])
 
-  const handleSlotClick = () => {
+  const handleSlotClick = (slotData) => {
     // For now, just open the enrollment modal
     // In Phase 4, this will pass the timeslot data to the modal
+    console.log('Selected slot:', slotData)
     onEnrollClick()
+  }
+
+  // Get primary teacher for display (first active teacher)
+  const primaryTeacher = teachers?.[0]
+
+  // Helper function to format time from 24-hour to 12-hour format
+  const formatTime = (time24) => {
+    if (!time24) return ''
+    const [hours, minutes] = time24.split(':')
+    const hour = parseInt(hours)
+    const ampm = hour >= 12 ? 'PM' : 'AM'
+    const hour12 = hour % 12 || 12
+    return `${hour12}:${minutes} ${ampm}`
+  }
+
+  // Helper function to get day name from weekday number
+  const getDayName = (weekday) => {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    return days[weekday] || 'Unknown'
   }
 
   return (
@@ -241,12 +276,26 @@ const HomePage = ({ onEnrollClick }) => {
             {/* Left Column */}
             <div className="about-teaser-content" data-wireframe-section="about-teaser-text">
               <div className="eyebrow" data-typography-container="about-eyebrow">About the studio</div>
-              <h2 className="section-heading" data-typography-container="about-heading">Personalized lessons from your dedicated teacher</h2>
+              <h2 className="section-heading" data-typography-container="about-heading">
+                {teachersLoading ? 'Loading...' :
+                 teachersError ? 'Personalized lessons from your dedicated teacher' :
+                 primaryTeacher ? `Personalized lessons from ${primaryTeacher.name}` :
+                 'Personalized lessons from your dedicated teacher'}
+              </h2>
               <p className="section-description" data-typography-container="about-description">
-                At Cedar Heights Music Academy, we believe every student deserves individual attention.
-                Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.
+                {teachersLoading ? 'Loading teacher information...' :
+                 teachersError ? 'At Cedar Heights Music Academy, we believe every student deserves individual attention. Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.' :
+                 primaryTeacher ? (primaryTeacher.bio || 'At Cedar Heights Music Academy, we believe every student deserves individual attention. Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.') :
+                 'At Cedar Heights Music Academy, we believe every student deserves individual attention. Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.'}
               </p>
-              <a href="/about#teacher" className="inline-link" data-typography-container="meet-teacher-link">Meet your teacher</a>
+              {primaryTeacher?.instruments && (
+                <div className="teacher-instruments" style={{ marginBottom: '1rem', fontSize: '0.9rem', color: '#666' }}>
+                  <strong>Instruments:</strong> {primaryTeacher.instruments.join(', ')}
+                </div>
+              )}
+              <a href="/about#teacher" className="inline-link" data-typography-container="meet-teacher-link">
+                {primaryTeacher ? `Meet ${primaryTeacher.name}` : 'Meet your teacher'}
+              </a>
             </div>
             
             {/* Right Column */}
@@ -263,58 +312,113 @@ const HomePage = ({ onEnrollClick }) => {
           <div className="availability-content" style={{ textAlign: 'center' }}>
             
             {/* Title */}
-            <h2 className="section-heading" data-typography-container="availability-title">Availability</h2>
+            <h2 className="section-heading" data-typography-container="availability-title">
+              {slotsLoading ? 'Loading Availability...' : 'Availability'}
+            </h2>
             
-            {/* Slot Chips - Matching wireframe exactly */}
+            {/* Slot Chips - Dynamic from API */}
             <div className="slots-grid" data-measurement-point="slots-grid-layout">
-              
-              {/* Slot 1 - Monday 9:30 PM to 10:00 PM */}
-              <div className="slot-chip" data-wireframe-section="time-slot-1" tabIndex={0} role="button" aria-label="Monday 9:30 PM to 10:00 PM" onClick={handleSlotClick}>
-                <div className="day" data-typography-container="slot-day">Monday</div>
-                <div className="time" data-typography-container="slot-time">
-                  <span className="start-time">9:30 PM</span> • <span className="end-time">10:00 PM</span>
+              {slotsLoading ? (
+                // Loading state - show skeleton slots
+                Array.from({ length: 6 }, (_, index) => (
+                  <div key={`loading-${index}`} className="slot-chip loading" style={{ opacity: 0.6 }}>
+                    <div className="day" data-typography-container="slot-day">Loading...</div>
+                    <div className="time" data-typography-container="slot-time">
+                      <span className="start-time">--:--</span> • <span className="end-time">--:--</span>
+                    </div>
+                  </div>
+                ))
+              ) : slotsError ? (
+                // Error state - show fallback slots
+                <>
+                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Monday 9:30 PM to 10:00 PM" onClick={() => handleSlotClick({ day: 'Monday', startTime: '9:30 PM', endTime: '10:00 PM' })}>
+                    <div className="day" data-typography-container="slot-day">Monday</div>
+                    <div className="time" data-typography-container="slot-time">
+                      <span className="start-time">9:30 PM</span> • <span className="end-time">10:00 PM</span>
+                    </div>
+                  </div>
+                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Wednesday 5:30 PM to 6:00 PM" onClick={() => handleSlotClick({ day: 'Wednesday', startTime: '5:30 PM', endTime: '6:00 PM' })}>
+                    <div className="day" data-typography-container="slot-day">Wednesday</div>
+                    <div className="time" data-typography-container="slot-time">
+                      <span className="start-time">5:30 PM</span> • <span className="end-time">6:00 PM</span>
+                    </div>
+                  </div>
+                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Thursday 6:00 PM to 6:30 PM" onClick={() => handleSlotClick({ day: 'Thursday', startTime: '6:00 PM', endTime: '6:30 PM' })}>
+                    <div className="day" data-typography-container="slot-day">Thursday</div>
+                    <div className="time" data-typography-container="slot-time">
+                      <span className="start-time">6:00 PM</span> • <span className="end-time">6:30 PM</span>
+                    </div>
+                  </div>
+                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Friday 4:00 PM to 4:30 PM" onClick={() => handleSlotClick({ day: 'Friday', startTime: '4:00 PM', endTime: '4:30 PM' })}>
+                    <div className="day" data-typography-container="slot-day">Friday</div>
+                    <div className="time" data-typography-container="slot-time">
+                      <span className="start-time">4:00 PM</span> • <span className="end-time">4:30 PM</span>
+                    </div>
+                  </div>
+                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Saturday 10:00 AM to 10:30 AM" onClick={() => handleSlotClick({ day: 'Saturday', startTime: '10:00 AM', endTime: '10:30 AM' })}>
+                    <div className="day" data-typography-container="slot-day">Saturday</div>
+                    <div className="time" data-typography-container="slot-time">
+                      <span className="start-time">10:00 AM</span> • <span className="end-time">10:30 AM</span>
+                    </div>
+                  </div>
+                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Saturday 2:00 PM to 2:30 PM" onClick={() => handleSlotClick({ day: 'Saturday', startTime: '2:00 PM', endTime: '2:30 PM' })}>
+                    <div className="day" data-typography-container="slot-day">Saturday</div>
+                    <div className="time" data-typography-container="slot-time">
+                      <span className="start-time">2:00 PM</span> • <span className="end-time">2:30 PM</span>
+                    </div>
+                  </div>
+                </>
+              ) : availableSlots && availableSlots.length > 0 ? (
+                // Success state - show API data
+                availableSlots.map((slot, index) => {
+                  const dayName = getDayName(slot.weekday)
+                  const startTime = formatTime(slot.start_time)
+                  const endTime = formatTime(slot.end_time)
+                  const slotData = {
+                    id: slot.id,
+                    day: dayName,
+                    startTime,
+                    endTime,
+                    teacherId: slot.teacher_id,
+                    duration: slot.duration,
+                    nextAvailableDate: slot.next_available_date
+                  }
+                  
+                  return (
+                    <div
+                      key={slot.id || `slot-${index}`}
+                      className="slot-chip"
+                      data-wireframe-section={`time-slot-${index + 1}`}
+                      tabIndex={0}
+                      role="button"
+                      aria-label={`${dayName} ${startTime} to ${endTime}`}
+                      onClick={() => handleSlotClick(slotData)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          handleSlotClick(slotData)
+                        }
+                      }}
+                    >
+                      <div className="day" data-typography-container="slot-day">{dayName}</div>
+                      <div className="time" data-typography-container="slot-time">
+                        <span className="start-time">{startTime}</span> • <span className="end-time">{endTime}</span>
+                      </div>
+                      {slot.next_available_date && (
+                        <div className="next-date" style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.25rem' }}>
+                          Next: {new Date(slot.next_available_date).toLocaleDateString()}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })
+              ) : (
+                // No slots available
+                <div className="no-slots-message" style={{ gridColumn: '1 / -1', padding: '2rem', color: '#666' }}>
+                  <p>No available time slots at the moment.</p>
+                  <p>Please contact us to discuss scheduling options.</p>
                 </div>
-              </div>
-              
-              {/* Slot 2 - Wednesday 5:30 PM to 6:00 PM */}
-              <div className="slot-chip" data-wireframe-section="time-slot-2" tabIndex={0} role="button" aria-label="Wednesday 5:30 PM to 6:00 PM" onClick={handleSlotClick}>
-                <div className="day" data-typography-container="slot-day">Wednesday</div>
-                <div className="time" data-typography-container="slot-time">
-                  <span className="start-time">5:30 PM</span> • <span className="end-time">6:00 PM</span>
-                </div>
-              </div>
-              
-              {/* Slot 3 - Thursday 6:00 PM to 6:30 PM */}
-              <div className="slot-chip" data-wireframe-section="time-slot-3" tabIndex={0} role="button" aria-label="Thursday 6:00 PM to 6:30 PM" onClick={handleSlotClick}>
-                <div className="day" data-typography-container="slot-day">Thursday</div>
-                <div className="time" data-typography-container="slot-time">
-                  <span className="start-time">6:00 PM</span> • <span className="end-time">6:30 PM</span>
-                </div>
-              </div>
-              
-              {/* Slot 4 - Friday 4:00 PM to 4:30 PM */}
-              <div className="slot-chip" data-wireframe-section="time-slot-4" tabIndex={0} role="button" aria-label="Friday 4:00 PM to 4:30 PM" onClick={handleSlotClick}>
-                <div className="day" data-typography-container="slot-day">Friday</div>
-                <div className="time" data-typography-container="slot-time">
-                  <span className="start-time">4:00 PM</span> • <span className="end-time">4:30 PM</span>
-                </div>
-              </div>
-              
-              {/* Slot 5 - Saturday 10:00 AM to 10:30 AM */}
-              <div className="slot-chip" data-wireframe-section="time-slot-5" tabIndex={0} role="button" aria-label="Saturday 10:00 AM to 10:30 AM" onClick={handleSlotClick}>
-                <div className="day" data-typography-container="slot-day">Saturday</div>
-                <div className="time" data-typography-container="slot-time">
-                  <span className="start-time">10:00 AM</span> • <span className="end-time">10:30 AM</span>
-                </div>
-              </div>
-              
-              {/* Slot 6 - Saturday 2:00 PM to 2:30 PM */}
-              <div className="slot-chip" data-wireframe-section="time-slot-6" tabIndex={0} role="button" aria-label="Saturday 2:00 PM to 2:30 PM" onClick={handleSlotClick}>
-                <div className="day" data-typography-container="slot-day">Saturday</div>
-                <div className="time" data-typography-container="slot-time">
-                  <span className="start-time">2:00 PM</span> • <span className="end-time">2:30 PM</span>
-                </div>
-              </div>
+              )}
             </div>
             
           </div>

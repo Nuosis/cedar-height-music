@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { sendInquiryEmail } from '../services/emailService.js'
+import { useInstruments } from '../hooks/usePublicAPI.js'
 import './ComingSoon.css'
 
 /**
@@ -19,10 +20,34 @@ const ComingSoon = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
   
+  // Fetch instruments data from API
+  const {
+    data: instruments,
+    isLoading: instrumentsLoading,
+    error: instrumentsError
+  } = useInstruments()
+  
   // Refs for layout investigation
   const mainContentRef = useRef(null)
   const heroImageRef = useRef(null)
   const contentRightRef = useRef(null)
+
+  // Fallback instruments if API fails
+  const fallbackInstruments = [
+    { id: 'piano', display_name: 'Piano', sort_order: 1 },
+    { id: 'guitar', display_name: 'Guitar', sort_order: 2 },
+    { id: 'bass', display_name: 'Bass', sort_order: 3 }
+  ]
+
+  // Get instruments to display (API data or fallback)
+  const availableInstruments = instruments && instruments.length > 0
+    ? instruments.sort((a, b) => a.sort_order - b.sort_order)
+    : fallbackInstruments
+
+  // Generate description text
+  const instrumentsText = instrumentsLoading
+    ? 'Music lessons available'
+    : availableInstruments.map(inst => inst.display_name.toLowerCase()).join(', ') + ' lessons available'
 
   // Layout investigation logging
   useEffect(() => {
@@ -218,7 +243,7 @@ This inquiry was submitted through the maintenance mode form.`
             <div className="content-right">
               <div className="coming-soon-message">
                 <p className="coming-soon-description">
-                  Piano, guitar, and bass lessons available.
+                  {instrumentsText}.
                 </p>
               </div>
 
@@ -306,9 +331,15 @@ This inquiry was submitted through the maintenance mode form.`
                       required
                       className="form-select"
                     >
-                      <option value="piano">Piano</option>
-                      <option value="guitar">Guitar</option>
-                      <option value="bass">Bass</option>
+                      {instrumentsLoading ? (
+                        <option value="">Loading instruments...</option>
+                      ) : (
+                        availableInstruments.map((instrument) => (
+                          <option key={instrument.id} value={instrument.id}>
+                            {instrument.display_name}
+                          </option>
+                        ))
+                      )}
                     </select>
                   </div>
                 </div>

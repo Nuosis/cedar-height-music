@@ -1,4 +1,5 @@
 import { Button } from '../components/core.jsx'
+import { usePricing } from '../hooks/usePublicAPI.js'
 
 /**
  * Pricing Page Component
@@ -6,8 +7,31 @@ import { Button } from '../components/core.jsx'
  * Removed billing frequency selector per 2025-08-28 update
  */
 const PricingPage = ({ onEnrollClick }) => {
-  // Single pricing model - no frequency selection needed
-  const monthlyPrice = '$125'
+  // Fetch pricing data from API
+  const {
+    data: pricingData,
+    isLoading: pricingLoading,
+    error: pricingError
+  } = usePricing()
+  
+  // Fallback pricing data
+  const fallbackPrice = 125.0
+  const fallbackCurrency = 'CAD'
+  
+  // Get pricing information with fallbacks
+  const monthlyPrice = pricingData?.base_monthly_price || fallbackPrice
+  const currency = pricingData?.currency || fallbackCurrency
+  const currentSemester = pricingData?.current_semester
+  
+  // Format price for display
+  const formatPrice = (price, curr) => {
+    return new Intl.NumberFormat('en-CA', {
+      style: 'currency',
+      currency: curr,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(price)
+  }
   
   const includedFeatures = [
     '30-minute one-on-one lessons',
@@ -56,8 +80,22 @@ const PricingPage = ({ onEnrollClick }) => {
             {/* Single Price Display */}
             <div className="single-price-display">
               <div className="price-card">
-                <div className="price-amount">{monthlyPrice}</div>
-                <div className="price-period">per month</div>
+                {pricingLoading ? (
+                  <>
+                    <div className="price-amount">Loading...</div>
+                    <div className="price-period">per month</div>
+                  </>
+                ) : pricingError ? (
+                  <>
+                    <div className="price-amount">{formatPrice(fallbackPrice, fallbackCurrency)}</div>
+                    <div className="price-period">per month</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="price-amount">{formatPrice(monthlyPrice, currency)}</div>
+                    <div className="price-period">per month</div>
+                  </>
+                )}
               </div>
             </div>
             
@@ -74,8 +112,20 @@ const PricingPage = ({ onEnrollClick }) => {
               {/* Pricing Disclaimer */}
               <div className="pricing-disclaimer">
                 <p className="disclaimer-text">
-                  <strong>Commitment: current semester</strong><br/>
+                  <strong>
+                    Commitment: {currentSemester ? currentSemester.name : 'current semester'}
+                  </strong><br/>
+                  {currentSemester && (
+                    <>
+                      {new Date(currentSemester.start_date).toLocaleDateString()} - {new Date(currentSemester.end_date).toLocaleDateString()}<br/>
+                    </>
+                  )}
                   Final pricing confirmed during enrollment
+                  {pricingError && (
+                    <><br/><em style={{ color: '#666', fontSize: '0.9em' }}>
+                      Pricing information temporarily unavailable - showing standard rates
+                    </em></>
+                  )}
                 </p>
               </div>
             </div>
