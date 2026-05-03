@@ -190,11 +190,6 @@ const HomePage = ({ onEnrollClick }) => {
           
           {/* Hero Canvas - Centered content group within ~856px max width */}
           <div className="hero-content" data-measurement-point="hero-content-width" style={{ maxWidth: '856px', margin: '0 auto' }}>
-            
-            {/* Foreground Figure */}
-            <div className="hero-figure" data-asset-container="boy-guitar-figure" data-measurement-point="figure-positioning">
-              <img src="/boy+guitar.png" alt="" role="presentation" className="hero-character" />
-            </div>
 
             {/* Hero Stack - Foreground content group, decorative accent layer, background band */}
             <div className="hero-foreground" data-wireframe-section="hero-foreground">
@@ -244,6 +239,11 @@ const HomePage = ({ onEnrollClick }) => {
               backgroundImage: seasonalBg?.image ? `url('${seasonalBg.image}')` : undefined
             }}
           ></div>
+        </div>
+
+        {/* Foreground Figure - anchored to section so feet stay on the road */}
+        <div className="hero-figure" data-asset-container="boy-guitar-figure" data-measurement-point="figure-positioning">
+          <img src="/boy+guitar.png" alt="" role="presentation" className="hero-character" />
         </div>
       </section>
 
