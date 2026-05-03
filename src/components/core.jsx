@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 import { Squash as Hamburger } from 'hamburger-react'
-import { useAvailability, useProducts } from '../hooks/usePublicAPI.js'
+import { useAvailability, useProducts, useSiteConfig } from '../hooks/usePublicAPI.js'
 import { api } from '../services/apiClient.js'
 
 // Inject component CSS (derived from wireframes) once
@@ -954,7 +954,7 @@ export function Footer({ onEnrollClick }) {
 // Shell only (no data wiring). Keyboard/ARIA implemented.
 export function EnrollmentModalShell({ open, onClose }) {
   const [step, setStep] = useState(1)
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedInstrument, setSelectedInstrument] = useState(null)
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null)
   const [checkoutEmail, setCheckoutEmail] = useState('')
   const [checkoutError, setCheckoutError] = useState('')
@@ -962,29 +962,70 @@ export function EnrollmentModalShell({ open, onClose }) {
   const dialogRef = useRef(null)
 
   const {
+    data: siteConfig,
+  } = useSiteConfig({ enabled: open })
+
+  const {
     data: products,
-    isLoading: productsLoading,
     error: productsError
-  } = useProducts()
+  } = useProducts({ enabled: open })
 
   const {
     data: availabilitySlots,
     isLoading: availabilityLoading,
     error: availabilityError
   } = useAvailability(
-    selectedProduct ? { duration_minutes: selectedProduct.primary_price?.metadata?.duration_minutes || 30 } : {},
-    { enabled: !!selectedProduct && step >= 2 }
+    selectedInstrument ? { duration_minutes: 30 } : {},
+    { enabled: !!selectedInstrument && step >= 2 }
   )
 
   const progressWidth = useMemo(() => `${((step - 1) / 2) * 100}%`, [step])
 
-  const fallbackProducts = [
-    { id: 'piano', name: 'Piano', instrument_id: 'piano', primary_price: null },
-    { id: 'guitar', name: 'Guitar', instrument_id: 'guitar', primary_price: null },
-    { id: 'bass', name: 'Bass', instrument_id: 'bass', primary_price: null }
+  const fallbackInstruments = [
+    { id: 'piano', name: 'Piano', display_name: 'Piano', active: true, sort_order: 1 },
+    { id: 'guitar', name: 'Guitar', display_name: 'Guitar', active: true, sort_order: 2 },
+    { id: 'bass', name: 'Bass', display_name: 'Bass', active: true, sort_order: 3 }
   ]
 
-  const availableProducts = products && products.length > 0 ? products : fallbackProducts
+  const availableInstruments = useMemo(() => {
+    const configured = siteConfig?.instruments?.length ? siteConfig.instruments : fallbackInstruments
+    return configured
+      .filter((instrument) => instrument.active !== false)
+      .sort((a, b) => (a.sort_order ?? 999) - (b.sort_order ?? 999))
+  }, [siteConfig])
+
+  const checkoutProduct = useMemo(() => {
+    if (!products?.length) return null
+
+    const usableProducts = products.filter((product) => {
+      const name = product.name?.toLowerCase() || ''
+      return product.active !== false && !name.includes('book') && !name.includes('individual')
+    })
+
+    const selected =
+      usableProducts.find((product) => product.name?.toLowerCase().includes('monthly tuition - 30')) ||
+      usableProducts.find((product) => product.name?.toLowerCase().includes('monthly tuition')) ||
+      products.find((product) => product.active !== false && product.primary_price)
+
+    if (!selected) return null
+
+    const recurringPrice = selected.prices?.find((price) => price.active !== false && price.recurring?.interval === 'month')
+    const primaryPrice = recurringPrice || selected.primary_price || selected.prices?.find((price) => price.active !== false)
+    return primaryPrice ? { ...selected, primary_price: primaryPrice } : null
+  }, [products])
+
+  const checkoutPriceLabel = useMemo(() => {
+    const price = checkoutProduct?.primary_price
+    if (!price?.unit_amount_decimal) return null
+
+    const amount = new Intl.NumberFormat('en-CA', {
+      style: 'currency',
+      currency: price.currency || 'CAD',
+      maximumFractionDigits: 0
+    }).format(price.unit_amount_decimal)
+    const interval = price.recurring?.interval || 'month'
+    return `${amount}/${interval}`
+  }, [checkoutProduct])
 
   // Get instrument emoji mapping
   const getInstrumentEmoji = (instrumentId) => {
@@ -998,12 +1039,13 @@ export function EnrollmentModalShell({ open, onClose }) {
       trumpet: '🎺',
       flute: '🪈'
     }
-    return emojiMap[instrumentId.toLowerCase()] || '🎵'
+    return emojiMap[String(instrumentId).toLowerCase()] || '🎵'
   }
 
-  const handleInstrumentSelect = (product) => {
-    setSelectedProduct(product)
+  const handleInstrumentSelect = (instrument) => {
+    setSelectedInstrument(instrument)
     setSelectedTimeSlot(null)
+    setCheckoutError('')
     setTimeout(() => setStep(2), 150) // Small delay for visual feedback
   }
 
@@ -1014,7 +1056,7 @@ export function EnrollmentModalShell({ open, onClose }) {
   }
 
   const handleCheckout = async () => {
-    if (!selectedProduct?.primary_price?.id) {
+    if (!checkoutProduct?.primary_price?.id) {
       setCheckoutError('Online payment is not available right now. Please contact us to enroll.')
       return
     }
@@ -1022,8 +1064,8 @@ export function EnrollmentModalShell({ open, onClose }) {
     setCheckoutError('')
     try {
       const response = await api.createCheckoutSession({
-        instrument_id: selectedProduct.instrument_id || selectedProduct.id,
-        price_id: selectedProduct.primary_price.id,
+        instrument_id: selectedInstrument?.id,
+        price_id: checkoutProduct.primary_price.id,
         availability_start: selectedTimeSlot?.start,
         customer_email: checkoutEmail || undefined,
         success_url: `${window.location.origin}/enroll?success=true`,
@@ -1117,28 +1159,19 @@ export function EnrollmentModalShell({ open, onClose }) {
           <div className={clsx('modal-step', step === 1 && 'active')}>
             <h3 className="step-title">Choose Your Instrument</h3>
             <p className="step-description">
-              {productsLoading ? 'Loading lessons...' :
-               productsError ? 'Online pricing is unavailable. You can still contact us to enroll.' :
-               availableProducts.map(product => product.name).join(', ')}
+              Pick the instrument you are interested in. Tuition is handled securely after you choose a time.
             </p>
             <div role="group" aria-label="Instrument options" style={{ display: 'grid', gap: '0.75rem' }}>
-              {productsLoading ? (
-                <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
-                  Loading lessons...
-                </div>
-              ) : (
-                availableProducts.map((product) => (
-                  <Button
-                    key={product.id}
-                    variant="secondary"
-                    onClick={() => handleInstrumentSelect(product)}
-                    className={selectedProduct?.id === product.id ? 'selected' : ''}
-                  >
-                    {getInstrumentEmoji(product.instrument_id || product.id)} {product.name}
-                    {product.primary_price?.unit_amount_decimal ? ` - $${product.primary_price.unit_amount_decimal}/${product.primary_price.recurring?.interval || 'month'}` : ''}
-                  </Button>
-                ))
-              )}
+              {availableInstruments.map((instrument) => (
+                <Button
+                  key={instrument.id}
+                  variant="secondary"
+                  onClick={() => handleInstrumentSelect(instrument)}
+                  className={selectedInstrument?.id === instrument.id ? 'selected' : ''}
+                >
+                  {getInstrumentEmoji(instrument.id || instrument.name)} {instrument.display_name || instrument.name}
+                </Button>
+              ))}
             </div>
           </div>
 
@@ -1190,10 +1223,15 @@ export function EnrollmentModalShell({ open, onClose }) {
 
             <div className="modal-step-scrollable">
               <Card style={{ marginBottom: '1.5rem' }}>
-                <div><strong>Instrument:</strong> {selectedProduct?.name || '(not selected)'}</div>
+                <div><strong>Instrument:</strong> {selectedInstrument?.display_name || selectedInstrument?.name || '(not selected)'}</div>
                 <div><strong>Time:</strong> {selectedTimeSlot ? selectedTimeSlot.display_label : 'Confirm after checkout'}</div>
-                <div><strong>Price:</strong> {selectedProduct?.primary_price?.unit_amount_decimal ? `$${selectedProduct.primary_price.unit_amount_decimal} ${selectedProduct.primary_price.currency}` : 'Contact us for pricing'}</div>
+                <div><strong>Tuition:</strong> {checkoutPriceLabel ? `${checkoutProduct.name} - ${checkoutPriceLabel}` : 'Contact us for pricing'}</div>
               </Card>
+              {productsError || !checkoutProduct?.primary_price ? (
+                <Card style={{ marginBottom: '1.5rem' }}>
+                  Online payment is temporarily unavailable. Please contact us and we will help finish enrollment directly.
+                </Card>
+              ) : null}
 
               <form className="enrollment-form" onSubmit={(event) => event.preventDefault()}>
                 <div className="form-group">
@@ -1225,7 +1263,7 @@ export function EnrollmentModalShell({ open, onClose }) {
               ← Back
             </button>
 
-            {step === 3 && !selectedProduct?.primary_price ? (
+            {step === 3 && !checkoutProduct?.primary_price ? (
               <Button
                 variant="primary"
                 as="a"

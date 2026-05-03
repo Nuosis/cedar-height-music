@@ -22,6 +22,7 @@ const PricingPage = ({ onEnrollClick }) => {
   const monthlyPrice = pricingData?.base_monthly_price || fallbackPrice
   const currency = pricingData?.currency || fallbackCurrency
   const currentSemester = pricingData?.current_semester
+  const hasSemesterDates = Boolean(currentSemester?.start_date && currentSemester?.end_date)
   
   // Format price for display
   const formatPrice = (price, curr) => {
@@ -76,57 +77,56 @@ const PricingPage = ({ onEnrollClick }) => {
       <section className="pricing-display-section section">
         <div className="page-container">
           <div className="pricing-display-content">
-            
-            {/* Single Price Display */}
-            <div className="single-price-display">
-              <div className="price-card">
-                {pricingLoading ? (
-                  <>
-                    <div className="price-amount">Loading...</div>
-                    <div className="price-period">per month</div>
-                  </>
-                ) : pricingError ? (
-                  <>
-                    <div className="price-amount">{formatPrice(fallbackPrice, fallbackCurrency)}</div>
-                    <div className="price-period">per month</div>
-                  </>
-                ) : (
-                  <>
-                    <div className="price-amount">{formatPrice(monthlyPrice, currency)}</div>
-                    <div className="price-period">per month</div>
-                  </>
-                )}
-              </div>
-            </div>
-            
-            <div className="pricing-details">
-              <div className="pricing-breakdown">
-                <h3 className="breakdown-title">What's included:</h3>
-                <ul className="breakdown-list">
-                  {includedFeatures.map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              {/* Pricing Disclaimer */}
-              <div className="pricing-disclaimer">
-                <p className="disclaimer-text">
-                  <strong>
-                    Commitment: {currentSemester ? currentSemester.name : 'current semester'}
-                  </strong><br/>
-                  {currentSemester && (
+            <div className="pricing-summary-row">
+              <div className="single-price-display">
+                <div className="price-card">
+                  {pricingLoading ? (
                     <>
-                      {new Date(currentSemester.start_date).toLocaleDateString()} - {new Date(currentSemester.end_date).toLocaleDateString()}<br/>
+                      <div className="price-amount">Loading...</div>
+                      <div className="price-period">per month</div>
+                    </>
+                  ) : pricingError ? (
+                    <>
+                      <div className="price-amount">{formatPrice(fallbackPrice, fallbackCurrency)}</div>
+                      <div className="price-period">per month</div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="price-amount">{formatPrice(monthlyPrice, currency)}</div>
+                      <div className="price-period">per month</div>
                     </>
                   )}
-                  Final pricing confirmed during enrollment
-                  {pricingError && (
-                    <><br/><em style={{ color: '#666', fontSize: '0.9em' }}>
-                      Pricing information temporarily unavailable - showing standard rates
-                    </em></>
-                  )}
-                </p>
+                </div>
+              </div>
+
+              <div className="pricing-details">
+                <div className="pricing-breakdown">
+                  <h3 className="breakdown-title">What's included:</h3>
+                  <ul className="breakdown-list">
+                    {includedFeatures.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="pricing-disclaimer">
+                  <p className="disclaimer-text">
+                    <strong>
+                      Commitment: {currentSemester ? currentSemester.name : 'current semester'}
+                    </strong><br/>
+                    {hasSemesterDates && (
+                      <>
+                        {new Date(currentSemester.start_date).toLocaleDateString()} - {new Date(currentSemester.end_date).toLocaleDateString()}<br/>
+                      </>
+                    )}
+                    Final pricing confirmed during enrollment
+                    {pricingError && (
+                      <><br/><em style={{ color: '#666', fontSize: '0.9em' }}>
+                        Pricing information temporarily unavailable - showing standard rates
+                      </em></>
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

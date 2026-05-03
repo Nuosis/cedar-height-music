@@ -187,7 +187,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   margin-bottom: 1rem;
 }
 
@@ -208,7 +208,7 @@
 }
 
 .inline-link {
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   text-decoration: none;
   font-weight: 600;
   border-bottom: 2px solid transparent;
@@ -216,7 +216,7 @@
 }
 
 .inline-link:hover {
-  border-bottom-color: var(--color-primary-green);
+  border-bottom-color: var(--color-accessible-green);
 }
 
 .about-teaser-image {
@@ -294,7 +294,7 @@
 }
 
 .slot-chip .time .start-time {
-  color: #4caf50; /* Green per Page Blueprints Line 138 */
+  color: var(--color-accessible-green);
   font-weight: 500;
 }
 
@@ -355,7 +355,7 @@
 .accordion-icon {
   font-size: 1.5rem;
   font-weight: 300;
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   transition: transform var(--transition-normal);
 }
 

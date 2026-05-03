@@ -473,7 +473,7 @@
 
 .eyebrow {
   font-size: 0.875rem;
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -540,7 +540,7 @@
 /* Page Blueprints Eyebrow Text - Line 162 */
 .hero-eyebrow {
   font-size: 1rem; /* Page Blueprints Line 164: Eyebrow ~16px */
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   font-weight: 500;
   margin-bottom: 1rem;
   text-transform: uppercase;
@@ -756,7 +756,7 @@
 }
 
 .feature-icon {
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   font-weight: bold;
   font-size: 1.125rem;
 }
@@ -863,7 +863,7 @@
 
 .teacher-instruments {
   font-size: 1rem;
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   font-weight: 500;
   margin-bottom: 1rem;
 }
@@ -1030,17 +1030,20 @@
 }
 
 .pricing-display-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
+  width: 100%;
 }
 
-/* Single Price Display */
+.pricing-summary-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: stretch;
+  width: 100%;
+}
+
 .single-price-display {
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
 }
 
 .price-card {
@@ -1050,8 +1053,13 @@
   padding: 3rem 2.5rem;
   text-align: center;
   box-shadow: 0 4px 12px rgba(153, 227, 158, 0.15);
-  min-width: 280px;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
   transition: var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .price-card:hover {
@@ -1062,7 +1070,7 @@
 .price-amount {
   font-size: 3rem;
   font-weight: 700;
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   margin-bottom: 0.5rem;
   line-height: 1;
 }
@@ -1090,14 +1098,16 @@
 .pricing-details {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 3rem;
-  align-items: start;
+  gap: 2rem;
+  align-items: stretch;
+  width: 100%;
 }
 
 .pricing-breakdown {
   background: rgba(153, 227, 158, 0.05);
   padding: 2rem;
   border-radius: var(--border-radius-medium);
+  height: 100%;
 }
 
 .breakdown-title {
@@ -1128,7 +1138,7 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   font-weight: bold;
 }
 
@@ -1138,6 +1148,9 @@
   border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: var(--border-radius-medium);
   padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .disclaimer-text {
@@ -1190,6 +1203,11 @@
   .pricing-hero-headline {
     font-size: 3rem;
   }
+
+  .pricing-summary-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
   
   .pricing-details {
     grid-template-columns: 1fr;
@@ -1198,7 +1216,6 @@
   
   .price-card {
     padding: 2.5rem 2rem;
-    min-width: 240px;
   }
   
   .price-amount {
@@ -1216,12 +1233,11 @@
   }
   
   .pricing-display-content {
-    gap: 2rem;
+    gap: 0;
   }
   
   .price-card {
     padding: 2rem 1.5rem;
-    min-width: 200px;
   }
   
   .price-amount {
@@ -1599,7 +1615,7 @@
 }
 
 .method-link {
-  color: var(--color-primary-green);
+  color: var(--color-accessible-green);
   text-decoration: none;
   font-weight: 500;
   transition: var(--transition-normal);
@@ -1687,4 +1703,3 @@
   outline-offset: 2px;
   border-radius: 4px;
 }
-

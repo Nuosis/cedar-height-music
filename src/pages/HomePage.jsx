@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Button, Card } from '../components/core.jsx'
 import { Plus, X } from 'lucide-react'
 import ValuePropsCarousel from '../components/ValuePropsCarousel.jsx'
-import { useAvailability, useTeachers } from '../hooks/usePublicAPI.js'
+import { useAvailability, useSiteConfig } from '../hooks/usePublicAPI.js'
 import '../styles/homepage.css'
 
 /**
@@ -150,12 +150,11 @@ const TimeSlotChip = ({ day, startTime, endTime, highlighted = false, onClick })
 const HomePage = ({ onEnrollClick }) => {
   const [seasonalBg, setSeasonalBg] = useState(null)
   
-  // Fetch teachers data from API
   const {
-    data: teachers,
-    isLoading: teachersLoading,
-    error: teachersError
-  } = useTeachers()
+    data: siteConfig,
+    isLoading: siteConfigLoading,
+    error: siteConfigError
+  } = useSiteConfig()
 
   // Fetch live calendar availability from the Cedar API.
   const {
@@ -176,8 +175,12 @@ const HomePage = ({ onEnrollClick }) => {
     onEnrollClick()
   }
 
-  // Get primary teacher for display (first active teacher)
-  const primaryTeacher = teachers?.[0]
+  const primaryTeacher = siteConfig?.teacher
+  const teacherName = primaryTeacher?.name || 'Kaeden Ottenbreit'
+  const teacherAbout = primaryTeacher?.about || 'At Cedar Heights Music Academy, every student receives focused one-on-one instruction shaped around their pace, goals, and confidence.'
+  const instrumentNames = (siteConfig?.instruments || [])
+    .filter((instrument) => instrument.active !== false)
+    .map((instrument) => instrument.display_name || instrument.name)
 
   return (
     <div className="home-page">
@@ -260,24 +263,20 @@ const HomePage = ({ onEnrollClick }) => {
             <div className="about-teaser-content" data-wireframe-section="about-teaser-text">
               <div className="eyebrow" data-typography-container="about-eyebrow">About the studio</div>
               <h2 className="section-heading" data-typography-container="about-heading">
-                {teachersLoading ? 'Loading...' :
-                 teachersError ? 'Personalized lessons from your dedicated teacher' :
-                 primaryTeacher ? `Personalized lessons from ${primaryTeacher.name}` :
-                 'Personalized lessons from your dedicated teacher'}
+                {siteConfigLoading ? 'Loading...' :
+                 siteConfigError ? 'Personalized lessons from your dedicated teacher' :
+                 `Personalized lessons from ${teacherName}`}
               </h2>
               <p className="section-description" data-typography-container="about-description">
-                {teachersLoading ? 'Loading teacher information...' :
-                 teachersError ? 'At Cedar Heights Music Academy, we believe every student deserves individual attention. Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.' :
-                 primaryTeacher ? (primaryTeacher.bio || 'At Cedar Heights Music Academy, we believe every student deserves individual attention. Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.') :
-                 'At Cedar Heights Music Academy, we believe every student deserves individual attention. Our one-on-one approach ensures you get the focused instruction needed to reach your musical goals.'}
+                {siteConfigLoading ? 'Loading teacher information...' : teacherAbout}
               </p>
-              {primaryTeacher?.instruments && (
+              {instrumentNames.length > 0 && (
                 <div className="teacher-instruments" style={{ marginBottom: '1rem', fontSize: '0.9rem', color: '#666' }}>
-                  <strong>Instruments:</strong> {primaryTeacher.instruments.join(', ')}
+                  <strong>Instruments:</strong> {instrumentNames.join(', ')}
                 </div>
               )}
               <a href="/about#teacher" className="inline-link" data-typography-container="meet-teacher-link">
-                {primaryTeacher ? `Meet ${primaryTeacher.name}` : 'Meet your teacher'}
+                Meet {teacherName}
               </a>
             </div>
             
