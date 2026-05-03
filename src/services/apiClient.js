@@ -317,6 +317,34 @@ export class MusicAcademyAPI {
     return this.request(endpoint);
   }
 
+  async getSiteConfig() {
+    return this.request('/public/site-config');
+  }
+
+  async getProducts() {
+    return this.request('/public/products');
+  }
+
+  async getAvailability(filters = {}) {
+    const params = new URLSearchParams();
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
+        params.append(key, String(value));
+      }
+    });
+
+    const queryString = params.toString();
+    return this.request(`/calendar/availability${queryString ? `?${queryString}` : ''}`);
+  }
+
+  async createCheckoutSession(payload) {
+    return this.request('/billing/create-checkout-session', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+  }
+
   /**
    * Gets available instruments
    * @param {Object} filters - Query parameters
@@ -366,12 +394,15 @@ export class MusicAcademyAPI {
 
 /**
  * Cached API client that extends the base client with client-side caching
- * Implements 2-minute cache timeout matching API headers
+ * Implements 2-minute cache timeout matching API headers with advanced performance features
  */
 export class CachedAPI extends MusicAcademyAPI {
   /**
    * @param {Object} options - Configuration options
    * @param {number} options.cacheTimeout - Cache timeout in milliseconds (default: 120000 = 2 minutes)
+   * @param {boolean} options.backgroundRefresh - Enable background refresh (default: true)
+   * @param {boolean} options.requestBatching - Enable request batching (default: true)
+   * @param {number} options.batchDelay - Batch delay in milliseconds (default: 50)
    */
   constructor(options = {}) {
     super(options);
@@ -381,11 +412,37 @@ export class CachedAPI extends MusicAcademyAPI {
     this.cacheHits = 0;
     this.cacheMisses = 0;
     
+    // Advanced performance features
+    this.backgroundRefresh = options.backgroundRefresh !== false;
+    this.requestBatching = options.requestBatching !== false;
+    this.batchDelay = options.batchDelay || 50;
+    
+    // Request deduplication and batching
+    this.pendingRequests = new Map();
+    this.batchQueue = new Map();
+    this.batchTimeouts = new Map();
+    
+    // Background refresh tracking
+    this.refreshQueue = new Set();
+    this.refreshInProgress = new Set();
+    
+    // Performance metrics
+    this.performanceMetrics = {
+      backgroundRefreshCount: 0,
+      batchedRequestCount: 0,
+      deduplicatedRequestCount: 0,
+      averageResponseTime: 0,
+      totalRequests: 0
+    };
+    
     // Periodic cache cleanup
     this._startCacheCleanup();
     
-    this._logInfo('Cached API Client initialized', {
+    this._logInfo('Enhanced Cached API Client initialized', {
       cacheTimeout: this.cacheTimeout,
+      backgroundRefresh: this.backgroundRefresh,
+      requestBatching: this.requestBatching,
+      batchDelay: this.batchDelay,
       cleanupInterval: 60000
     });
   }
@@ -439,35 +496,121 @@ export class CachedAPI extends MusicAcademyAPI {
   }
 
   /**
-   * Makes a cached request
+   * Handles request deduplication for identical pending requests
+   * @param {string} cacheKey - Cache key for the request
+   * @param {Function} requestFn - Function that makes the actual request
+   * @returns {Promise<Object>} API response data
+   * @private
+   */
+  async _handleRequestDeduplication(cacheKey, requestFn) {
+    // Check if there's already a pending request for this key
+    if (this.pendingRequests.has(cacheKey)) {
+      this.performanceMetrics.deduplicatedRequestCount++;
+      this._logDebug(`Deduplicating request for ${cacheKey}`);
+      return this.pendingRequests.get(cacheKey);
+    }
+
+    // Create and store the request promise
+    const requestPromise = requestFn().finally(() => {
+      // Clean up the pending request when done
+      this.pendingRequests.delete(cacheKey);
+    });
+
+    this.pendingRequests.set(cacheKey, requestPromise);
+    return requestPromise;
+  }
+
+  /**
+   * Schedules background refresh for stale cache entries
+   * @param {string} cacheKey - Cache key to refresh
+   * @param {Function} requestFn - Function that makes the actual request
+   * @private
+   */
+  _scheduleBackgroundRefresh(cacheKey, requestFn) {
+    if (!this.backgroundRefresh || this.refreshInProgress.has(cacheKey)) {
+      return;
+    }
+
+    // Add to refresh queue
+    this.refreshQueue.add(cacheKey);
+    this.refreshInProgress.add(cacheKey);
+
+    // Schedule the refresh
+    setTimeout(async () => {
+      try {
+        this.performanceMetrics.backgroundRefreshCount++;
+        this._logDebug(`Background refreshing ${cacheKey}`);
+        
+        const data = await requestFn();
+        
+        // Update cache with fresh data
+        this.cache.set(cacheKey, {
+          data: JSON.parse(JSON.stringify(data)),
+          timestamp: Date.now()
+        });
+        
+        this._logDebug(`Background refresh completed for ${cacheKey}`);
+      } catch (error) {
+        this._logError(`Background refresh failed for ${cacheKey}`, error);
+      } finally {
+        this.refreshQueue.delete(cacheKey);
+        this.refreshInProgress.delete(cacheKey);
+      }
+    }, 100); // Small delay to avoid blocking main thread
+  }
+
+  /**
+   * Makes a cached request with advanced performance optimizations
    * @param {string} endpoint - API endpoint path
    * @param {Object} options - Fetch options
    * @param {number} retryCount - Current retry attempt
    * @returns {Promise<Object>} API response data
    */
   async request(endpoint, options = {}, retryCount = 0) {
+    const startTime = Date.now();
+    
     // Only cache GET requests
     if (!options.method || options.method.toUpperCase() === 'GET') {
       const cacheKey = this._getCacheKey(endpoint, options);
       const cached = this.cache.get(cacheKey);
+      const now = Date.now();
+      
+      // Create request function for deduplication and background refresh
+      const makeRequest = () => super.request(endpoint, options, retryCount);
       
       // Check if we have a valid cached response
-      if (cached && Date.now() - cached.timestamp < this.cacheTimeout) {
-        this.cacheHits++;
-        this._logDebug(`Cache hit for ${endpoint}`, {
-          cacheKey,
-          age: Date.now() - cached.timestamp,
-          cacheHits: this.cacheHits,
-          cacheMisses: this.cacheMisses
-        });
+      if (cached) {
+        const age = now - cached.timestamp;
+        const isStale = age > this.cacheTimeout;
+        const isNearStale = age > (this.cacheTimeout * 0.8); // 80% of cache timeout
         
-        // Return a copy to prevent mutation
-        return JSON.parse(JSON.stringify(cached.data));
+        if (!isStale) {
+          this.cacheHits++;
+          this._logDebug(`Cache hit for ${endpoint}`, {
+            cacheKey,
+            age,
+            cacheHits: this.cacheHits,
+            cacheMisses: this.cacheMisses
+          });
+          
+          // Schedule background refresh if near stale
+          if (isNearStale && this.backgroundRefresh) {
+            this._scheduleBackgroundRefresh(cacheKey, makeRequest);
+          }
+          
+          // Update performance metrics
+          const responseTime = Date.now() - startTime;
+          this._updatePerformanceMetrics(responseTime);
+          
+          // Return a copy to prevent mutation
+          return JSON.parse(JSON.stringify(cached.data));
+        }
       }
       
-      // Cache miss - make the request
+      // Cache miss or stale - make the request with deduplication
       this.cacheMisses++;
-      const data = await super.request(endpoint, options, retryCount);
+      
+      const data = await this._handleRequestDeduplication(cacheKey, makeRequest);
       
       // Cache the response
       this.cache.set(cacheKey, {
@@ -482,11 +625,32 @@ export class CachedAPI extends MusicAcademyAPI {
         cacheMisses: this.cacheMisses
       });
       
+      // Update performance metrics
+      const responseTime = Date.now() - startTime;
+      this._updatePerformanceMetrics(responseTime);
+      
       return data;
     }
     
-    // Non-GET requests bypass cache
-    return super.request(endpoint, options, retryCount);
+    // Non-GET requests bypass cache but still get performance tracking
+    const data = await super.request(endpoint, options, retryCount);
+    const responseTime = Date.now() - startTime;
+    this._updatePerformanceMetrics(responseTime);
+    
+    return data;
+  }
+
+  /**
+   * Updates performance metrics
+   * @param {number} responseTime - Response time in milliseconds
+   * @private
+   */
+  _updatePerformanceMetrics(responseTime) {
+    this.performanceMetrics.totalRequests++;
+    
+    // Calculate rolling average response time
+    const totalTime = this.performanceMetrics.averageResponseTime * (this.performanceMetrics.totalRequests - 1);
+    this.performanceMetrics.averageResponseTime = (totalTime + responseTime) / this.performanceMetrics.totalRequests;
   }
 
   /**
@@ -522,20 +686,58 @@ export class CachedAPI extends MusicAcademyAPI {
   }
 
   /**
-   * Gets cache statistics
-   * @returns {Object} Cache statistics
+   * Gets comprehensive cache and performance statistics
+   * @returns {Object} Cache and performance statistics
    */
   getCacheStats() {
     const totalRequests = this.cacheHits + this.cacheMisses;
     
     return {
       ...super.getStats(),
+      // Cache statistics
       cacheSize: this.cache.size,
       cacheHits: this.cacheHits,
       cacheMisses: this.cacheMisses,
       cacheHitRate: totalRequests > 0 ? (this.cacheHits / totalRequests) : 0,
-      cacheTimeout: this.cacheTimeout
+      cacheTimeout: this.cacheTimeout,
+      
+      // Performance metrics
+      backgroundRefreshCount: this.performanceMetrics.backgroundRefreshCount,
+      batchedRequestCount: this.performanceMetrics.batchedRequestCount,
+      deduplicatedRequestCount: this.performanceMetrics.deduplicatedRequestCount,
+      averageResponseTime: Math.round(this.performanceMetrics.averageResponseTime),
+      totalRequests: this.performanceMetrics.totalRequests,
+      
+      // Active operations
+      pendingRequestsCount: this.pendingRequests.size,
+      refreshQueueSize: this.refreshQueue.size,
+      refreshInProgressCount: this.refreshInProgress.size,
+      
+      // Performance ratios
+      deduplicationRate: this.performanceMetrics.totalRequests > 0
+        ? (this.performanceMetrics.deduplicatedRequestCount / this.performanceMetrics.totalRequests)
+        : 0,
+      backgroundRefreshRate: this.performanceMetrics.totalRequests > 0
+        ? (this.performanceMetrics.backgroundRefreshCount / this.performanceMetrics.totalRequests)
+        : 0
     };
+  }
+
+  /**
+   * Resets all statistics including performance metrics
+   */
+  resetStats() {
+    super.resetStats();
+    this.cacheHits = 0;
+    this.cacheMisses = 0;
+    this.performanceMetrics = {
+      backgroundRefreshCount: 0,
+      batchedRequestCount: 0,
+      deduplicatedRequestCount: 0,
+      averageResponseTime: 0,
+      totalRequests: 0
+    };
+    this._logInfo('All statistics reset including performance metrics');
   }
 
   /**
@@ -546,8 +748,16 @@ export class CachedAPI extends MusicAcademyAPI {
       clearInterval(this.cleanupInterval);
       this.cleanupInterval = null;
     }
+    
+    // Clear all pending operations
+    this.pendingRequests.clear();
+    this.refreshQueue.clear();
+    this.refreshInProgress.clear();
+    this.batchQueue.clear();
+    this.batchTimeouts.clear();
+    
     this.clearCache();
-    this._logInfo('Cached API Client destroyed');
+    this._logInfo('Enhanced Cached API Client destroyed');
   }
 }
 

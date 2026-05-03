@@ -17,6 +17,9 @@ export const queryKeys = {
   timeslots: (filters = {}) => ['timeslots', filters],
   pricing: (filters = {}) => ['pricing', filters],
   instruments: (filters = {}) => ['instruments', filters],
+  siteConfig: () => ['site-config'],
+  products: () => ['products'],
+  availability: (filters = {}) => ['availability', filters],
 }
 
 /**
@@ -108,6 +111,45 @@ export const useInstruments = (filters = {}, options = {}) => {
     cacheTime: 300000, // 5 minutes
     retry: 3,
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    ...options
+  })
+}
+
+export const useSiteConfig = (options = {}) => {
+  return useQuery({
+    queryKey: queryKeys.siteConfig(),
+    queryFn: async () => {
+      const response = await api.getSiteConfig()
+      return response.data
+    },
+    staleTime: 300000,
+    retry: 2,
+    ...options
+  })
+}
+
+export const useProducts = (options = {}) => {
+  return useQuery({
+    queryKey: queryKeys.products(),
+    queryFn: async () => {
+      const response = await api.getProducts()
+      return response.data
+    },
+    staleTime: 120000,
+    retry: 2,
+    ...options
+  })
+}
+
+export const useAvailability = (filters = {}, options = {}) => {
+  return useQuery({
+    queryKey: queryKeys.availability(filters),
+    queryFn: async () => {
+      const response = await api.getAvailability(filters)
+      return response.data
+    },
+    staleTime: 60000,
+    retry: 1,
     ...options
   })
 }
@@ -268,6 +310,9 @@ export default {
   useTimeslots,
   usePricing,
   useInstruments,
+  useSiteConfig,
+  useProducts,
+  useAvailability,
   useTeacherTimeslots,
   useNextAvailableSlots,
   useInvalidateQueries,

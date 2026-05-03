@@ -6,7 +6,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 import { Squash as Hamburger } from 'hamburger-react'
-import { useInstruments } from '../hooks/usePublicAPI.js'
+import { useAvailability, useProducts } from '../hooks/usePublicAPI.js'
+import { api } from '../services/apiClient.js'
 
 // Inject component CSS (derived from wireframes) once
 const CORE_STYLE_ID = 'chm-core-components-styles'
@@ -948,39 +949,37 @@ export function Footer({ onEnrollClick }) {
 // Shell only (no data wiring). Keyboard/ARIA implemented.
 export function EnrollmentModalShell({ open, onClose }) {
   const [step, setStep] = useState(1)
-  const [selectedInstrument, setSelectedInstrument] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null)
-  const [formData, setFormData] = useState({
-    studentName: '',
-    studentAge: '',
-    skillLevel: 'beginner',
-    contactName: '',
-    relation: 'parent',
-    email: '',
-    phone: ''
-  })
+  const [checkoutEmail, setCheckoutEmail] = useState('')
+  const [checkoutError, setCheckoutError] = useState('')
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
   const dialogRef = useRef(null)
 
-  // Fetch instruments data from API
   const {
-    data: instruments,
-    isLoading: instrumentsLoading,
-    error: instrumentsError
-  } = useInstruments()
+    data: products,
+    isLoading: productsLoading,
+    error: productsError
+  } = useProducts()
+
+  const {
+    data: availabilitySlots,
+    isLoading: availabilityLoading,
+    error: availabilityError
+  } = useAvailability(
+    selectedProduct ? { duration_minutes: selectedProduct.primary_price?.metadata?.duration_minutes || 30 } : {},
+    { enabled: !!selectedProduct && step >= 2 }
+  )
 
   const progressWidth = useMemo(() => `${((step - 1) / 2) * 100}%`, [step])
 
-  // Fallback instruments if API fails
-  const fallbackInstruments = [
-    { id: 'piano', display_name: 'Piano', sort_order: 1 },
-    { id: 'guitar', display_name: 'Guitar', sort_order: 2 },
-    { id: 'bass', display_name: 'Bass', sort_order: 3 }
+  const fallbackProducts = [
+    { id: 'piano', name: 'Piano', instrument_id: 'piano', primary_price: null },
+    { id: 'guitar', name: 'Guitar', instrument_id: 'guitar', primary_price: null },
+    { id: 'bass', name: 'Bass', instrument_id: 'bass', primary_price: null }
   ]
 
-  // Get instruments to display (API data or fallback)
-  const availableInstruments = instruments && instruments.length > 0
-    ? instruments.sort((a, b) => a.sort_order - b.sort_order)
-    : fallbackInstruments
+  const availableProducts = products && products.length > 0 ? products : fallbackProducts
 
   // Get instrument emoji mapping
   const getInstrumentEmoji = (instrumentId) => {
@@ -997,16 +996,9 @@ export function EnrollmentModalShell({ open, onClose }) {
     return emojiMap[instrumentId.toLowerCase()] || '🎵'
   }
 
-  // Mock available time slots
-  const availableTimeSlots = [
-    { day: 'Tuesday', startTime: '4:00 PM', endTime: '4:30 PM' },
-    { day: 'Thursday', startTime: '6:00 PM', endTime: '6:30 PM' },
-    { day: 'Saturday', startTime: '10:00 AM', endTime: '10:30 AM' }
-  ]
-
-  const handleInstrumentSelect = (instrument) => {
-    setSelectedInstrument(instrument)
-    // Auto-advance to next step
+  const handleInstrumentSelect = (product) => {
+    setSelectedProduct(product)
+    setSelectedTimeSlot(null)
     setTimeout(() => setStep(2), 150) // Small delay for visual feedback
   }
 
@@ -1016,12 +1008,32 @@ export function EnrollmentModalShell({ open, onClose }) {
     setTimeout(() => setStep(3), 150) // Small delay for visual feedback
   }
 
-  const handleFormInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+  const handleCheckout = async () => {
+    if (!selectedProduct?.primary_price?.id) {
+      setCheckoutError('Online payment is not available right now. Please contact us to enroll.')
+      return
+    }
+    setCheckoutLoading(true)
+    setCheckoutError('')
+    try {
+      const response = await api.createCheckoutSession({
+        instrument_id: selectedProduct.instrument_id || selectedProduct.id,
+        price_id: selectedProduct.primary_price.id,
+        availability_start: selectedTimeSlot?.start,
+        customer_email: checkoutEmail || undefined,
+        success_url: `${window.location.origin}/enroll?success=true`,
+        cancel_url: `${window.location.origin}/enroll?canceled=true`
+      })
+      if (response.data?.url) {
+        window.location.assign(response.data.url)
+      } else {
+        throw new Error('Stripe did not return a checkout URL')
+      }
+    } catch (error) {
+      setCheckoutError(error.message || 'Unable to start checkout. Please contact us to enroll.')
+    } finally {
+      setCheckoutLoading(false)
+    }
   }
 
   // Focus trap + Escape to close + body scroll lock
@@ -1100,25 +1112,25 @@ export function EnrollmentModalShell({ open, onClose }) {
           <div className={clsx('modal-step', step === 1 && 'active')}>
             <h3 className="step-title">Choose Your Instrument</h3>
             <p className="step-description">
-              {instrumentsLoading ? 'Loading instruments...' :
-               instrumentsError ? 'Piano, Guitar, Bass' :
-               availableInstruments.map(inst => inst.display_name).join(', ')}
+              {productsLoading ? 'Loading lessons...' :
+               productsError ? 'Online pricing is unavailable. You can still contact us to enroll.' :
+               availableProducts.map(product => product.name).join(', ')}
             </p>
-            {/* Instrument selection with auto-advance */}
             <div role="group" aria-label="Instrument options" style={{ display: 'grid', gap: '0.75rem' }}>
-              {instrumentsLoading ? (
+              {productsLoading ? (
                 <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
-                  Loading instruments...
+                  Loading lessons...
                 </div>
               ) : (
-                availableInstruments.map((instrument) => (
+                availableProducts.map((product) => (
                   <Button
-                    key={instrument.id}
+                    key={product.id}
                     variant="secondary"
-                    onClick={() => handleInstrumentSelect(instrument.id)}
-                    className={selectedInstrument === instrument.id ? 'selected' : ''}
+                    onClick={() => handleInstrumentSelect(product)}
+                    className={selectedProduct?.id === product.id ? 'selected' : ''}
                   >
-                    {getInstrumentEmoji(instrument.id)} {instrument.display_name}
+                    {getInstrumentEmoji(product.instrument_id || product.id)} {product.name}
+                    {product.primary_price?.unit_amount_decimal ? ` - $${product.primary_price.unit_amount_decimal}/${product.primary_price.recurring?.interval || 'month'}` : ''}
                   </Button>
                 ))
               )}
@@ -1127,157 +1139,73 @@ export function EnrollmentModalShell({ open, onClose }) {
 
           <div className={clsx('modal-step', step === 2 && 'active')}>
             <h3 className="step-title">Pick Your Preferred Time</h3>
-            <p className="step-description">Choose from available time slots</p>
-            
-            {/* Time slot grid using same styling as HomePage */}
-            <div className="slots-grid">
-              {availableTimeSlots.map((slot, index) => (
-                <div
-                  key={index}
-                  className={`slot-chip ${selectedTimeSlot === slot ? 'selected' : ''}`}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`${slot.day} ${slot.startTime} to ${slot.endTime}`}
-                  onClick={() => handleTimeSlotSelect(slot)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      handleTimeSlotSelect(slot)
-                    }
-                  }}
-                >
-                  <div className="day">{slot.day}</div>
-                  <div className="time">
-                    <span className="start-time">{slot.startTime}</span> • <span className="end-time">{slot.endTime}</span>
+            <p className="step-description">
+              {availabilityError
+                ? 'Calendar availability is unavailable. You can continue checkout and we will confirm the lesson time directly.'
+                : 'Choose from available time slots'}
+            </p>
+
+            {availabilityLoading ? (
+              <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>Loading available times...</div>
+            ) : availabilityError || !availabilitySlots?.length ? (
+              <Card>
+                <p style={{ marginTop: 0 }}>No live calendar times are available right now.</p>
+                <Button variant="primary" onClick={() => setStep(3)}>Continue without a time</Button>
+              </Card>
+            ) : (
+              <div className="slots-grid">
+                {availabilitySlots.map((slot) => (
+                  <div
+                    key={slot.availability_id}
+                    className={`slot-chip ${selectedTimeSlot?.availability_id === slot.availability_id ? 'selected' : ''}`}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={slot.display_label}
+                    onClick={() => handleTimeSlotSelect(slot)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        handleTimeSlotSelect(slot)
+                      }
+                    }}
+                  >
+                    <div className="day">{slot.display_label}</div>
+                    <div className="time">
+                      <span className="start-time">{new Date(slot.start).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}</span> • <span className="end-time">{new Date(slot.end).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className={clsx('modal-step', step === 3 && 'active')}>
-            <h3 className="step-title">Complete Your Enrollment</h3>
-            <p className="step-description">Please provide student and contact information</p>
-            
+            <h3 className="step-title">Start Secure Checkout</h3>
+            <p className="step-description">Review your lesson selection and continue to Stripe Checkout.</p>
+
             <div className="modal-step-scrollable">
-              <form className="enrollment-form">
-                {/* Selection Summary */}
-                <Card style={{ marginBottom: '1.5rem' }}>
-                  <div><strong>Selected:</strong> {selectedInstrument ? selectedInstrument.charAt(0).toUpperCase() + selectedInstrument.slice(1) : '(not selected)'} • {selectedTimeSlot ? `${selectedTimeSlot.day} ${selectedTimeSlot.startTime} - ${selectedTimeSlot.endTime}` : '(not selected)'}</div>
-                </Card>
+              <Card style={{ marginBottom: '1.5rem' }}>
+                <div><strong>Instrument:</strong> {selectedProduct?.name || '(not selected)'}</div>
+                <div><strong>Time:</strong> {selectedTimeSlot ? selectedTimeSlot.display_label : 'Confirm after checkout'}</div>
+                <div><strong>Price:</strong> {selectedProduct?.primary_price?.unit_amount_decimal ? `$${selectedProduct.primary_price.unit_amount_decimal} ${selectedProduct.primary_price.currency}` : 'Contact us for pricing'}</div>
+              </Card>
 
-                {/* Student Information */}
-                <h4 style={{ margin: '0 0 1rem 0', fontSize: '1.1rem', fontWeight: '600' }}>Student Information</h4>
-                
+              <form className="enrollment-form" onSubmit={(event) => event.preventDefault()}>
                 <div className="form-group">
-                  <label htmlFor="studentName" className="form-label">Student Name *</label>
-                  <input
-                    type="text"
-                    id="studentName"
-                    name="studentName"
-                    value={formData.studentName}
-                    onChange={handleFormInputChange}
-                    required
-                    className="form-input"
-                    placeholder="Enter student's full name"
-                  />
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="studentAge" className="form-label">Student Age *</label>
-                    <input
-                      type="number"
-                      id="studentAge"
-                      name="studentAge"
-                      value={formData.studentAge}
-                      onChange={handleFormInputChange}
-                      required
-                      min="3"
-                      max="99"
-                      className="form-input"
-                      placeholder="Age"
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label htmlFor="skillLevel" className="form-label">Skill Level</label>
-                    <select
-                      id="skillLevel"
-                      name="skillLevel"
-                      value={formData.skillLevel}
-                      onChange={handleFormInputChange}
-                      className="form-select"
-                    >
-                      <option value="beginner">Beginner</option>
-                      <option value="intermediate">Intermediate</option>
-                      <option value="advanced">Advanced</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Contact Information */}
-                <h4 style={{ margin: '1.5rem 0 1rem 0', fontSize: '1.1rem', fontWeight: '600' }}>Contact Information</h4>
-                
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="contactName" className="form-label">Contact Name *</label>
-                    <input
-                      type="text"
-                      id="contactName"
-                      name="contactName"
-                      value={formData.contactName}
-                      onChange={handleFormInputChange}
-                      required
-                      className="form-input"
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label htmlFor="relation" className="form-label">Relation to Student</label>
-                    <select
-                      id="relation"
-                      name="relation"
-                      value={formData.relation}
-                      onChange={handleFormInputChange}
-                      className="form-select"
-                    >
-                      <option value="parent">Parent</option>
-                      <option value="guardian">Guardian</option>
-                      <option value="self">Self</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email" className="form-label">Email Address *</label>
+                  <label htmlFor="checkoutEmail" className="form-label">Email Address</label>
                   <input
                     type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleFormInputChange}
-                    required
+                    id="checkoutEmail"
+                    name="checkoutEmail"
+                    value={checkoutEmail}
+                    onChange={(event) => setCheckoutEmail(event.target.value)}
                     className="form-input"
                     placeholder="your.email@example.com"
                   />
                 </div>
-
-                <div className="form-group">
-                  <label htmlFor="phone" className="form-label">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleFormInputChange}
-                    className="form-input"
-                    placeholder="(123) 456-7890"
-                  />
-                </div>
               </form>
+
+              {checkoutError ? <p style={{ color: '#9f1d1d' }}>{checkoutError}</p> : null}
             </div>
           </div>
         </div>
@@ -1292,17 +1220,25 @@ export function EnrollmentModalShell({ open, onClose }) {
               ← Back
             </button>
 
-            {step === 3 ? (
+            {step === 3 && !selectedProduct?.primary_price ? (
+              <Button
+                variant="primary"
+                as="a"
+                href="/contact"
+                className="nav-button"
+                onClick={() => onClose?.()}
+              >
+                Contact Us to Enroll
+              </Button>
+            ) : step === 3 ? (
               <Button
                 variant="primary"
                 as="button"
                 className="nav-button"
-                onClick={() => {
-                  // Phase 4 will build URL & redirect; Phase 2 just closes
-                  onClose?.()
-                }}
+                disabled={checkoutLoading}
+                onClick={handleCheckout}
               >
-                Secure Your Spot Now!
+                {checkoutLoading ? 'Opening Checkout...' : 'Continue to Checkout'}
               </Button>
             ) : null}
           </div>

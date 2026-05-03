@@ -38,6 +38,7 @@ function App() {
           <Route path="/about" element={<AboutPage onEnrollClick={handleEnrollClick} />} />
           <Route path="/pricing" element={<PricingPage onEnrollClick={handleEnrollClick} />} />
           <Route path="/contact" element={<ContactPage onEnrollClick={handleEnrollClick} />} />
+          <Route path="/enroll" element={<HomePage onEnrollClick={handleEnrollClick} />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
         </Routes>

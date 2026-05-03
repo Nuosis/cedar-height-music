@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from '../components/core.jsx'
 import { Mail, Phone, Clock, CheckCircle, AlertCircle } from 'lucide-react'
+import { sendInquiryEmail, sendContactEmails } from '../services/emailService.js'
 
 /**
  * Contact Page Component
@@ -41,6 +42,8 @@ const ContactPage = ({ onEnrollClick }) => {
     
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required'
+    } else if (formData.name.length > 100) {
+      newErrors.name = 'Name must be 100 characters or less'
     }
     
     if (!formData.email.trim()) {
@@ -49,8 +52,14 @@ const ContactPage = ({ onEnrollClick }) => {
       newErrors.email = 'Please enter a valid email address'
     }
     
+    if (formData.phone && formData.phone.replace(/\D/g, '').length > 20) {
+      newErrors.phone = 'Phone number is too long'
+    }
+    
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required'
+    } else if (formData.message.length > 2000) {
+      newErrors.message = 'Message must be 2000 characters or less'
     }
     
     if (!formData.consent) {
@@ -100,27 +109,80 @@ const ContactPage = ({ onEnrollClick }) => {
     
     setIsSubmitting(true)
     setSubmitStatus(null)
+    setErrors({})
     
     try {
-      // In a real implementation, this would submit to Formspree or similar service
-      // For now, simulate the submission
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      // Prepare inquiry data for the new API
+      const inquiryData = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+        subject: `New Inquiry from ${formData.name.trim()}`
+      }
       
-      // Simulate success
-      setSubmitStatus('success')
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-        consent: false,
-        website: ''
-      })
-      setErrors({})
+      // Add phone if provided
+      if (formData.phone && formData.phone.trim()) {
+        inquiryData.phone = formData.phone.replace(/\D/g, '') // Remove formatting for API
+      }
+      
+      // Try the new API endpoint first
+      try {
+        console.log('Attempting to send inquiry via new API...')
+        await sendInquiryEmail(inquiryData)
+        console.log('Inquiry sent successfully via new API')
+        
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+          consent: false,
+          website: ''
+        })
+        
+      } catch (apiError) {
+        console.warn('New API failed, falling back to Brevo:', apiError.message)
+        
+        // Fallback to existing Brevo email service
+        const contactData = {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone || '',
+          subject: `New Inquiry from ${formData.name.trim()}`,
+          message: formData.message.trim()
+        }
+        
+        const results = await sendContactEmails(contactData)
+        
+        if (results.success) {
+          console.log('Inquiry sent successfully via Brevo fallback')
+          setSubmitStatus('success')
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            message: '',
+            consent: false,
+            website: ''
+          })
+        } else {
+          throw new Error('Both API and fallback email services failed')
+        }
+      }
       
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
+      
+      // Set user-friendly error message
+      if (error.message.includes('Authentication failed')) {
+        setErrors({ submit: 'Service temporarily unavailable. Please try again later or contact us directly.' })
+      } else if (error.message.includes('Validation error')) {
+        setErrors({ submit: 'Please check your information and try again.' })
+      } else {
+        setErrors({ submit: 'Unable to send message. Please try again or contact us directly at kaeden@cedarheightsmusicacademy.com' })
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -206,9 +268,11 @@ const ContactPage = ({ onEnrollClick }) => {
                           className={`form-input ${errors.name ? 'error' : ''}`}
                           value={formData.name}
                           onChange={handleInputChange}
+                          maxLength="100"
                           required
                         />
                         {errors.name && <span className="error-text">{errors.name}</span>}
+                        <div className="character-count">{formData.name.length}/100</div>
                       </div>
                     </div>
                     
@@ -235,11 +299,12 @@ const ContactPage = ({ onEnrollClick }) => {
                           type="tel"
                           id="contact-phone"
                           name="phone"
-                          className="form-input"
+                          className={`form-input ${errors.phone ? 'error' : ''}`}
                           value={formData.phone}
                           onChange={handlePhoneChange}
                           placeholder="(250) 555-0123"
                         />
+                        {errors.phone && <span className="error-text">{errors.phone}</span>}
                       </div>
                     </div>
                     
@@ -253,9 +318,11 @@ const ContactPage = ({ onEnrollClick }) => {
                           rows="5"
                           value={formData.message}
                           onChange={handleInputChange}
+                          maxLength="2000"
                           required
                         />
                         {errors.message && <span className="error-text">{errors.message}</span>}
+                        <div className="character-count">{formData.message.length}/2000</div>
                       </div>
                     </div>
                     
@@ -295,7 +362,7 @@ const ContactPage = ({ onEnrollClick }) => {
                           <div className="status-icon">
                             <AlertCircle size={20} />
                           </div>
-                          <p>Sorry, there was an error sending your message. Please try again or contact us directly.</p>
+                          <p>{errors.submit || 'Sorry, there was an error sending your message. Please try again or contact us directly.'}</p>
                         </div>
                       </div>
                     )}
