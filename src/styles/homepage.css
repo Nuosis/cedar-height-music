@@ -49,6 +49,9 @@
 .hero-foreground {
   max-width: 600px;
   width: 100%;
+  position: relative;
+  z-index: 2;
+  order: 2;
 }
 
 .hero-logo {
@@ -96,15 +99,17 @@
 }
 
 .hero-figure {
-  position: absolute;
-  left: 20%;
-  bottom: 0;
-  z-index: 1;
+  position: relative;
+  left: auto;
+  bottom: auto;
+  z-index: 3;
+  order: 1;
+  margin: 0 auto 1rem auto;
   pointer-events: none;
 }
 
 .hero-character {
-  max-width: 300px;
+  max-width: 170px;
   height: auto;
   display: block;
 }
@@ -401,11 +406,7 @@
   }
 
   .hero-character {
-    max-width: 200px;
-  }
-
-  .hero-figure {
-    left: 10%;
+    max-width: 150px;
   }
   
   .section-heading {
@@ -456,11 +457,7 @@
   }
   
   .hero-character {
-    max-width: 150px;
-  }
-
-  .hero-figure {
-    left: 0%;
+    max-width: 130px;
   }
   
   .logo-image {

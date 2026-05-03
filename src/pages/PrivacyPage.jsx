@@ -87,8 +87,8 @@ const PrivacyPage = () => {
                 <div className="contact-block">
                   <p>
                     <strong>Cedar Heights Music Academy</strong><br/>
-                    Email: <a href="mailto:hello@cedarheightsmusic.com">hello@cedarheightsmusic.com</a><br/>
-                    Phone: <a href="tel:+1-250-555-0123">(250) 555-0123</a><br/>
+                    Email: <a href="mailto:kaeden@cedarheightsmusicacademy.com">kaeden@cedarheightsmusicacademy.com</a><br/>
+                    Phone: <a href="tel:+17808435591">(780) 843-5591</a><br/>
                     Address: Cedar Heights, Nanaimo, BC
                   </p>
                 </div>

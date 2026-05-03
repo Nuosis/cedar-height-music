@@ -302,7 +302,7 @@ const ContactPage = ({ onEnrollClick }) => {
                           className={`form-input ${errors.phone ? 'error' : ''}`}
                           value={formData.phone}
                           onChange={handlePhoneChange}
-                          placeholder="(250) 555-0123"
+                          placeholder="(780) 843-5591"
                         />
                         {errors.phone && <span className="error-text">{errors.phone}</span>}
                       </div>
@@ -384,6 +384,18 @@ const ContactPage = ({ onEnrollClick }) => {
                       <div className="method-label">Email</div>
                       <a href="mailto:kaeden@cedarheightsmusicacademy.com" className="method-link">
                         kaeden@cedarheightsmusicacademy.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="contact-method">
+                    <div className="method-icon">
+                      <Phone size={20} />
+                    </div>
+                    <div className="method-details">
+                      <div className="method-label">Phone</div>
+                      <a href="tel:+17808435591" className="method-link">
+                        (780) 843-5591
                       </a>
                     </div>
                   </div>

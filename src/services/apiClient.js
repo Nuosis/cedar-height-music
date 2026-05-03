@@ -119,7 +119,7 @@ export class MusicAcademyAPI {
     // Enforce rate limiting
     await this._enforceRateLimit();
     
-    const url = `${this.baseURL}${endpoint}`;
+    const url = `${this.baseURL.replace(/\/+$/, '')}/${endpoint.replace(/^\/+/, '')}`;
     this.requestCount++;
     
     const requestId = `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -132,13 +132,14 @@ export class MusicAcademyAPI {
     });
 
     try {
+      const headers = { ...options.headers };
+      if (options.body && !headers['Content-Type']) {
+        headers['Content-Type'] = 'application/json';
+      }
+
       const response = await fetch(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          'User-Agent': 'Cedar Heights Music Academy Frontend/1.0',
-          ...options.headers
-        },
-        ...options
+        ...options,
+        headers
       });
 
       const executionTime = Date.now() - startTime;

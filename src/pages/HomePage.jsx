@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Button, Card } from '../components/core.jsx'
 import { Plus, X } from 'lucide-react'
 import ValuePropsCarousel from '../components/ValuePropsCarousel.jsx'
-import { useTeachers, useNextAvailableSlots } from '../hooks/usePublicAPI.js'
+import { useAvailability, useTeachers } from '../hooks/usePublicAPI.js'
 import '../styles/homepage.css'
 
 /**
@@ -157,12 +157,12 @@ const HomePage = ({ onEnrollClick }) => {
     error: teachersError
   } = useTeachers()
 
-  // Fetch next available timeslots (limit to 6 for display)
+  // Fetch live calendar availability from the Cedar API.
   const {
-    data: availableSlots,
+    data: availabilitySlots,
     isLoading: slotsLoading,
     error: slotsError
-  } = useNextAvailableSlots(6)
+  } = useAvailability()
 
   useEffect(() => {
     const bgInfo = getSeasonalBackground()
@@ -179,22 +179,6 @@ const HomePage = ({ onEnrollClick }) => {
   // Get primary teacher for display (first active teacher)
   const primaryTeacher = teachers?.[0]
 
-  // Helper function to format time from 24-hour to 12-hour format
-  const formatTime = (time24) => {
-    if (!time24) return ''
-    const [hours, minutes] = time24.split(':')
-    const hour = parseInt(hours)
-    const ampm = hour >= 12 ? 'PM' : 'AM'
-    const hour12 = hour % 12 || 12
-    return `${hour12}:${minutes} ${ampm}`
-  }
-
-  // Helper function to get day name from weekday number
-  const getDayName = (weekday) => {
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    return days[weekday] || 'Unknown'
-  }
-
   return (
     <div className="home-page">
       {/* Hero Section - Wireframe Compliant */}
@@ -204,6 +188,11 @@ const HomePage = ({ onEnrollClick }) => {
           {/* Hero Canvas - Centered content group within ~856px max width */}
           <div className="hero-content" data-measurement-point="hero-content-width" style={{ maxWidth: '856px', margin: '0 auto' }}>
             
+            {/* Foreground Figure */}
+            <div className="hero-figure" data-asset-container="boy-guitar-figure" data-measurement-point="figure-positioning">
+              <img src="/boy+guitar.png" alt="" role="presentation" className="hero-character" />
+            </div>
+
             {/* Hero Stack - Foreground content group, decorative accent layer, background band */}
             <div className="hero-foreground" data-wireframe-section="hero-foreground">
               
@@ -241,12 +230,6 @@ const HomePage = ({ onEnrollClick }) => {
               <div className="decorative-accent accent-1"></div>
               <div className="decorative-accent accent-2"></div>
             </div>
-          </div>
-          
-          {/* Foreground Figure - Moved outside hero-content to anchor to section, not centered content */}
-          <div className="hero-figure" data-asset-container="boy-guitar-figure" data-measurement-point="figure-positioning">
-            {/* Asset: boy+guitar.png positioned per wireframe specifications */}
-            <img src="/boy+guitar.png" alt="" role="presentation" className="hero-character" />
           </div>
           
           {/* Seasonal Background */}
@@ -329,69 +312,35 @@ const HomePage = ({ onEnrollClick }) => {
                   </div>
                 ))
               ) : slotsError ? (
-                // Error state - show fallback slots
-                <>
-                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Monday 9:30 PM to 10:00 PM" onClick={() => handleSlotClick({ day: 'Monday', startTime: '9:30 PM', endTime: '10:00 PM' })}>
-                    <div className="day" data-typography-container="slot-day">Monday</div>
-                    <div className="time" data-typography-container="slot-time">
-                      <span className="start-time">9:30 PM</span> • <span className="end-time">10:00 PM</span>
-                    </div>
-                  </div>
-                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Wednesday 5:30 PM to 6:00 PM" onClick={() => handleSlotClick({ day: 'Wednesday', startTime: '5:30 PM', endTime: '6:00 PM' })}>
-                    <div className="day" data-typography-container="slot-day">Wednesday</div>
-                    <div className="time" data-typography-container="slot-time">
-                      <span className="start-time">5:30 PM</span> • <span className="end-time">6:00 PM</span>
-                    </div>
-                  </div>
-                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Thursday 6:00 PM to 6:30 PM" onClick={() => handleSlotClick({ day: 'Thursday', startTime: '6:00 PM', endTime: '6:30 PM' })}>
-                    <div className="day" data-typography-container="slot-day">Thursday</div>
-                    <div className="time" data-typography-container="slot-time">
-                      <span className="start-time">6:00 PM</span> • <span className="end-time">6:30 PM</span>
-                    </div>
-                  </div>
-                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Friday 4:00 PM to 4:30 PM" onClick={() => handleSlotClick({ day: 'Friday', startTime: '4:00 PM', endTime: '4:30 PM' })}>
-                    <div className="day" data-typography-container="slot-day">Friday</div>
-                    <div className="time" data-typography-container="slot-time">
-                      <span className="start-time">4:00 PM</span> • <span className="end-time">4:30 PM</span>
-                    </div>
-                  </div>
-                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Saturday 10:00 AM to 10:30 AM" onClick={() => handleSlotClick({ day: 'Saturday', startTime: '10:00 AM', endTime: '10:30 AM' })}>
-                    <div className="day" data-typography-container="slot-day">Saturday</div>
-                    <div className="time" data-typography-container="slot-time">
-                      <span className="start-time">10:00 AM</span> • <span className="end-time">10:30 AM</span>
-                    </div>
-                  </div>
-                  <div className="slot-chip" tabIndex={0} role="button" aria-label="Saturday 2:00 PM to 2:30 PM" onClick={() => handleSlotClick({ day: 'Saturday', startTime: '2:00 PM', endTime: '2:30 PM' })}>
-                    <div className="day" data-typography-container="slot-day">Saturday</div>
-                    <div className="time" data-typography-container="slot-time">
-                      <span className="start-time">2:00 PM</span> • <span className="end-time">2:30 PM</span>
-                    </div>
-                  </div>
-                </>
-              ) : availableSlots && availableSlots.length > 0 ? (
-                // Success state - show API data
-                availableSlots.map((slot, index) => {
-                  const dayName = getDayName(slot.weekday)
-                  const startTime = formatTime(slot.start_time)
-                  const endTime = formatTime(slot.end_time)
+                <div className="no-slots-message" style={{ gridColumn: '1 / -1', padding: '2rem', color: '#444' }}>
+                  <p>Live calendar availability is temporarily unavailable.</p>
+                  <p>Please contact us to discuss scheduling options.</p>
+                </div>
+              ) : availabilitySlots && availabilitySlots.length > 0 ? (
+                // Success state - show live calendar data
+                availabilitySlots.slice(0, 6).map((slot, index) => {
+                  const dayLabel = new Date(slot.start).toLocaleDateString([], {
+                    weekday: 'long',
+                    month: 'short',
+                    day: 'numeric'
+                  })
                   const slotData = {
-                    id: slot.id,
-                    day: dayName,
-                    startTime,
-                    endTime,
-                    teacherId: slot.teacher_id,
-                    duration: slot.duration,
-                    nextAvailableDate: slot.next_available_date
+                    id: slot.availability_id,
+                    day: dayLabel,
+                    startTime: new Date(slot.start).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+                    endTime: new Date(slot.end).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+                    start: slot.start,
+                    end: slot.end
                   }
                   
                   return (
                     <div
-                      key={slot.id || `slot-${index}`}
+                      key={slot.availability_id || `slot-${index}`}
                       className="slot-chip"
                       data-wireframe-section={`time-slot-${index + 1}`}
                       tabIndex={0}
                       role="button"
-                      aria-label={`${dayName} ${startTime} to ${endTime}`}
+                      aria-label={`${dayLabel}, ${slotData.startTime} to ${slotData.endTime}`}
                       onClick={() => handleSlotClick(slotData)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
@@ -400,15 +349,10 @@ const HomePage = ({ onEnrollClick }) => {
                         }
                       }}
                     >
-                      <div className="day" data-typography-container="slot-day">{dayName}</div>
+                      <div className="day" data-typography-container="slot-day">{dayLabel}</div>
                       <div className="time" data-typography-container="slot-time">
-                        <span className="start-time">{startTime}</span> • <span className="end-time">{endTime}</span>
+                        <span className="start-time">{slotData.startTime}</span> • <span className="end-time">{slotData.endTime}</span>
                       </div>
-                      {slot.next_available_date && (
-                        <div className="next-date" style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.25rem' }}>
-                          Next: {new Date(slot.next_available_date).toLocaleDateString()}
-                        </div>
-                      )}
                     </div>
                   )
                 })

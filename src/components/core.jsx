@@ -16,6 +16,7 @@ const CORE_CSS = `
 :root {
   --chm-shadow-1: 0 2px 4px rgba(0,0,0,0.05);
   --chm-shadow-2: 0 4px 12px rgba(0,0,0,0.1);
+  --chm-green-strong: #2f7d37;
 }
 
 /* Page container per wireframes */
@@ -64,7 +65,8 @@ const CORE_CSS = `
   box-shadow: var(--chm-shadow-1);
 }
 .btn-primary:hover {
-  background: #3d8542;
+  background: var(--chm-green-strong);
+  color: #fff;
   transform: translateY(-1px);
   box-shadow: var(--chm-shadow-2);
 }
@@ -279,7 +281,8 @@ const CORE_CSS = `
   box-shadow: var(--chm-shadow-1);
 }
 .primary-cta:hover {
-  background: #3d8542;
+  background: var(--chm-green-strong);
+  color: #fff;
   transform: translateY(-1px);
   box-shadow: var(--chm-shadow-2);
 }
@@ -381,11 +384,11 @@ const CORE_CSS = `
   font-size: inherit;
 }
 .nav-link:hover {
-  color: var(--color-primary-green);
+  color: var(--chm-green-strong);
 }
 .nav-link[aria-current="page"],
 .nav-link.active {
-  color: var(--color-primary-green);
+  color: var(--chm-green-strong);
   font-weight: 600;
 }
 .nav-link[aria-current="page"]::after,
@@ -396,7 +399,7 @@ const CORE_CSS = `
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--color-primary-green);
+  background: var(--chm-green-strong);
   border-radius: 1px;
 }
 .enroll-cta {
@@ -410,7 +413,8 @@ const CORE_CSS = `
   transition: var(--transition-normal);
 }
 .enroll-cta:hover {
-  background: #3d8542;
+  background: var(--chm-green-strong);
+  color: #fff;
 }
 
 /* Mobile nav */
@@ -466,7 +470,7 @@ const CORE_CSS = `
 .mobile-nav-link[aria-current="page"],
 .mobile-nav-link.active {
   background: rgba(153, 227, 158, 0.1);
-  color: var(--color-primary-green);
+  color: var(--chm-green-strong);
 }
 @media (max-width: 767px) {
   .nav-menu { display: none; }
@@ -559,7 +563,8 @@ const CORE_CSS = `
   min-height: 36px;
 }
 .footer-enroll-button:hover {
-  background: #3d8542 !important;
+  background: var(--chm-green-strong) !important;
+  color: #fff !important;
   transform: translateX(4px);
 }
 .footer-enroll-button:hover::before { display: none; }
@@ -921,13 +926,13 @@ export function Footer({ onEnrollClick }) {
           <div className="footer-column footer-social">
             <h3 className="footer-heading">Connect</h3>
             <div className="social-links">
-              <a href="mailto:hello@cedarheightsmusic.com" className="social-link" aria-label="Email us">
+              <a href="mailto:kaeden@cedarheightsmusicacademy.com" className="social-link" aria-label="Email us">
                 <span className="social-icon">📧</span>
-                <span className="social-text">hello@cedarheightsmusic.com</span>
+                <span className="social-text">kaeden@cedarheightsmusicacademy.com</span>
               </a>
-              <a href="tel:+1-250-555-0123" className="social-link" aria-label="Call us">
+              <a href="tel:+17808435591" className="social-link" aria-label="Call us">
                 <span className="social-icon">📞</span>
-                <span className="social-text">(250) 555-0123</span>
+                <span className="social-text">(780) 843-5591</span>
               </a>
               <div className="social-link location-info" aria-label="Location">
                 <span className="social-icon">📍</span>
