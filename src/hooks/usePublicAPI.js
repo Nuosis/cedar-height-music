@@ -14,7 +14,6 @@ import { api } from '../services/apiClient.js'
  */
 export const queryKeys = {
   teachers: (filters = {}) => ['teachers', filters],
-  timeslots: (filters = {}) => ['timeslots', filters],
   pricing: (filters = {}) => ['pricing', filters],
   instruments: (filters = {}) => ['instruments', filters],
   siteConfig: () => ['site-config'],
@@ -35,32 +34,6 @@ export const useTeachers = (filters = {}, options = {}) => {
     queryKey: queryKeys.teachers(filters),
     queryFn: async () => {
       const response = await api.getTeachers(filters)
-      return response.data
-    },
-    staleTime: 120000, // 2 minutes - matches API cache headers
-    cacheTime: 300000, // 5 minutes
-    retry: 3,
-    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
-    ...options
-  })
-}
-
-/**
- * Hook to fetch timeslots data with optional filtering
- * @param {Object} filters - Query parameters for filtering
- * @param {number} filters.teacher_id - Filter by teacher ID
- * @param {number} filters.weekday - Filter by weekday (0=Monday, 6=Sunday)
- * @param {boolean} filters.active - Filter by active status (default: true)
- * @param {string} filters.start_date - Filter slots from this date (YYYY-MM-DD)
- * @param {number} filters.limit - Limit results (max 100, default 50)
- * @param {Object} options - React Query options
- * @returns {Object} Query result with data, loading, error states
- */
-export const useTimeslots = (filters = {}, options = {}) => {
-  return useQuery({
-    queryKey: queryKeys.timeslots(filters),
-    queryFn: async () => {
-      const response = await api.getTimeslots(filters)
       return response.data
     },
     staleTime: 120000, // 2 minutes - matches API cache headers
@@ -155,57 +128,6 @@ export const useAvailability = (filters = {}, options = {}) => {
 }
 
 /**
- * Hook to get available timeslots for a specific teacher
- * Convenience hook that filters timeslots by teacher_id
- * @param {number} teacherId - Teacher ID to filter by
- * @param {Object} additionalFilters - Additional filters to apply
- * @param {Object} options - React Query options
- * @returns {Object} Query result with teacher's timeslots
- */
-export const useTeacherTimeslots = (teacherId, additionalFilters = {}, options = {}) => {
-  const filters = {
-    teacher_id: teacherId,
-    ...additionalFilters
-  }
-  
-  return useTimeslots(filters, {
-    enabled: !!teacherId, // Only run query if teacherId is provided
-    ...options
-  })
-}
-
-/**
- * Hook to get next available timeslots across all teachers
- * Fetches timeslots with a limit and sorts by next available date
- * @param {number} limit - Number of slots to fetch (default: 10)
- * @param {Object} options - React Query options
- * @returns {Object} Query result with next available timeslots
- */
-export const useNextAvailableSlots = (limit = 10, options = {}) => {
-  const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD format
-  
-  return useTimeslots(
-    {
-      start_date: today,
-      limit,
-      active: true
-    },
-    {
-      select: (data) => {
-        // Sort by next_available_date if available
-        return data?.sort((a, b) => {
-          if (a.next_available_date && b.next_available_date) {
-            return new Date(a.next_available_date) - new Date(b.next_available_date)
-          }
-          return 0
-        }) || []
-      },
-      ...options
-    }
-  )
-}
-
-/**
  * Hook to invalidate and refetch API data
  * Useful for refreshing data after mutations or on user action
  * @returns {Object} Functions to invalidate specific query types
@@ -217,11 +139,6 @@ export const useInvalidateQueries = () => {
     invalidateTeachers: (filters) => {
       return queryClient.invalidateQueries({
         queryKey: filters ? queryKeys.teachers(filters) : ['teachers']
-      })
-    },
-    invalidateTimeslots: (filters) => {
-      return queryClient.invalidateQueries({
-        queryKey: filters ? queryKeys.timeslots(filters) : ['timeslots']
       })
     },
     invalidatePricing: (filters) => {
@@ -254,16 +171,6 @@ export const usePrefetchQueries = () => {
         queryKey: queryKeys.teachers(filters),
         queryFn: async () => {
           const response = await api.getTeachers(filters)
-          return response.data
-        },
-        staleTime: 120000
-      })
-    },
-    prefetchTimeslots: (filters = {}) => {
-      return queryClient.prefetchQuery({
-        queryKey: queryKeys.timeslots(filters),
-        queryFn: async () => {
-          const response = await api.getTimeslots(filters)
           return response.data
         },
         staleTime: 120000
@@ -307,14 +214,11 @@ export const useAPIStats = () => {
 // Export all hooks as default for convenience
 export default {
   useTeachers,
-  useTimeslots,
   usePricing,
   useInstruments,
   useSiteConfig,
   useProducts,
   useAvailability,
-  useTeacherTimeslots,
-  useNextAvailableSlots,
   useInvalidateQueries,
   usePrefetchQueries,
   useAPIStats,

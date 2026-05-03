@@ -258,40 +258,6 @@ export class MusicAcademyAPI {
   }
 
   /**
-   * Gets timeslots data with optional filtering
-   * @param {Object} filters - Query parameters
-   * @param {number} filters.teacher_id - Filter by teacher ID
-   * @param {number} filters.weekday - Filter by weekday (0=Monday, 6=Sunday)
-   * @param {boolean} filters.active - Filter by active status (default: true)
-   * @param {string} filters.start_date - Filter slots from this date (YYYY-MM-DD)
-   * @param {number} filters.limit - Limit results (max 100, default 50)
-   * @returns {Promise<Object>} API response with timeslots data
-   */
-  async getTimeslots(filters = {}) {
-    const params = new URLSearchParams();
-    
-    // Add filters to query parameters with validation
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value !== undefined && value !== null && value !== '') {
-        // Validate specific parameters
-        if (key === 'limit' && (value < 1 || value > 100)) {
-          throw new Error('Limit must be between 1 and 100');
-        }
-        if (key === 'weekday' && (value < 0 || value > 6)) {
-          throw new Error('Weekday must be between 0 (Monday) and 6 (Sunday)');
-        }
-        
-        params.append(key, String(value));
-      }
-    });
-    
-    const queryString = params.toString();
-    const endpoint = `/public/timeslots${queryString ? `?${queryString}` : ''}`;
-    
-    return this.request(endpoint);
-  }
-
-  /**
    * Gets current pricing information
    * @param {Object} filters - Query parameters
    * @param {string} filters.billing_frequency - Filter by billing frequency (monthly|yearly|semester)
