@@ -101,7 +101,7 @@
 
 .hero-figure {
   position: absolute;
-  left: 25%;
+  left: 15%;
   bottom: 0;
   transform: translateX(-50%);
   z-index: 5; /* above .hero-foreground (z-index: 2) so the figure obstructs the text */
@@ -451,6 +451,10 @@
   .slot-chip {
     min-height: 80px;
     padding: 0.75rem;
+  }
+
+  .hero-character {
+    width: clamp(144px, 17.6vw, 256px); /* 80% of desktop sizing */
   }
 
   .logo-image {
