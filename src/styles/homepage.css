@@ -1,40 +1,18 @@
 /* HomePage Styles */
 
 /* Hero Section */
-.hero-section {
+.home-page .hero-section {
   position: relative;
-  min-height: 80vh;
-  max-height: 100vh; /* Use viewport height for better scaling */
+  min-height: min(760px, calc(100vh - 64px));
+  max-height: none;
   display: flex;
   align-items: flex-start;
-  padding-top: 2rem;
+  padding-top: clamp(1rem, 2vh, 1.5rem);
   overflow: hidden;
   background: var(--color-warm-off-white);
 }
 
-/* Enhanced scaling for larger screens */
-@media (min-width: 950px) {
-  .hero-section {
-    min-height: calc(80vh + (100vw - 950px) * 0.1); /* Grows with screen width */
-    max-height: calc(100vh + (100vw - 950px) * 0.05); /* Controlled max growth */
-  }
-}
-
-@media (min-width: 1200px) {
-  .hero-section {
-    min-height: calc(85vh + (100vw - 1200px) * 0.08); /* More aggressive scaling for very wide screens */
-    max-height: calc(100vh + (100vw - 1200px) * 0.03);
-  }
-}
-
-@media (min-width: 1600px) {
-  .hero-section {
-    min-height: calc(90vh + (100vw - 1600px) * 0.05); /* Cap the growth for ultra-wide screens */
-    max-height: calc(100vh + (100vw - 1600px) * 0.02);
-  }
-}
-
-.hero-content {
+.home-page .hero-content {
   position: relative;
   z-index: 2;
   display: flex;
@@ -46,7 +24,7 @@
   margin: 0 auto;
 }
 
-.hero-foreground {
+.home-page .hero-foreground {
   max-width: 600px;
   width: 100%;
   position: relative;
@@ -54,31 +32,32 @@
   order: 2;
 }
 
-.hero-logo {
-  margin-bottom: 1.5rem;
+.home-page .hero-logo {
+  margin-bottom: clamp(0.5rem, 1.5vh, 0.9rem);
   display: flex;
   justify-content: center;
 }
 
-.logo-image {
-  max-width: 120px;
+.home-page .logo-image {
+  width: clamp(74px, 8vw, 96px);
+  max-width: 96px;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.hero-tagline {
+.home-page .hero-tagline {
   font-size: 1.125rem;
   color: var(--color-dark-text);
-  margin-bottom: 1rem;
+  margin-bottom: clamp(0.5rem, 1.5vh, 0.9rem);
   opacity: 0.8;
 }
 
-.hero-headline {
-  font-size: var(--font-size-hero);
+.home-page .hero-headline {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
   font-weight: 700;
   line-height: 1.1;
-  margin: 0 0 2rem 0;
+  margin: 0 0 clamp(1rem, 2vh, 1.5rem) 0;
   color: var(--color-dark-text);
 }
 
@@ -98,23 +77,24 @@
   transform: translateX(4px);
 }
 
-.hero-figure {
+.home-page .hero-figure {
   position: relative;
   left: auto;
   bottom: auto;
   z-index: 3;
   order: 1;
-  margin: 0 auto 1rem auto;
+  margin: 0 auto clamp(0.5rem, 1.5vh, 0.9rem) auto;
   pointer-events: none;
 }
 
-.hero-character {
-  max-width: 170px;
+.home-page .hero-character {
+  width: clamp(84px, 9vw, 130px);
+  max-width: 130px;
   height: auto;
   display: block;
 }
 
-.hero-background {
+.home-page .hero-background {
   position: absolute;
   top: 0;
   left: 0;
@@ -127,7 +107,7 @@
   z-index: 0;
 }
 
-.hero-decorative {
+.home-page .hero-decorative {
   position: absolute;
   top: 0;
   left: 0;
@@ -396,17 +376,16 @@
     padding: var(--section-spacing-tablet) 0;
   }
   
-  .hero-section {
-    min-height: 70vh;
-    max-height: 90vh; /* Use viewport height for tablets */
+  .home-page .hero-section {
+    min-height: min(700px, calc(100vh - 64px));
   }
   
-  .hero-headline {
-    font-size: 3rem;
+  .home-page .hero-headline {
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
   }
 
-  .hero-character {
-    max-width: 150px;
+  .home-page .hero-character {
+    max-width: 115px;
   }
   
   .section-heading {
@@ -419,17 +398,16 @@
     padding: var(--section-spacing-mobile) 0;
   }
   
-  .hero-section {
-    min-height: 60vh;
-    max-height: 80vh; /* Use viewport height for mobile */
+  .home-page .hero-section {
+    min-height: min(640px, calc(100vh - 64px));
   }
   
-  .hero-content {
+  .home-page .hero-content {
     text-align: center;
   }
   
-  .hero-headline {
-    font-size: 2.5rem;
+  .home-page .hero-headline {
+    font-size: clamp(2rem, 10vw, 2.7rem);
   }
   
   .section-heading {
@@ -456,11 +434,11 @@
     padding: 0.75rem;
   }
   
-  .hero-character {
-    max-width: 130px;
+  .home-page .hero-character {
+    max-width: 96px;
   }
   
-  .logo-image {
-    max-width: 100px;
+  .home-page .logo-image {
+    max-width: 76px;
   }
 }
