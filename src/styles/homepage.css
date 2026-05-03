@@ -44,9 +44,7 @@
   width: 100%;
   max-width: 856px;
   margin: 0 auto;
-  /* Reserve room at the bottom so the CTA clears the figure's head;
-     the headline may still overlap the figure (obstructed by it). */
-  padding-bottom: clamp(220px, 32vw, 380px);
+  padding-bottom: 2rem;
 }
 
 .hero-foreground {
@@ -103,7 +101,7 @@
 
 .hero-figure {
   position: absolute;
-  left: 50%;
+  left: 25%;
   bottom: 0;
   transform: translateX(-50%);
   z-index: 5; /* above .hero-foreground (z-index: 2) so the figure obstructs the text */
